@@ -46,6 +46,12 @@
     .skill { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(0,0,0,.25); border: 1px solid var(--line); }
     .skill b { color: var(--gold); font-family: "M PLUS Rounded 1c", sans-serif; }
     .sheet .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .skills-box h3 { margin: 16px 0 8px; font-size: 1rem; }
+    .skills { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+    .skills li { display: grid; grid-template-columns: 120px 1fr; gap: 10px; padding: 9px 12px; border-radius: 10px; background: #141418; border: 1px solid #222228; font-size: .9rem; line-height: 1.4; }
+    .skills li b { color: #8b8b96; font-weight: 600; font-size: .8rem; padding-top: 1px; }
+    .skills-note { font-size: .74rem; margin: 6px 0 0; }
+    @media (max-width: 520px) { .skills li { grid-template-columns: 1fr; gap: 2px; } }
     .empty { text-align: center; padding: 40px 10px; color: var(--muted); }
     @media (max-width: 520px) { .sheet-top { flex-direction: column; text-align: center; } .sheet .meta { justify-content: center; } }
   </style>
@@ -108,8 +114,11 @@
   </footer>
 
   <script src="character.js"></script>
+  <script src="skills.js"></script>
+  <script src="skills-tr.js"></script>
   <script src="assets/comun.js"></script>
   <script>
+    addI18n({"sk.title": ["Habilidades", "Skills", "スキル"], "sk.soult": ["Ataque especial", "Soultimate", "ひっさつわざ"], "sk.skill": ["Skill {n}", "Skill {n}", "スキル{n}"], "sk.center": ["Center skill", "Center skill", "センタースキル"], "sk.note": ["Skills de The Puni Spreadsheet (por Sallitine). Pasa el ratón por encima para ver el texto original en inglés.", "Skills from The Puni Spreadsheet (by Sallitine).", "スキル情報：The Puni Spreadsheet（Sallitine作）。マウスを重ねると英語の原文を表示。"]});
     addI18n({"yk.kicker": ["Base de datos", "Database", "データベース"], "yk.title": ["Yokais", "Yo-kai", "妖怪"], "yk.hero": ["Todos los UZ, UZ+ y UZ++ con sus stats, center skill y unity. Pulsa un yokai para ver su ficha.", "Every UZ, UZ+ and UZ++ with their stats, center skill and unity. Click a yo-kai to see its profile.", "UZ・UZ+・UZ++の全妖怪のステータス、センタースキル、結束。妖怪をクリックすると詳細が見られます。"], "yk.search": ["Buscar por nombre o saga…", "Search by name or series…", "名前・シリーズで検索…"], "yk.allSagas": ["Todas las sagas", "All series", "すべてのシリーズ"], "yk.anySkill": ["Cualquier habilidad", "Any skill", "すべてのスキル"], "yk.withUnity": ["Con unity de tribu", "With tribe unity", "種族結束あり"], "yk.withFemale": ["Con unity femenino", "With female unity", "女の子結束あり"], "yk.withCenter": ["Con center skill", "With center skill", "センタースキルあり"], "yk.sortRelease": ["Orden de salida", "Release order", "登場順"], "yk.sortHp": ["Más PV", "Most HP", "HPが高い順"], "yk.sortAtk": ["Más ATQ", "Most ATK", "こうげきが高い順"], "yk.sortTotal": ["Más PV + ATQ", "Most HP + ATK", "HP＋こうげき順"], "yk.sortName": ["Nombre (A-Z)", "Name (A-Z)", "名前順"], "yk.count": ["{n} yokais", "{n} yo-kai", "{n}体"], "yk.empty": ["No hay yokais con esos filtros.", "No yo-kai match these filters.", "条件に合う妖怪がいません。"], "yk.unityT": ["Unity de tribu +{p}%", "Tribe unity +{p}%", "種族結束+{p}%"], "yk.unityD": ["Sube un {p}% el {HP} y el {ATK} de los {tribe} del equipo. Solo funciona si hay 2 o más yokais de su tribu.", "Raises the {HP} and {ATK} of {tribe} in the team by {p}%. Only works with 2 or more yo-kai of its tribe.", "チーム内の{tribe}の{HP}と{ATK}を{p}%アップ。同じ種族が2体以上いると発動。"], "yk.sameT": ["Unity de equipo +{p}%", "Team unity +{p}%", "全員同種族結束+{p}%"], "yk.sameD": ["Solo se activa si todo el equipo es de la misma tribu.", "Only activates if the whole team is the same tribe.", "チーム全員が同じ種族のときだけ発動。"], "yk.femT": ["Unity femenino {pct}", "Female unity {pct}", "女の子結束 {pct}"], "yk.femD": ["Para las chicas del equipo, si hay 2 o más.", "For the girls in the team, if there are 2 or more.", "女の子妖怪が2体以上いると、女の子妖怪に発動。"], "yk.centerT": ["Center skill {pct}", "Center skill {pct}", "センタースキル {pct}"], "yk.centerD": ["Si va en el centro del equipo, afecta a: {who}.", "If placed in the center of the team, it affects: {who}.", "センターに置くと発動。対象：{who}。"], "yk.noSkills": ["Sin center skill ni unity registrados.", "No center skill or unity recorded.", "センタースキル・結束の記録なし。"], "yk.noDupes": ["Sin dupes", "No dupes", "0凸"], "yk.d5": ["5 dupes", "5 dupes", "5凸"], "yk.d10": ["10 dupes (+20%)", "10 dupes (+20%)", "10凸（+20%）"], "yk.add": ["⚔ Añadir al equipo", "⚔ Add to team", "⚔ チームに追加"], "yk.close": ["Cerrar", "Close", "閉じる"], "yk.f.unity": ["Unity", "Unity", "結束"], "yk.f.female": ["♀ Unity", "♀ Unity", "♀結束"], "yk.f.center": ["★ Center", "★ Center", "★センター"], "yk.foot": ["Stats: The Puni Spreadsheet (por Sallitine) y datos de la comunidad. Las stats son las del nivel máximo de su rango.", "Stats: The Puni Spreadsheet (by Sallitine) and community data. Stats are at the max level of each rank.", "ステータス：The Puni Spreadsheet（Sallitine作）とコミュニティのデータ。各ランクの最大レベル時の値です。"], "yk.aria.search": ["Buscar", "Search", "検索"]});
     const $ = id => document.getElementById(id);
     const all = characters.map((c, i) => ({ ...c, order: i, tk: PP.key(c.tribe) }));
@@ -126,6 +135,22 @@
       if (c.femaleUnity) out.push(`<div class="skill"><b>${t("yk.femT", { pct: PP.pct(c.femaleUnity.hpPercent, c.femaleUnity.atkPercent) })}</b><br><span class="muted">${t("yk.femD")}</span></div>`);
       if (c.centerSkill) out.push(`<div class="skill"><b>${t("yk.centerT", { pct: PP.pct(c.centerSkill.hpPercent, c.centerSkill.atkPercent) })}</b><br><span class="muted">${t("yk.centerD", { who: PP.esc(PP.describeAffects(c.centerSkill.affects)) })}</span></div>`);
       return out.join("") || `<p class="muted">${t("yk.noSkills")}</p>`;
+    }
+
+    // Lista de skills del sheet: "Soultimate: …", "Skill 2a: …" (la center skill ya sale arriba)
+    function skillsList(c) {
+      const lines = (typeof SKILLS !== "undefined" && SKILLS[c.id]) || [];
+      const rows = lines.map(l => {
+        const m = l.match(/^(Soultimate|Center Skill|Skill\s*([0-9a-z]+))\s*:\s*(.*)$/i);
+        if (!m) return null;
+        if (/^center/i.test(m[1])) return null;
+        const label = /^soultimate/i.test(m[1]) ? t("sk.soult") : t("sk.skill", { n: m[2] || "" });
+        const tr = (typeof SKILLS_TR !== "undefined" && SKILLS_TR[m[3]]) || null;
+        const text = LANG === "es" && tr ? tr[0] : LANG === "ja" && tr ? tr[1] : m[3];
+        return `<li><b>${PP.esc(label)}</b><span${text !== m[3] ? ` title="${PP.esc(m[3])}"` : ""}>${PP.esc(text)}</span></li>`;
+      }).filter(Boolean);
+      if (!rows.length) return "";
+      return `<div class="skills-box"><h3>${t("sk.title")}</h3><ul class="skills">${rows.join("")}</ul><p class="muted skills-note">${t("sk.note")}</p></div>`;
     }
 
     function openSheet(id, push = true) {
@@ -152,6 +177,7 @@
           <tr><td>❤ ${t("hp")}</td><td>${PP.fmt(s0.hp)}</td><td>${PP.fmt(PP.statsAt(c, 5).hp)}</td><td><b>${PP.fmt(s10.hp)}</b></td></tr>
           <tr><td>⚔ ${t("atk")}</td><td>${PP.fmt(s0.atk)}</td><td>${PP.fmt(PP.statsAt(c, 5).atk)}</td><td><b>${PP.fmt(s10.atk)}</b></td></tr>
         </table></div>
+        ${skillsList(c)}
         ${unityText(c)}
         <div class="actions">
           <a class="btn" href="team-builder.html?add=${encodeURIComponent(c.id)}">${t("yk.add")}</a>
