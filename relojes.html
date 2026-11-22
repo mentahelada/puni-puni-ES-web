@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relojes · Puni Puni ES</title>
+  <meta name="description" content="Todos los relojes de Yo-kai Watch Puni Puni con su imagen y a qué yokais suben las stats." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/estilo.css" />
+  <link rel="stylesheet" href="assets/nav.css" />
+  <style>
+    .watches { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+    .watch {
+      display: grid; grid-template-columns: 78px 1fr; gap: 14px; align-items: center;
+      padding: 14px; border-radius: 20px; background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border: 1px solid var(--line);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .watch:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .watch img { width: 78px; height: 78px; object-fit: contain; filter: drop-shadow(0 6px 12px rgba(0,0,0,.4)); }
+    .watch .noimg { width: 78px; height: 78px; display: grid; place-items: center; font-size: 2.4rem; }
+    .watch b { display: block; font-family: "M PLUS Rounded 1c", sans-serif; font-size: 1.02rem; line-height: 1.2; }
+    .watch .bonus { display: flex; gap: 6px; margin: 6px 0 4px; flex-wrap: wrap; }
+    .watch .bonus span { font-weight: 800; font-size: .78rem; padding: 2px 8px; border-radius: 999px; }
+    .watch .hp { background: rgba(255,90,110,.18); color: #ff9aab; }
+    .watch .atk { background: rgba(79,214,255,.16); color: #8fe3ff; }
+    .watch .who { color: var(--muted); font-size: .86rem; }
+    .watch .center { color: var(--gold); font-size: .78rem; font-weight: 700; }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/minimal.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="yokais.html">Yokais</a>
+      <a href="relojes.html">Relojes</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="mecanicas.html">Mecánicas</a>
+      <a href="guias.html">Guías</a>
+      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="kicker">Equipamiento</div>
+    <h1>Relojes</h1>
+    <p>El reloj que equipas sube el PV y el ATQ de los yokais que cumplen su condición: una tribu, una saga o solo las chicas.</p>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="filters">
+        <input id="q" type="search" placeholder="Buscar reloj…" aria-label="Buscar reloj" />
+        <select id="fType" aria-label="Tipo">
+          <option value="">Todos los relojes</option>
+          <option value="tribes">Por tribu</option>
+          <option value="sagas">Por saga</option>
+          <option value="genders">Por género</option>
+        </select>
+        <select id="fTribe" aria-label="Tribu"><option value="">Cualquier tribu</option></select>
+        <select id="sort" aria-label="Ordenar">
+          <option value="">Orden de salida</option>
+          <option value="best">Más bonus total</option>
+        </select>
+        <span id="count" class="count"></span>
+      </div>
+      <div id="list" class="watches"></div>
+      <p class="muted" style="margin-top:16px">Puedes probar cualquier reloj con tu equipo en el <a href="team-builder.html">Team Builder</a>. Imágenes de los relojes: <a href="https://mtwildwood.net/es/puni/watches" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+  </footer>
+
+  <script src="watches.js"></script>
+  <script src="assets/comun.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    PP.TRIBE_ORDER.forEach(t => $("fTribe").add(new Option(PP.TRIBE_ES[t], t)));
+    const list = CLOCKS.map((c, i) => ({ ...c, order: i }));
+
+    function render() {
+      const q = $("q").value.trim().toLowerCase(), ty = $("fType").value, tr = $("fTribe").value;
+      let out = list.filter(c => {
+        const a = c.affects || {};
+        if (q && !c.label.toLowerCase().includes(q)) return false;
+        if (ty && !(a[ty] && a[ty].length)) return false;
+        if (tr && !(a.tribes || []).map(PP.key).includes(tr)) return false;
+        return true;
+      });
+      if ($("sort").value === "best") out.sort((a, b) => (b.hpPercent + b.atkPercent) - (a.hpPercent + a.atkPercent));
+      $("count").textContent = `${out.length} reloj${out.length === 1 ? "" : "es"}`;
+      $("list").innerHTML = out.map(c => `
+        <article class="watch">
+          <img src="relojes/${PP.esc(c.id)}.png" alt="${PP.esc(c.label)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;noimg&quot;>⌚</div>'">
+          <div>
+            <b>${PP.esc(c.label)}</b>
+            <div class="bonus"><span class="hp">❤ +${c.hpPercent}%</span><span class="atk">⚔ +${c.atkPercent}%</span></div>
+            <div class="who">Para: ${PP.esc(PP.describeAffects(c.affects))}</div>
+            ${c.centerOnly ? `<div class="center">Solo al yokai del centro</div>` : ""}
+          </div>
+        </article>`).join("") || `<p class="muted">No hay relojes con esos filtros.</p>`;
+    }
+    ["q", "fType", "fTribe", "sort"].forEach(id => $(id).addEventListener("input", render));
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yokais · Puni Puni ES</title>
+  <meta name="description" content="Base de datos de yokais UZ, UZ+ y UZ++ de Yo-kai Watch Puni Puni con stats, center skill y unity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/estilo.css" />
+  <link rel="stylesheet" href="assets/nav.css" />
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 14px; }
+    .yk {
+      --tc: var(--accent-2);
+      position: relative; cursor: pointer; text-align: center; padding: 12px 10px 14px; border-radius: 20px; border: 0; color: var(--text);
+      background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--tc) 30%, transparent), transparent 62%), linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tc) 35%, transparent);
+      transition: transform .18s ease, box-shadow .18s ease; font: inherit;
+    }
+    .yk:hover, .yk:focus-visible { transform: translateY(-4px); box-shadow: inset 0 0 0 2px var(--tc), 0 14px 28px color-mix(in srgb, var(--tc) 28%, transparent); outline: none; }
+    .yk .tags { display: flex; justify-content: space-between; gap: 6px; }
+    .yk img { height: 92px; width: 100%; object-fit: contain; margin: 6px 0 8px; transition: transform .25s ease; }
+    .yk:hover img { transform: scale(1.08) rotate(-3deg); }
+    .yk b { display: block; font-size: .92rem; line-height: 1.2; min-height: 2.4em; }
+    .yk small { display: block; color: var(--muted); font-size: .76rem; margin-top: 4px; }
+    .yk .flags { display: flex; justify-content: center; gap: 4px; margin-top: 6px; min-height: 18px; }
+    .flag { font-size: .66rem; font-weight: 800; padding: 1px 7px; border-radius: 999px; background: rgba(255,255,255,.1); color: var(--gold); }
+
+    dialog { border: 0; padding: 0; background: transparent; color: var(--text); max-width: min(640px, calc(100% - 24px)); width: 100%; }
+    dialog::backdrop { background: rgba(8, 4, 24, .72); backdrop-filter: blur(4px); }
+    .sheet {
+      --tc: var(--accent-2);
+      position: relative; border-radius: 26px; padding: 26px; border: 1px solid var(--line);
+      background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--tc) 35%, transparent), transparent 55%), #22164d;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    }
+    .sheet .close { position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; background: rgba(255,255,255,.1); color: #fff; font-size: 1.2rem; }
+    .sheet-top { display: flex; gap: 18px; align-items: center; }
+    .sheet-top img { width: 130px; height: 120px; object-fit: contain; filter: drop-shadow(0 10px 18px rgba(0,0,0,.45)); }
+    .sheet h2 { margin: 0 0 6px; font-size: 1.6rem; line-height: 1.15; }
+    .sheet .meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; color: var(--muted); font-size: .88rem; }
+    .sheet table.nice { margin-top: 16px; }
+    .skill { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(0,0,0,.25); border: 1px solid var(--line); }
+    .skill b { color: var(--gold); font-family: "M PLUS Rounded 1c", sans-serif; }
+    .sheet .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .empty { text-align: center; padding: 40px 10px; color: var(--muted); }
+    @media (max-width: 520px) { .sheet-top { flex-direction: column; text-align: center; } .sheet .meta { justify-content: center; } }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/minimal.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="yokais.html">Yokais</a>
+      <a href="relojes.html">Relojes</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="mecanicas.html">Mecánicas</a>
+      <a href="guias.html">Guías</a>
+      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="kicker">Base de datos</div>
+    <h1>Yokais <span>UZ</span></h1>
+    <p>Todos los UZ, UZ+ y UZ++ con sus stats, center skill y unity. Pulsa un yokai para ver su ficha.</p>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="filters">
+        <input id="q" type="search" placeholder="Buscar por nombre o saga…" aria-label="Buscar" />
+        <select id="fRank" aria-label="Rango"><option value="">Todos los rangos</option></select>
+        <select id="fTribe" aria-label="Tribu"><option value="">Todas las tribus</option></select>
+        <select id="fSaga" aria-label="Saga"><option value="">Todas las sagas</option></select>
+        <select id="fExtra" aria-label="Habilidad">
+          <option value="">Cualquier habilidad</option>
+          <option value="unity">Con unity de tribu</option>
+          <option value="female">Con unity femenino</option>
+          <option value="center">Con center skill</option>
+        </select>
+        <select id="sort" aria-label="Ordenar">
+          <option value="">Orden de salida</option>
+          <option value="hp">Más PV</option>
+          <option value="atk">Más ATQ</option>
+          <option value="total">Más PV + ATQ</option>
+          <option value="name">Nombre (A-Z)</option>
+        </select>
+        <span id="count" class="count"></span>
+      </div>
+      <div id="grid" class="grid"></div>
+    </section>
+  </main>
+
+  <dialog id="ficha"><div class="sheet" id="sheet"></div></dialog>
+
+  <footer class="site-footer">
+    <p>Stats: <em>The Puni Spreadsheet</em> (por Sallitine) y datos de la comunidad. Las stats son las del nivel máximo de su rango.</p>
+    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+  </footer>
+
+  <script src="character.js"></script>
+  <script src="assets/comun.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    const all = characters.map((c, i) => ({ ...c, order: i, tk: PP.key(c.tribe) }));
+
+    // Opciones de filtros
+    ["UZ++", "UZ+", "UZ"].forEach(r => $("fRank").add(new Option(r, r)));
+    PP.TRIBE_ORDER.forEach(t => $("fTribe").add(new Option(PP.TRIBE_ES[t], t)));
+    [...new Set(all.map(c => c.saga).filter(Boolean))].sort((a, b) => a.localeCompare(b)).forEach(s => $("fSaga").add(new Option(s, s)));
+
+    function unityText(c) {
+      const out = [];
+      if (c.unity) out.push(`<div class="skill"><b>Unity de tribu +${c.unity.percent}%</b><br><span class="muted">Sube un ${c.unity.percent}% el PV y el ATQ de los ${PP.tribeEsPlural(c.tribe)} del equipo. Solo funciona si hay 2 o más yokais de su tribu.</span></div>`);
+      if (c.sameTeamUnity) out.push(`<div class="skill"><b>Unity de equipo +${c.sameTeamUnity.percent}%</b><br><span class="muted">Solo se activa si todo el equipo es de la misma tribu.</span></div>`);
+      if (c.femaleUnity) out.push(`<div class="skill"><b>Unity femenino ${PP.pct(c.femaleUnity.hpPercent, c.femaleUnity.atkPercent)}</b><br><span class="muted">Para las chicas del equipo, si hay 2 o más.</span></div>`);
+      if (c.centerSkill) out.push(`<div class="skill"><b>Center skill ${PP.pct(c.centerSkill.hpPercent, c.centerSkill.atkPercent)}</b><br><span class="muted">Si va en el centro del equipo, afecta a: ${PP.esc(PP.describeAffects(c.centerSkill.affects))}.</span></div>`);
+      return out.join("") || `<p class="muted">Sin center skill ni unity registrados.</p>`;
+    }
+
+    function openSheet(id, push = true) {
+      const c = all.find(x => x.id === id);
+      if (!c) return;
+      const s0 = PP.statsAt(c, 0), s10 = PP.statsAt(c, 10);
+      $("sheet").dataset.tribe = c.tk;
+      $("sheet").innerHTML = `
+        <button class="close" type="button" aria-label="Cerrar">×</button>
+        <div class="sheet-top">
+          <img src="${PP.esc(c.image)}" alt="${PP.esc(c.name)}">
+          <div>
+            <h2>${PP.esc(c.name)}</h2>
+            <div class="meta">
+              <span class="pill rank-${PP.rankKey(c.rank)}">${PP.esc(c.rank)} · Nv. ${PP.RANK_LEVEL[c.rank] || "?"}</span>
+              <span class="pill tribe-pill" data-tribe="${PP.esc(c.tk)}">${PP.esc(PP.tribeEs(c.tribe))}</span>
+              <span>${PP.genderSymbol(c.gender)}</span>
+              ${c.saga ? `<span>· ${PP.esc(c.saga)}</span>` : ""}
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap"><table class="nice">
+          <tr><th></th><th>Sin dupes</th><th>5 dupes</th><th>10 dupes (+20%)</th></tr>
+          <tr><td>❤ PV</td><td>${PP.fmt(s0.hp)}</td><td>${PP.fmt(PP.statsAt(c, 5).hp)}</td><td><b>${PP.fmt(s10.hp)}</b></td></tr>
+          <tr><td>⚔ ATQ</td><td>${PP.fmt(s0.atk)}</td><td>${PP.fmt(PP.statsAt(c, 5).atk)}</td><td><b>${PP.fmt(s10.atk)}</b></td></tr>
+        </table></div>
+        ${unityText(c)}
+        <div class="actions">
+          <a class="btn" href="team-builder.html?add=${encodeURIComponent(c.id)}">⚔ Añadir al equipo</a>
+        </div>`;
+      $("sheet").querySelector(".close").onclick = () => $("ficha").close();
+      if (!$("ficha").open) $("ficha").showModal();
+      if (push) history.replaceState(null, "", "#" + encodeURIComponent(c.id));
+    }
+    $("ficha").addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
+    $("ficha").addEventListener("click", e => { if (e.target === $("ficha")) $("ficha").close(); });
+
+    function render() {
+      const q = $("q").value.trim().toLowerCase();
+      const r = $("fRank").value, t = $("fTribe").value, s = $("fSaga").value, x = $("fExtra").value, so = $("sort").value;
+      let list = all.filter(c =>
+        (!q || c.name.toLowerCase().includes(q) || String(c.saga || "").toLowerCase().includes(q)) &&
+        (!r || c.rank === r) && (!t || c.tk === t) && (!s || c.saga === s) &&
+        (!x || (x === "unity" ? (c.unity || c.sameTeamUnity) : x === "female" ? c.femaleUnity : c.centerSkill)));
+      const st = c => PP.statsAt(c, 0);
+      if (so === "hp") list.sort((a, b) => b.hp0 - a.hp0);
+      else if (so === "atk") list.sort((a, b) => b.atk0 - a.atk0);
+      else if (so === "total") list.sort((a, b) => (b.hp0 + b.atk0) - (a.hp0 + a.atk0));
+      else if (so === "name") list.sort((a, b) => a.name.localeCompare(b.name));
+      $("count").textContent = `${list.length} yokai${list.length === 1 ? "" : "s"}`;
+      $("grid").innerHTML = list.length ? list.map(c => `
+        <button class="yk" type="button" data-id="${PP.esc(c.id)}" data-tribe="${PP.esc(c.tk)}">
+          <div class="tags"><span class="pill rank-${PP.rankKey(c.rank)}">${PP.esc(c.rank)}</span><span class="pill tribe-pill">${PP.esc(PP.tribeEs(c.tribe))}</span></div>
+          <img src="${PP.esc(c.image)}" alt="" loading="lazy">
+          <b>${PP.esc(c.name)}</b>
+          <small>❤ ${PP.fmt(c.hp0)} · ⚔ ${PP.fmt(c.atk0)}</small>
+          <div class="flags">${c.unity || c.sameTeamUnity ? `<span class="flag">Unity</span>` : ""}${c.femaleUnity ? `<span class="flag">♀ Unity</span>` : ""}${c.centerSkill ? `<span class="flag">★ Center</span>` : ""}</div>
+        </button>`).join("") : `<div class="empty">No hay yokais con esos filtros.</div>`;
+    }
+    ["q", "fRank", "fTribe", "fSaga", "fExtra", "sort"].forEach(id => $(id).addEventListener("input", render));
+    $("grid").addEventListener("click", e => { const b = e.target.closest(".yk"); if (b) openSheet(b.dataset.id); });
+    render();
+    if (location.hash) openSheet(decodeURIComponent(location.hash.slice(1)), false);
+  </script>
+</body>
+</html>

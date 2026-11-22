@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Builder · Puni Puni ES</title>
+  <link rel="stylesheet" href="assets/nav.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a30;
+      --panel-2: #18233f;
+      --line: #273557;
+      --text: #f5f7ff;
+      --muted: #a9b4cf;
+      --accent: #7c5cff;
+      --accent-2: #4cc9f0;
+      --good: #5ee6a8;
+      --shadow: 0 18px 45px rgba(0,0,0,.30);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(124,92,255,.18), transparent 35%),
+        radial-gradient(circle at top right, rgba(76,201,240,.10), transparent 30%),
+        var(--bg);
+    }
+
+    header {
+      padding: 42px 24px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: -.04em;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto 50px;
+    }
+
+    .layout {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .team-panel { order: 1; }
+    .stats-panel { order: 2; }
+    .characters-panel { order: 3; }
+
+    .panel {
+      background: rgba(18, 26, 48, .92);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(12px);
+    }
+
+    .panel-title {
+      margin: 0 0 16px;
+      font-size: 1.15rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .slot {
+      background: linear-gradient(180deg, var(--panel-2), rgba(24,35,63,.55));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .slot:hover {
+      transform: translateY(-2px);
+      border-color: #3b4d78;
+    }
+
+    .slot.drag-over {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,92,255,.18);
+      transform: translateY(-3px);
+    }
+
+    .slot.dragging {
+      opacity: .5;
+    }
+
+    .slot[draggable="true"] {
+      cursor: grab;
+    }
+
+    .team-drop-active {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px rgba(124,92,255,.12);
+    }
+
+    .slot-center {
+      border-color: #ffd166;
+      box-shadow: 0 0 0 2px rgba(255,209,102,.18);
+    }
+
+    .center-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,209,102,.16);
+      color: #ffd166;
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .center-skill-text {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      color: #ffd166;
+      font-size: .74rem;
+      line-height: 1.35;
+    }
+
+    .unity-text {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      font-size: .74rem;
+      line-height: 1.35;
+    }
+
+    .unity-text.unity-active {
+      color: var(--accent-2);
+    }
+
+    .unity-text.unity-inactive {
+      color: var(--muted);
+    }
+
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 7px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(124,92,255,.16);
+      color: #d9d2ff;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .level-fixed {
+      color: var(--good);
+      font-size: .75rem;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .portrait {
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, rgba(124,92,255,.75), rgba(76,201,240,.50));
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slot-number {
+      color: var(--muted);
+      font-size: .78rem;
+      margin-bottom: 3px;
+    }
+
+    .character-name {
+      font-weight: 750;
+      margin-bottom: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    select {
+      width: 100%;
+      background: #0e162a;
+      color: var(--text);
+      border: 1px solid #304263;
+      border-radius: 10px;
+      padding: 9px 10px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,92,255,.18);
+    }
+
+    .level-label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: .77rem;
+      font-weight: 700;
+    }
+
+    .level-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 7px;
+      align-items: center;
+    }
+
+    .level-input {
+      width: 100%;
+      background: #0e162a;
+      color: var(--text);
+      border: 1px solid #304263;
+      border-radius: 9px;
+      padding: 7px 5px;
+      text-align: center;
+      outline: none;
+    }
+
+    .level-input:focus {
+      border-color: var(--accent);
+    }
+
+    .level-range {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .mini-stats {
+      margin-top: 10px;
+      display: grid;
+      gap: 5px;
+      font-size: .82rem;
+    }
+
+    .mini-stat {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+    }
+
+    .mini-stat strong { color: var(--text); }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .summary-card {
+      padding: 18px 16px;
+      border-radius: 14px;
+      background: #0e162a;
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .summary-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .summary-label {
+      display: block;
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 650;
+    }
+
+    .summary-card strong {
+      font-size: 1.6rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -.01em;
+    }
+
+    .selected-list {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .selected-list h3 {
+      margin: 0 0 10px;
+      font-size: .95rem;
+    }
+
+    .selected-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(39,53,87,.55);
+    }
+
+    .selected-item:last-child { border-bottom: 0; }
+
+    .tribe-unity-panel {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .tribe-unity-title {
+      margin: 0 0 10px;
+      font-size: .95rem;
+    }
+
+    .tribe-unity-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tribe-unity-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: #0e162a;
+      border: 1px solid var(--line);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .tribe-unity-chip.tribe-unity-active {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    .tribe-unity-chip.tribe-unity-inactive {
+      color: var(--muted);
+      opacity: .7;
+    }
+
+    .tribe-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex: 0 0 auto;
+      background: rgba(255,255,255,.06);
+    }
+
+    .tribe-unity-name {
+      white-space: nowrap;
+    }
+
+    .tribe-unity-value {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .saved-teams-panel {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .saved-teams-panel h3 {
+      margin: 0 0 10px;
+      font-size: .95rem;
+    }
+
+    .save-team-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .save-team-row input {
+      flex: 1;
+      background: #0e162a;
+      color: var(--text);
+      border: 1px solid #304263;
+      border-radius: 10px;
+      padding: 9px 10px;
+      outline: none;
+      min-width: 0;
+    }
+
+    .save-team-row input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,92,255,.18);
+    }
+
+    .save-team-row button {
+      flex-shrink: 0;
+    }
+
+    .saved-teams-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .saved-team-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 10px;
+      background: rgba(24,35,63,.5);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .saved-team-item .saved-team-name {
+      flex: 1;
+      font-weight: 650;
+      font-size: .88rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .saved-team-item button {
+      padding: 6px 10px;
+      font-size: .78rem;
+    }
+
+    .saved-team-item .delete-team-btn {
+      background: transparent;
+      border: 1px solid #4a3355;
+      color: #ffb4c6;
+    }
+
+    .saved-team-item .delete-team-btn:hover {
+      background: rgba(255,90,120,.12);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .selected-item span {
+      color: var(--muted);
+      font-size: .82rem;
+      margin-left: auto;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 11px;
+      padding: 10px 14px;
+      color: white;
+      background: var(--accent);
+      cursor: pointer;
+      font-weight: 750;
+    }
+
+    button:hover { filter: brightness(1.08); }
+
+    .hint {
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+
+    footer {
+      text-align: center;
+      color: #73809e;
+      padding: 10px 20px 30px;
+      font-size: .8rem;
+    }
+
+    .credits {
+      margin-top: 20px;
+      border-top: 1px solid rgba(169,180,207,.15);
+      padding-top: 18px;
+      line-height: 1.7;
+    }
+    .credits p { margin: 0; }
+    .credits-label { color: var(--muted); }
+    .credits a {
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(169,180,207,.5);
+      transition: color .15s, border-color .15s;
+    }
+    .credits a:hover { color: #7289da; border-bottom-color: #7289da; }
+
+    @media (max-width: 950px) {
+      .team-grid { grid-template-columns: repeat(5, minmax(120px, 1fr)); overflow-x: auto; padding-bottom: 4px; }
+    }
+
+    @media (max-width: 600px) {
+      main { width: min(100% - 18px, 1180px); }
+      .panel { padding: 15px; }
+      .team-grid { grid-template-columns: repeat(5, 140px); }
+      .stat { grid-template-columns: 64px 1fr 58px; }
+    }
+  
+.created-characters {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.created-characters:empty {
+  display: none;
+}
+.created-characters-title {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+
+.tribe-filter-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 16px;
+}
+
+.tribe-filter-row label {
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.tribe-filter-row select {
+  max-width: 220px;
+}
+
+.created-drag-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: grab;
+  background: var(--panel-2);
+}
+
+.created-drag-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.created-drag-card .portrait {
+  height: 110px;
+  margin-bottom: 8px;
+}
+
+.created-drag-card.dragging {
+  opacity: .65;
+}
+
+/* ==================== Yo-kai Watch theme ==================== */
+:root {
+  --bg: #170f33;
+  --panel: rgba(32, 22, 72, .78);
+  --panel-2: #2a1d5c;
+  --line: rgba(160, 140, 255, .22);
+  --text: #fbf8ff;
+  --muted: #b9b0dc;
+  --accent: #e8344e;      /* rojo del reloj */
+  --accent-2: #4fd6ff;
+  --gold: #ffcf3f;
+  --good: #6ef0b2;
+  --radius: 22px;
+  --t-brave: #ff5a5f;  --t-mysterious: #ffd23f; --t-tough: #ff9a3c;
+  --t-charming: #ff7ac6; --t-heartful: #5fe08a; --t-shady: #6c8cff;
+  --t-eerie: #b66dff;  --t-slippery: #3fd5e8;  --t-enma: #e0b13a;
+}
+
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  background: #170f33;
+}
+/* Fondo: mosaico de punis, visible a los lados y oscurecido en el centro */
+body::before {
+  content: ""; position: fixed; inset: -600px 0 0 -600px; z-index: -1; pointer-events: none;
+  background:
+    url("fondo-punis.webp") 0 0 / 520px 520px repeat;
+  opacity: .75;
+  animation: drift 90s linear infinite;
+}
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(232,52,78,.22), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(79,214,255,.14), transparent 60%),
+    linear-gradient(90deg,
+      rgba(23,15,51,.35) 0%, rgba(23,15,51,.6) 11%,
+      rgba(23,15,51,.95) 22%, rgba(23,15,51,.95) 78%,
+      rgba(23,15,51,.6) 89%, rgba(23,15,51,.35) 100%);
+}
+@keyframes drift { to { transform: translate(520px, 520px); } }
+@media (prefers-reduced-motion: reduce) { body::before { animation: none; } }
+
+h1, h2, h3, .panel-title, button, .rank-pill, .rank-badge, .center-badge {
+  font-family: "M PLUS Rounded 1c", "Nunito", sans-serif;
+}
+
+/* ---------- Banner ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 20px 92px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 120%, rgba(232,52,78,.45), transparent 55%),
+    linear-gradient(180deg, #2b1670 0%, #3b1d86 45%, #5a2aa0 100%);
+  isolation: isolate;
+}
+.hero-stars {
+  position: absolute; inset: 0; z-index: -2; opacity: .8;
+  background-image:
+    radial-gradient(2px 2px at 12% 22%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 28% 68%, #fff, transparent),
+    radial-gradient(2px 2px at 46% 14%, #ffe9a8, transparent),
+    radial-gradient(1.5px 1.5px at 62% 42%, #fff, transparent),
+    radial-gradient(2px 2px at 78% 18%, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 88% 60%, #bfe9ff, transparent),
+    radial-gradient(1.5px 1.5px at 6% 80%, #fff, transparent),
+    radial-gradient(2px 2px at 54% 78%, #fff, transparent);
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+.hero-moon {
+  position: absolute; z-index: -2; top: 28px; right: 9%;
+  width: 90px; height: 90px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff6cf, #ffd86b 60%, #f0a93a);
+  box-shadow: 0 0 60px 14px rgba(255, 207, 63, .35);
+}
+.hero-punis { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.hero-puni {
+  position: absolute;
+  width: var(--s, 76px);
+  opacity: .9;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+  animation: float var(--d, 7s) ease-in-out var(--delay, 0s) infinite alternate;
+}
+.hero-content { position: relative; max-width: 760px; margin: 0 auto; }
+.hero-kicker {
+  display: inline-block; margin-bottom: 12px; padding: 6px 16px;
+  border-radius: 999px; font-weight: 800; letter-spacing: .08em; font-size: .85rem;
+  color: #fff; background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,255,255,.18), 0 6px 18px rgba(232,52,78,.45);
+}
+.hero h1 {
+  margin: 0; font-size: clamp(2.3rem, 6vw, 4rem); font-weight: 800; line-height: 1.05;
+  letter-spacing: -.01em; color: #fff;
+  text-shadow: 0 4px 0 #2a1366, 0 10px 30px rgba(0,0,0,.45);
+}
+.hero h1 span {
+  display: block;
+  background: linear-gradient(90deg, var(--gold), #ff8a3d 50%, var(--accent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: none; filter: drop-shadow(0 4px 0 #2a1366);
+}
+.hero p { margin: 14px auto 0; max-width: 560px; color: #e4dcff; font-size: 1.05rem; font-weight: 600; }
+.hero-domain { margin-top: 10px; color: rgba(255,255,255,.55); font-size: .8rem; font-weight: 700; letter-spacing: .06em; }
+.hero-wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 60px; fill: #1d1342; }
+
+@keyframes float { from { transform: translateY(0) rotate(-4deg); } to { transform: translateY(-18px) rotate(4deg); } }
+@keyframes twinkle { from { opacity: .45; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-puni, .hero-stars { animation: none; }
+}
+
+/* ---------- Paneles ---------- */
+main { margin-top: -28px; position: relative; z-index: 1; }
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 50px rgba(5, 0, 30, .45), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.panel-title {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 1.3rem; font-weight: 800;
+}
+.panel-title::before {
+  content: ""; width: 14px; height: 14px; border-radius: 50%; flex: 0 0 auto;
+  background: radial-gradient(circle at 35% 35%, #ff8a9a, var(--accent));
+  box-shadow: 0 0 0 3px rgba(232,52,78,.25);
+}
+button {
+  background: linear-gradient(180deg, #ff5a6e, var(--accent));
+  box-shadow: 0 4px 0 #a51b30, 0 8px 18px rgba(232,52,78,.35);
+  border-radius: 999px; padding: 10px 18px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+button:active { transform: translateY(3px); box-shadow: 0 1px 0 #a51b30; }
+select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); border-color: var(--line); border-radius: 12px; }
+
+/* ---------- Equipo ---------- */
+.slot {
+  --tc: var(--accent-2);
+  background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+  border: 2px solid color-mix(in srgb, var(--tc) 45%, transparent);
+  border-radius: 20px;
+}
+.slot .portrait {
+  background: radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--tc) 40%, transparent), transparent 70%);
+  border: 0;
+}
+.slot .portrait img { object-fit: contain; }
+.slot:hover { border-color: var(--tc); box-shadow: 0 10px 26px color-mix(in srgb, var(--tc) 30%, transparent); }
+.slot-center {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(255,207,63,.25), 0 12px 32px rgba(255,207,63,.25);
+}
+.center-badge { background: linear-gradient(90deg, #ffe27a, var(--gold)); color: #3a2600; }
+.summary-card { background: linear-gradient(160deg, rgba(232,52,78,.22), rgba(32,22,72,.6)); border-color: rgba(232,52,78,.35); border-radius: 18px; }
+.summary-card:nth-child(2) { background: linear-gradient(160deg, rgba(79,214,255,.2), rgba(32,22,72,.6)); border-color: rgba(79,214,255,.35); }
+.summary-card strong { font-family: "M PLUS Rounded 1c", sans-serif; font-size: 2rem; }
+
+/* ---------- Rangos ---------- */
+.rank-badge, .rank-pill { color: #fff; font-weight: 800; }
+.rank-pill { padding: 2px 9px; border-radius: 999px; font-size: .72rem; letter-spacing: .03em; }
+.rank-uzpp { background: linear-gradient(90deg, #ffd35a, #ff9d2e); color: #3a2200; box-shadow: 0 0 12px rgba(255,190,60,.45); }
+.rank-uzp  { background: linear-gradient(90deg, #c46bff, #ff6bc8); }
+.rank-uz   { background: linear-gradient(90deg, #3d8bff, #4fd6ff); }
+
+/* ---------- Colección ---------- */
+.collection-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 14px; }
+.created-drag-card {
+  --tc: var(--accent-2);
+  position: relative;
+  border: 0; border-radius: 20px; padding: 12px 12px 14px;
+  background:
+    radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--tc) 30%, transparent), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tc) 35%, transparent);
+  text-align: center;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.created-drag-card:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 0 2px var(--tc), 0 14px 28px color-mix(in srgb, var(--tc) 28%, transparent);
+}
+.created-drag-card img { height: 96px; margin: 6px auto 8px; transition: transform .25s ease; }
+.created-drag-card:hover img { transform: scale(1.08) rotate(-3deg); }
+.created-drag-card strong { display: block; font-size: .92rem; line-height: 1.2; min-height: 2.4em; }
+.card-tags { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.tribe-tag {
+  font-size: .7rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+  color: #1a1030; background: var(--tc);
+}
+
+/* Color por tribu */
+[data-tribe="brave"]      { --tc: var(--t-brave); }
+[data-tribe="mysterious"] { --tc: var(--t-mysterious); }
+[data-tribe="tough"]      { --tc: var(--t-tough); }
+[data-tribe="charming"]   { --tc: var(--t-charming); }
+[data-tribe="heartful"]   { --tc: var(--t-heartful); }
+[data-tribe="shady"]      { --tc: var(--t-shady); }
+[data-tribe="eerie"]      { --tc: var(--t-eerie); }
+[data-tribe="slippery"]   { --tc: var(--t-slippery); }
+[data-tribe="enma"]       { --tc: var(--t-enma); }
+
+.tribe-unity-chip:not([data-tribe]) { --tc: var(--good); }
+.tribe-unity-chip.tribe-unity-active { border-color: var(--tc); color: var(--tc); }
+.tribe-unity-chip.tribe-unity-active .tribe-unity-value { color: #1a1030; background: var(--tc); padding: 1px 8px; border-radius: 999px; }
+.credits { color: var(--muted); }
+
+@media (max-width: 600px) {
+  .hero { padding: 44px 16px 80px; }
+  .hero-moon { width: 56px; height: 56px; }
+  .collection-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+/* ============================================================ */
+
+/* ---------- Barra fija del equipo ---------- */
+.mini-team {
+  position: fixed; left: 50%; bottom: 16px; z-index: 50;
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 999px;
+  background: rgba(30, 18, 70, .92);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 14px 40px rgba(0,0,0,.5), 0 0 0 3px rgba(232,52,78,.25);
+  backdrop-filter: blur(10px);
+  transform: translate(-50%, 140%); opacity: 0; pointer-events: none;
+  transition: transform .3s cubic-bezier(.2,.9,.3,1.2), opacity .2s ease;
+}
+.mini-team.visible { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.mini-title {
+  padding: 8px 14px; font-size: .85rem; border-radius: 999px;
+}
+.mini-slots { display: flex; gap: 8px; }
+.mini-slot {
+  --tc: var(--accent-2);
+  position: relative; width: 58px; height: 58px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--tc) 35%, transparent), rgba(255,255,255,.04) 70%);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tc) 60%, transparent);
+  cursor: grab; transition: transform .15s ease, box-shadow .15s ease;
+}
+.mini-slot img { width: 50px; height: 50px; object-fit: contain; pointer-events: none; }
+.mini-slot span { font-weight: 800; }
+.mini-empty { color: var(--muted); font-size: 1.4rem; font-weight: 800; cursor: default; box-shadow: none; border: 2px dashed var(--line); background: none; }
+.mini-center { box-shadow: inset 0 0 0 2px var(--gold), 0 0 14px rgba(255,207,63,.45); }
+.mini-slot.drag-over { transform: scale(1.12); box-shadow: inset 0 0 0 3px #fff, 0 0 18px rgba(255,255,255,.5); }
+.mini-remove {
+  position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; padding: 0;
+  border-radius: 50%; font-size: .8rem; line-height: 20px; display: none;
+  box-shadow: 0 2px 0 #a51b30;
+}
+.mini-slot:hover .mini-remove, .mini-slot:focus-within .mini-remove { display: block; }
+.mini-team { border-radius: 26px; }
+.mini-cell { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.mini-cell-stats {
+  display: flex; flex-direction: column; align-items: center; line-height: 1.1;
+  font-family: "M PLUS Rounded 1c", sans-serif; font-size: .68rem; font-weight: 800; min-height: 2.2em;
+}
+.mini-cell-stats .hp { color: #ff8fa0; }
+.mini-cell-stats .atk { color: #8fe3ff; }
+.mini-cell-stats .hp::before { content: "❤ "; }
+.mini-cell-stats .atk::before { content: "⚔ "; }
+.mini-side { display: flex; flex-direction: column; gap: 6px; }
+.mini-stats-box { display: flex; flex-direction: column; gap: 2px; font-size: .78rem; color: var(--muted); white-space: nowrap; }
+.mini-stats-box strong { color: var(--text); font-family: "M PLUS Rounded 1c", sans-serif; font-size: .92rem; }
+.mini-unity-list { display: flex; flex-wrap: wrap; gap: 4px; max-width: 170px; }
+.mini-unity {
+  font-size: .68rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+  color: #1a1030; background: var(--tc); white-space: nowrap;
+}
+.mini-unity-none { background: rgba(255,255,255,.1); color: var(--muted); }
+.mini-unity.mini-off { background: transparent; color: var(--tc); box-shadow: inset 0 0 0 1.5px var(--tc); opacity: .75; }
+.mini-female { --tc: #ff9ad5; }
+.mini-center-chip { --tc: var(--gold); }
+.mini-watch { --tc: #9fb4ff; }
+.mini-unity-list { max-width: 220px; }
+.tribe-unity-chip.tribe-unity-inactive .tribe-unity-value { opacity: .85; }
+@media (max-width: 600px) {
+  .mini-team {
+    flex-wrap: wrap; justify-content: center; gap: 6px 10px;
+    width: calc(100% - 20px); padding: 8px 10px; bottom: 10px; border-radius: 22px;
+  }
+  .mini-title { display: none; }
+  .mini-slots { gap: 6px; }
+  .mini-slot { width: 46px; height: 46px; }
+  .mini-slot img { width: 40px; height: 40px; }
+  .mini-cell-stats { font-size: .6rem; }
+  .mini-side { flex-direction: row; align-items: center; gap: 10px; width: 100%; justify-content: center; }
+  .mini-stats-box { flex-direction: row; gap: 10px; }
+  .mini-unity-list { max-width: none; }
+  .mini-remove { display: block; }
+}
+
+/* ---------- Stats arriba y relojes ---------- */
+.team-summary { margin-bottom: 16px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.stats-panel .selected-list { margin-top: 0; border-top: 0; padding-top: 0; }
+.watch-panel { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 16px; }
+.watch-current { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.watch-current > div { flex: 1; min-width: 0; }
+.watch-current-img { width: 64px; height: 64px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); }
+.watch-current #clockSummary { margin: 6px 0 0; }
+.watch-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; }
+.watch-option {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 6px; border-radius: 14px; box-shadow: none;
+  background: rgba(255,255,255,.05); border: 1px solid var(--line);
+  color: var(--text); font-family: "Nunito", sans-serif; font-weight: 700; font-size: .7rem; line-height: 1.15;
+}
+.watch-option:hover { background: rgba(255,255,255,.1); filter: none; }
+.watch-option:active { transform: none; box-shadow: none; }
+.watch-option img { width: 44px; height: 44px; object-fit: contain; }
+.watch-option .watch-pct { color: var(--gold); font-size: .66rem; }
+.watch-option.selected { border-color: var(--gold); background: rgba(255,207,63,.14); box-shadow: 0 0 0 2px rgba(255,207,63,.3); }
+.watch-none { justify-content: center; min-height: 82px; color: var(--muted); }
+
+.team-empty-hint {
+  grid-column: 1/-1;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  text-align: center;
+}
+
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/minimal.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="yokais.html">Yokais</a>
+      <a href="relojes.html">Relojes</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="mecanicas.html">Mecánicas</a>
+      <a href="guias.html">Guías</a>
+      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+    </div>
+  </nav>
+  <header class="hero">
+    <div class="hero-stars" aria-hidden="true"></div>
+    <div class="hero-moon" aria-hidden="true"></div>
+    <div id="heroPunis" class="hero-punis" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-kicker">妖怪ウォッチ ぷにぷに</div>
+      <h1>Puni Puni <span>Team Builder</span></h1>
+      <p>Arma tu equipo y mira sus stats reales con dupes, relojes, center skills y unity.</p>
+      <div class="hero-domain">punipuni-teambuilder.com</div>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section class="panel team-panel">
+        <h2 class="panel-title">Tu equipo</h2>
+
+        <div id="summary" class="summary team-summary"></div>
+
+        <div id="teamGrid" class="team-grid"></div>
+
+        <div class="tribe-unity-panel">
+          <h3 class="tribe-unity-title">Bonus de tribu <span class="hint">(efecto de tribu + unity)</span></h3>
+          <div id="tribeUnityList" class="tribe-unity-list"></div>
+        </div>
+
+        <div class="bonus-panel watch-panel">
+          <h3 class="tribe-unity-title">Reloj</h3>
+          <div class="watch-current">
+            <img id="watchCurrentImg" class="watch-current-img" alt="" hidden>
+            <div>
+              <select id="clockSelect" aria-label="Watch">
+                <option value="">Sin reloj</option>
+              </select>
+              <p id="clockSummary" class="hint">Ningún reloj seleccionado.</p>
+            </div>
+          </div>
+          <div id="watchPicker" class="watch-picker"></div>
+        </div>
+
+        <div class="controls">
+          <div class="hint">
+            Arrastra un yokai de la colección a uno de los 5 huecos, o arrastra entre huecos para reordenar.
+            El nivel se fija solo según su rango.
+          </div>
+          <button id="resetBtn" type="button">Vaciar</button>
+        </div>
+
+        <div class="saved-teams-panel">
+          <h3>Equipos guardados</h3>
+          <div class="save-team-row">
+            <input id="saveTeamName" type="text" placeholder="Nombre del equipo..." maxlength="40" />
+            <button id="saveTeamBtn" type="button">Guardar equipo</button>
+          </div>
+          <div id="savedTeamsList" class="saved-teams-list"></div>
+        </div>
+      </section>
+
+      <aside class="panel stats-panel">
+        <h2 class="panel-title">Yokais elegidos</h2>
+
+        <div class="selected-list">
+          <h3 class="visually-hidden">Yokais elegidos</h3>
+          <div id="selectedList"></div>
+        </div>
+      </aside>
+
+<section class="panel characters-panel">
+  <h2 class="panel-title">Colección</h2>
+  <p class="hint">Arrastra un yokai al equipo (o haz clic) para añadirlo.</p>
+  <div class="tribe-filter-row">
+    <label for="tribeFilter">Tribu</label>
+    <select id="tribeFilter">
+      <option value="">Todas las tribus</option>
+    </select>
+    <label for="rankFilter">Rango</label>
+    <select id="rankFilter">
+      <option value="">Todos los rangos</option>
+    </select>
+  </div>
+  <div id="createdCharactersDragZone" class="collection-grid"></div>
+</section>
+    </div>
+  </main>
+
+
+
+
+
+
+<div id="miniTeam" class="mini-team" aria-label="Tu equipo (barra rápida)">
+  <button type="button" class="mini-title" id="miniTeamTop" title="Ir a tu equipo">Equipo</button>
+  <div id="miniTeamSlots" class="mini-slots"></div>
+  <div class="mini-side">
+    <div class="mini-stats-box">
+      <span>❤ <strong id="miniTeamHp">0</strong></span>
+      <span>⚔ <strong id="miniTeamAtk">0</strong></span>
+    </div>
+    <div id="miniTeamUnity" class="mini-unity-list"></div>
+  </div>
+</div>
+
+<footer class="credits">
+    <p><span class="credits-label">Hecho por:</span> <a href="https://discord.com/users/1440708112867921940" target="_blank" rel="noopener noreferrer">mentahelada</a></p>
+    <p><span class="credits-label">Créditos:</span> <a href="https://discord.com/users/732345044425506827" target="_blank" rel="noopener noreferrer">Jeff74</a> · <a href="https://discord.com/users/458312562069733397" target="_blank" rel="noopener noreferrer">Cadri</a></p>
+  </footer>
+
+  <script src="character.js"></script>
+  <script src="watches.js"></script>
+  <script src="assets/comun.js"></script>
+
+  <script>
+    // Banner: punis flotando, elegidas al azar de la colección
+    (function () {
+      const box = document.getElementById("heroPunis");
+      if (!box || typeof characters === "undefined") return;
+      const pool = characters.filter(c => c.image).sort(() => Math.random() - 0.5);
+      const count = window.innerWidth < 600 ? 7 : 14;
+      // Posiciones repartidas por los bordes para no tapar el título
+      const spots = [[3,10],[12,40],[4,70],[21,14],[22,64],[13,82],[90,70],[93,34],[76,58],[86,46],[25,38],[79,82],[70,78],[30,84]];
+      pool.slice(0, count).forEach((c, i) => {
+        const img = document.createElement("img");
+        img.className = "hero-puni";
+        img.src = c.image;
+        img.alt = "";
+        const [x, y] = spots[i % spots.length];
+        img.style.left = x + "%";
+        img.style.top = y + "%";
+        img.style.setProperty("--s", (56 + Math.random() * 44).toFixed(0) + "px");
+        img.style.setProperty("--d", (5 + Math.random() * 4).toFixed(1) + "s");
+        img.style.setProperty("--delay", (-Math.random() * 5).toFixed(1) + "s");
+        box.appendChild(img);
+      });
+    })();
+  </script>
+
+  <script>
+
+    const RANK_LEVELS = Object.freeze({
+      "UZ": 90,
+      "UZ+": 100,
+      "UZ++": 110,
+    });
+
+    // Official list of tribes, used to fill the "Filter by tribe" dropdown.
+    // A character's "tribe" field can be any of these (case-insensitive).
+    const TRIBES = ["Shady", "Mysterious", "Eerie", "Brave", "Enma", "Charming", "Heartful", "Tough", "Slippery"];
+
+    // Tribe icons shown next to each tribe's unity bonus (team panel).
+    // Drop an image at img/tribes/<key>.png for each tribe you want an icon
+    // for (key = tribe name, lowercase, spaces as-is) — e.g. img/tribes/shady.png.
+    // Missing/broken images are just hidden, so this is fully optional.
+    function getTribeIconPath(tribeKey) {
+      return `img/tribes/${tribeKey}.png`;
+    }
+
+    // To add a new watch, add another object to this array.
+    // id: internal value (no spaces), label: shown in the dropdown,
+    // hpPercent / atkPercent: % bonus to HP and ATK (can differ),
+    // affects: same filter format as centerSkill.affects:
+    //   {}                         -> whole team
+    //   { tribes: ["shady"] }      -> only those tribes
+    //   { ranks: ["UZ+","UZ++"] }  -> only those ranks
+    //   { genders: ["female"] }    -> only that gender
+    //   { sagas: ["Nyanbo"] }      -> only that saga
+    //   { ids: ["shadow"] }        -> only those specific characters
+    
+    
+    // CLOCKS (the watches list) now lives in watches.js
+
+    function getClock(id) {
+      return CLOCKS.find(c => c.id === id) || null;
+    }
+
+    // Watches with centerOnly: true only boost the Yo-kai in the center slot
+    // (and only if that Yo-kai matches the watch's "affects" filter).
+    function describeClockTarget(clock) {
+      const who = describeCenterFilter(clock.affects);
+      if (!clock.centerOnly) return who;
+      return who === "todo el equipo" ? "el yokai del centro" : `el yokai del centro (si es ${who})`;
+    }
+
+    function describeClock(clock) {
+      const who = describeClockTarget(clock);
+      if (clock.hpPercent === clock.atkPercent) {
+        return `${clock.label}: +${clock.hpPercent}% PV y ATQ para ${who}.`;
+      }
+      return `${clock.label}: +${clock.hpPercent}% PV, +${clock.atkPercent}% ATQ para ${who}.`;
+    }
+
+
+    const defaultTeam = [];
+    let team = [];
+
+    function getCharacter(id) {
+      return characters.find(c => c.id === id) || null;
+    }
+
+    function getRankLevel(character) {
+      if (!character) return 0;
+      return RANK_LEVELS[String(character.rank || "").trim().toUpperCase()] || 0;
+    }
+
+    function getDupes(member) {
+      const raw = Number(member?.dupes);
+      return Math.max(0, Math.min(10, Number.isFinite(raw) ? raw : 0));
+    }
+
+    function getStats(character, dupes = 0) {
+      // Initial stats +2% per dupe, up to +20% at 10 dupes.
+      const d = Math.max(0, Math.min(10, Number(dupes) || 0));
+      const mult = 1 + 0.02 * d;
+      return { hp: Math.round(character.hp0 * mult), atk: Math.round(character.atk0 * mult) };
+    }
+
+    // Center slot: position 3 = array index 2.
+    const CENTER_SLOT_INDEX = 2;
+
+    // Decides whether "character" receives a center character's skill bonus.
+    // "filter" can be:
+    //   {}                         -> whole team (self included)
+    //   { tribes: ["shady"] }      -> only those tribes (lowercase)
+    //   { ranks: ["UZ+","UZ++"] }  -> only those ranks
+    //   { genders: ["female"] }    -> only that gender
+    //   { sagas: ["Nyanbo"] }      -> only that saga (matches character.saga, case-insensitive)
+    //   { ids: ["shadow"] }        -> only those specific characters
+    // Combine keys and ALL of them must match (AND).
+    function characterMatchesCenterFilter(character, filter) {
+      if (!filter || typeof filter !== "object") return true;
+      if (Array.isArray(filter.tribes) && filter.tribes.length) {
+        const tribes = filter.tribes.map(t => String(t).trim().toLowerCase());
+        if (!tribes.includes(String(character.tribe || "").trim().toLowerCase())) return false;
+      }
+      if (Array.isArray(filter.ranks) && filter.ranks.length) {
+        const ranks = filter.ranks.map(r => String(r).trim().toUpperCase());
+        if (!ranks.includes(String(character.rank || "").trim().toUpperCase())) return false;
+      }
+      if (Array.isArray(filter.genders) && filter.genders.length) {
+        const genders = filter.genders.map(g => String(g).trim().toLowerCase());
+        if (!genders.includes(String(character.gender || "").trim().toLowerCase())) return false;
+      }
+      if (Array.isArray(filter.sagas) && filter.sagas.length) {
+        const sagas = filter.sagas.map(s => String(s).trim().toLowerCase());
+        if (!sagas.includes(String(character.saga || "").trim().toLowerCase())) return false;
+      }
+      if (Array.isArray(filter.ids) && filter.ids.length) {
+        if (!filter.ids.includes(character.id)) return false;
+      }
+      return true;
+    }
+
+    function getCenterSkill() {
+      const centerMember = team[CENTER_SLOT_INDEX];
+      if (!centerMember) return null;
+      const centerChar = getCharacter(centerMember.id);
+      return centerChar?.centerSkill || null;
+    }
+
+    function describeCenterFilter(filter) {
+      if (!filter || typeof filter !== "object") return "todo el equipo";
+      const parts = [];
+      if (Array.isArray(filter.tribes) && filter.tribes.length) {
+        parts.push("tribu " + filter.tribes.map(t => PP.tribeEs(t)).join("/"));
+      }
+      if (Array.isArray(filter.ranks) && filter.ranks.length) {
+        parts.push("rango " + filter.ranks.join("/"));
+      }
+      if (Array.isArray(filter.genders) && filter.genders.length) {
+        parts.push(filter.genders.map(g => String(g).toLowerCase() === "female" ? "chicas" : "chicos").join("/"));
+      }
+      if (Array.isArray(filter.sagas) && filter.sagas.length) {
+        parts.push("saga " + filter.sagas.join("/"));
+      }
+      if (Array.isArray(filter.ids) && filter.ids.length) {
+        const names = filter.ids.map(id => getCharacter(id)?.name || id);
+        parts.push(names.join("/"));
+      }
+      return parts.length ? parts.join(", ") : "todo el equipo";
+    }
+
+    function describeCenterSkill(skill) {
+      if (skill.label) return skill.label;
+      const hpPercent = Number(skill.hpPercent) || 0;
+      const atkPercent = Number(skill.atkPercent) || 0;
+      const who = describeCenterFilter(skill.affects);
+      if (hpPercent === atkPercent) {
+        return `Center skill: +${hpPercent}% PV/ATQ a ${who}`;
+      }
+      return `Center skill: +${hpPercent}% PV, +${atkPercent}% ATQ a ${who}`;
+    }
+
+    // Unity: a character with a "unity" field grants a flat % HP/ATK bonus to the
+    // WHOLE team, but only activates if there are at least 2 characters of that
+    // character's own tribe in the current team (itself included). Position in
+    // the team doesn't matter (unlike centerSkill).
+    function getTribeCounts() {
+      const counts = {};
+      team.forEach(member => {
+        const character = getCharacter(member.id);
+        if (!character) return;
+        const tribe = String(character.tribe || "").trim().toLowerCase();
+        if (!tribe) return;
+        counts[tribe] = (counts[tribe] || 0) + 1;
+      });
+      return counts;
+    }
+
+    function isUnityActive(character, tribeCounts) {
+      if (!character?.unity) return false;
+      const tribe = String(character.tribe || "").trim().toLowerCase();
+      return (tribeCounts[tribe] || 0) >= 2;
+    }
+
+    function describeUnity(character) {
+      const unity = character.unity;
+      if (unity.label) return unity.label;
+      const percent = Number(unity.percent) || 0;
+      const tribeLabel = character.tribe ? PP.tribeEsPlural(character.tribe) : "los de su tribu";
+      return `Unity: +${percent}% PV/ATQ a los ${tribeLabel} (necesita 2+ ${tribeLabel})`;
+    }
+
+    // Builds one entry per tribe present in the current team that has at
+    // least one "unity" character, summing the % from every ACTIVE unity of
+    // that tribe (several characters of the same tribe can each carry their
+    // own unity.percent, and they stack). Tribes that are present but haven't
+    // reached the 2+ threshold yet are still listed (percent 0, active:false)
+    // so the team panel can show "needs 1 more", etc.
+    function getTribeUnityBreakdown() {
+      const tribeCounts = getTribeCounts();
+      const breakdown = {};
+
+      team.forEach(member => {
+        const character = getCharacter(member.id);
+        if (!character || !character.unity) return;
+        const tribeKey = String(character.tribe || "").trim().toLowerCase();
+        if (!tribeKey) return;
+
+        if (!breakdown[tribeKey]) {
+          const tribeLabel = String(character.tribe).trim().replace(/^./, c => c.toUpperCase());
+          const count = tribeCounts[tribeKey] || 0;
+          breakdown[tribeKey] = {
+            tribeKey,
+            tribeLabel,
+            count,
+            active: count >= 2,
+            percent: 0,
+            potential: 0   // lo que daría si estuviera activa (se suma con cada yokai con unity)
+          };
+        }
+        const pct = Number(character.unity.percent) || 0;
+        breakdown[tribeKey].potential += pct;
+        if (breakdown[tribeKey].active) {
+          breakdown[tribeKey].percent += pct;
+        }
+      });
+
+      return Object.values(breakdown).sort((a, b) => a.tribeLabel.localeCompare(b.tribeLabel));
+    }
+
+    function renderTribeUnity() {
+      const list = document.getElementById("tribeUnityList");
+      if (!list) return;
+
+      // Una entrada por tribu del equipo con su % (efecto de tribu + unity, que solo cuenta con 2+)
+      const groups = getTribeBonusBreakdown().filter(g => g.count >= 2);
+
+      list.innerHTML = groups.length
+        ? groups.map(g => {
+            const any = g.percent > 0;
+            return `
+            <div class="tribe-unity-chip${any ? " tribe-unity-active" : " tribe-unity-inactive"}" data-tribe="${escapeHtml(g.tribeKey)}" title="${escapeHtml(describeTribeBonus(g))}">
+              <span class="tribe-unity-name">${escapeHtml(g.tribeLabel)} ×${g.count}</span>
+              <span class="tribe-unity-value">${formatTribeBonus(g)}</span>
+            </div>`;
+          }).join("")
+        : '<p class="hint">Pon 2 o más yokais de la misma tribu para conseguir bonus de tribu.</p>';
+    }
+
+    // Female Unity: like Unity, but restricted to gender instead of tribe.
+    // A character with a "femaleUnity" field grants a flat % HP/ATK bonus
+    // ONLY to the FEMALE members of the team (not the whole team), and only
+    // activates if there are at least 2 female characters in the current
+    // team (itself included, if it is female). Unlike regular Unity,
+    // femaleUnity has separate hpPercent/atkPercent (they don't have to match).
+    function getGenderCounts() {
+      const counts = {};
+      team.forEach(member => {
+        const character = getCharacter(member.id);
+        if (!character) return;
+        const gender = String(character.gender || "").trim().toLowerCase();
+        if (!gender) return;
+        counts[gender] = (counts[gender] || 0) + 1;
+      });
+      return counts;
+    }
+
+    function isFemaleUnityActive(character, genderCounts) {
+      if (!character?.femaleUnity) return false;
+      return (genderCounts.female || 0) >= 2;
+    }
+
+    function describeFemaleUnity(character) {
+      const femaleUnity = character.femaleUnity;
+      if (femaleUnity.label) return femaleUnity.label;
+      const hpPercent = Number(femaleUnity.hpPercent) || 0;
+      const atkPercent = Number(femaleUnity.atkPercent) || 0;
+      if (hpPercent === atkPercent) {
+        return `Unity femenino: +${hpPercent}% PV/ATQ a las chicas (necesita 2+ chicas)`;
+      }
+      return `Unity femenino: +${hpPercent}% PV, +${atkPercent}% ATQ a las chicas (necesita 2+ chicas)`;
+    }
+
+    function getInitials(name) {
+      return name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+    }
+
+    // "UZ++" -> "uzpp", "UZ+" -> "uzp", "UZ" -> "uz" (for CSS classes)
+    function rankKey(rank) {
+      return String(rank || "").trim().toLowerCase().replace(/\+/g, "p");
+    }
+
+    function getGenderSymbol(gender) {
+      const g = String(gender || "").trim().toLowerCase();
+      if (g === "female") return "♀";
+      if (g === "male") return "♂";
+      return "";
+    }
+
+    function renderTeam() {
+      const grid = document.getElementById("teamGrid");
+      const tribeCounts = getTribeCounts();
+      const genderCounts = getGenderCounts();
+
+      grid.innerHTML = team.length
+        ? team.map((member, index) => {
+            const char = getCharacter(member.id);
+            if (!char) return "";
+
+            const level = getRankLevel(char);
+            const dupes = getDupes(member);
+            const stats = getStats(char, dupes);
+
+            const portrait = char.image
+              ? `<img src="${escapeHtml(char.image)}" alt="${escapeHtml(char.name)}" loading="lazy">`
+              : getInitials(char.name);
+
+            const dupeOptions = Array.from({ length: 11 }, (_, i) => i)
+              .map(n => `<option value="${n}" ${n === dupes ? "selected" : ""}>${n}</option>`)
+              .join("");
+
+            const isCenter = index === CENTER_SLOT_INDEX;
+            const centerBadge = isCenter ? '<div class="center-badge">★ Centro</div>' : "";
+            const centerSkillText = isCenter && char.centerSkill
+              ? `<div class="center-skill-text">${escapeHtml(describeCenterSkill(char.centerSkill))}</div>`
+              : "";
+
+            const unityActive = isUnityActive(char, tribeCounts);
+            const unityText = char.unity
+              ? `<div class="unity-text${unityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeUnity(char))}${unityActive ? "" : " — no activo"}</div>`
+              : "";
+
+            const femaleUnityActive = isFemaleUnityActive(char, genderCounts);
+            const femaleUnityText = char.femaleUnity
+              ? `<div class="unity-text${femaleUnityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeFemaleUnity(char))}${femaleUnityActive ? "" : " — no activo"}</div>`
+              : "";
+
+            return `
+              <div class="slot${isCenter ? " slot-center" : ""}" data-slot="${index}" data-character-id="${escapeHtml(char.id)}" data-tribe="${escapeHtml(String(char.tribe || "").toLowerCase())}" draggable="true">
+                ${centerBadge}
+                <div class="portrait">${portrait}</div>
+                <div class="slot-number">Posición ${index + 1}</div>
+                <div class="character-name" title="${escapeHtml(char.name)}">${escapeHtml(char.name)}</div>
+                <div class="rank-badge rank-${rankKey(char.rank)}">${escapeHtml(String(char.rank || "").toUpperCase())} ${getGenderSymbol(char.gender)} · Nv. ${level}</div>
+                <div class="level-fixed">Nivel fijado por el rango</div>
+                <label class="level-label" for="dupes-${index}">Dupes (0-10)</label>
+                <select class="dupes-select" id="dupes-${index}" data-slot="${index}" draggable="false">${dupeOptions}</select>
+                <div class="mini-stats">
+                  <div class="mini-stat"><span>PV</span><strong>${stats.hp.toLocaleString("en-US")}</strong></div>
+                  <div class="mini-stat"><span>ATQ</span><strong>${stats.atk.toLocaleString("en-US")}</strong></div>
+                </div>
+                ${centerSkillText}
+                ${unityText}
+                ${femaleUnityText}
+              </div>`;
+          }).join("")
+        : '<div class="hint team-empty-hint">Arrastra aquí un yokai de la colección.</div>';
+    }
+
+    function calculateTeamStats() {
+      return calculateMemberStats().reduce(
+        (total, s) => ({ hp: total.hp + s.hp, atk: total.atk + s.atk }),
+        { hp: 0, atk: 0 }
+      );
+    }
+
+    // Final HP/ATK of each team member (dupes + unity + watch + center skill)
+    function calculateMemberStats() {
+      return calculateMemberBonuses().map(({ member, hpPercent, atkPercent }) => {
+        const stats = getStats(getCharacter(member.id), getDupes(member));
+        return {
+          hp: Math.round(stats.hp * (1 + hpPercent / 100)),
+          atk: Math.round(stats.atk * (1 + atkPercent / 100))
+        };
+      });
+    }
+
+    // % de bonus de cada miembro: unity de SU tribu (con 2+ de esa tribu), female unity, reloj y center skill
+    function calculateMemberBonuses() {
+      const selectedClock = document.getElementById("clockSelect")?.value || "";
+      const clock = getClock(selectedClock);
+      const centerSkill = getCenterSkill();
+
+      const unityByTribe = {};
+      getTribeBonusBreakdown().forEach(g => { unityByTribe[g.tribeKey] = g.percent; });
+
+      // Female Unity bonus: summed separately for HP/ATK (they can differ),
+      // and only ever applied to female team members below — never the whole team.
+      const genderCounts = getGenderCounts();
+      let femaleUnityHpPercent = 0;
+      let femaleUnityAtkPercent = 0;
+      team.forEach(member => {
+        const character = getCharacter(member.id);
+        if (character && isFemaleUnityActive(character, genderCounts)) {
+          femaleUnityHpPercent += Number(character.femaleUnity.hpPercent) || 0;
+          femaleUnityAtkPercent += Number(character.femaleUnity.atkPercent) || 0;
+        }
+      });
+
+      return team.map((member, index) => {
+        const character = getCharacter(member.id);
+        const unityPercent = unityByTribe[String(character.tribe || "").trim().toLowerCase()] || 0;
+
+        let hpPercent = unityPercent;
+        let atkPercent = unityPercent;
+
+        const isFemale = String(character.gender || "").trim().toLowerCase() === "female";
+        if (isFemale) {
+          hpPercent += femaleUnityHpPercent;
+          atkPercent += femaleUnityAtkPercent;
+        }
+
+        const clockReachesSlot = !clock?.centerOnly || index === CENTER_SLOT_INDEX;
+        if (clock && clockReachesSlot && characterMatchesCenterFilter(character, clock.affects)) {
+          hpPercent += Number(clock.hpPercent) || 0;
+          atkPercent += Number(clock.atkPercent) || 0;
+        }
+
+        if (centerSkill && characterMatchesCenterFilter(character, centerSkill.affects)) {
+          hpPercent += Number(centerSkill.hpPercent) || 0;
+          atkPercent += Number(centerSkill.atkPercent) || 0;
+        }
+
+        return { member, character, hpPercent, atkPercent };
+      });
+    }
+
+    // Tribe effect (種族効果): +% HP/ATK for the yokai of a tribe depending on how many are in the team
+    const TRIBE_EFFECT = { 1: 0, 2: 10, 3: 20, 4: 25, 5: 30 };
+
+    // Una entrada por tribu del equipo: cuántos hay y el % que reciben (efecto de tribu + unity).
+    // El unity de una tribu solo cuenta con 2+ yokais de esa tribu, y se suma el de cada uno que lo tenga.
+    function getTribeBonusBreakdown() {
+      const groups = {};
+      team.forEach(member => {
+        const c = getCharacter(member.id);
+        const key = String(c?.tribe || "").trim().toLowerCase();
+        if (!key) return;
+        const g = groups[key] || (groups[key] = { tribeKey: key, tribeLabel: PP.tribeEs(key), count: 0, unity: 0 });
+        g.count++;
+        if (c.unity) g.unity += Number(c.unity.percent) || 0;
+        // "Same team unity": solo si TODO el equipo es de la misma tribu (se comprueba abajo)
+        if (c.sameTeamUnity) g.sameTeam = (g.sameTeam || 0) + (Number(c.sameTeamUnity.percent) || 0);
+      });
+      const list = Object.values(groups);
+      const allSameTribe = list.length === 1 && list[0].count >= 2;
+      return list
+        .map(g => {
+          const effect = TRIBE_EFFECT[Math.min(g.count, 5)] || 0;               // efecto de tribu del juego
+          const unity = g.count >= 2 ? g.unity + (allSameTribe ? (g.sameTeam || 0) : 0) : 0;
+          return { ...g, effect, unityTotal: unity, percent: effect + unity };
+        })
+        .sort((a, b) => a.tribeLabel.localeCompare(b.tribeLabel));
+    }
+
+    function formatTribeBonus(g) {
+      return `+${g.percent}%`;
+    }
+
+    // "Tribe effect +10% (2 Charming) + Unity +56%"
+    function describeTribeBonus(g) {
+      const parts = [`Efecto de tribu +${g.effect}% (${g.count} ${g.tribeLabel})`];
+      if (g.unityTotal) parts.push(`Unity +${g.unityTotal}%`);
+      else if (g.unity && g.count < 2) parts.push(`Unity +${g.unity}% (necesita 2+)`);
+      return parts.join(" + ");
+    }
+
+    function renderStats() {
+      const totals = calculateTeamStats();
+
+      document.getElementById("summary").innerHTML = `
+        <div class="summary-card">
+          <span class="summary-icon">❤</span>
+          <span class="summary-label">PV total del equipo</span>
+          <strong>${totals.hp.toLocaleString("en-US")}</strong>
+        </div>
+        <div class="summary-card">
+          <span class="summary-icon">⚔</span>
+          <span class="summary-label">ATQ total del equipo</span>
+          <strong>${totals.atk.toLocaleString("en-US")}</strong>
+        </div>
+      `;
+    }
+
+    function renderSelectedList() {
+      const list = document.getElementById("selectedList");
+
+      list.innerHTML = team.map((member, index) => {
+        const c = getCharacter(member.id);
+        return `
+          <div class="selected-item">
+            <div class="dot"></div>
+            <strong>${index + 1}. ${escapeHtml(c.name)}</strong>
+            <span>${escapeHtml(String(c.rank || "").toUpperCase())} · Nv. ${getRankLevel(c)} · ${getDupes(member)} dupe${getDupes(member) === 1 ? "" : "s"}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function render() {
+      renderTeam();
+      renderStats();
+      renderSelectedList();
+      renderTribeUnity();
+      renderMiniTeam();
+    }
+
+    // Barra fija con el equipo (aparece al bajar por la página)
+    function renderMiniTeam() {
+      const slots = document.getElementById("miniTeamSlots");
+      if (!slots) return;
+      const memberStats = calculateMemberStats();
+      const fmt = n => n.toLocaleString("en-US");
+      slots.innerHTML = Array.from({ length: 5 }, (_, i) => {
+        const member = team[i];
+        const c = member ? getCharacter(member.id) : null;
+        const center = i === CENTER_SLOT_INDEX ? " mini-center" : "";
+        if (!c) {
+          return `<div class="mini-cell"><div class="mini-slot mini-empty${center}" data-slot="${i}" title="Hueco libre ${i + 1}">+</div><div class="mini-cell-stats">&nbsp;</div></div>`;
+        }
+        const face = c.image
+          ? `<img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.name)}">`
+          : `<span>${getInitials(c.name)}</span>`;
+        const s = memberStats[i];
+        return `<div class="mini-cell">
+            <div class="mini-slot${center}" data-slot="${i}" data-character-id="${escapeHtml(c.id)}" data-tribe="${escapeHtml(String(c.tribe || "").toLowerCase())}" draggable="true" title="${escapeHtml(c.name)} · ${getDupes(member)} dupes">
+              ${face}<button type="button" class="mini-remove" data-remove="${i}" aria-label="Quitar a ${escapeHtml(c.name)}">×</button>
+            </div>
+            <div class="mini-cell-stats"><span class="hp">${fmt(s.hp)}</span><span class="atk">${fmt(s.atk)}</span></div>
+          </div>`;
+      }).join("");
+      const totals = memberStats.reduce((t, s) => ({ hp: t.hp + s.hp, atk: t.atk + s.atk }), { hp: 0, atk: 0 });
+      document.getElementById("miniTeamHp").textContent = fmt(totals.hp);
+      document.getElementById("miniTeamAtk").textContent = fmt(totals.atk);
+
+      // % de bonus que recibe cada tribu (unity con 2+ + center skill + reloj + female unity)
+      const groups = getTribeBonusBreakdown().filter(g => g.count >= 2);
+      document.getElementById("miniTeamUnity").innerHTML = groups.length
+        ? groups.map(g => `<span class="mini-unity${g.percent ? "" : " mini-off"}" data-tribe="${escapeHtml(g.tribeKey)}" title="${escapeHtml(describeTribeBonus(g))}">${escapeHtml(g.tribeLabel)} ×${g.count} ${formatTribeBonus(g)}</span>`).join("")
+        : `<span class="mini-unity mini-unity-none">Sin bonus de tribu</span>`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      team = defaultTeam.map(id => ({ id, level: getRankLevel(getCharacter(id)) }));
+      render();
+    });
+
+    render();
+  
+
+    // Delegated listeners for the team grid: set up ONCE here instead of being
+    // re-attached to every slot/select on every render() call.
+    const teamGrid = document.getElementById("teamGrid");
+
+    teamGrid.addEventListener("change", event => {
+      const select = event.target.closest(".dupes-select");
+      if (!select) return;
+      const index = Number(select.dataset.slot);
+      if (team[index]) {
+        team[index].dupes = Math.max(0, Math.min(10, Number(select.value) || 0));
+        render();
+      }
+    });
+
+    teamGrid.addEventListener("dragstart", event => {
+      const slot = event.target.closest(".slot[draggable='true']");
+      if (!slot) return;
+      event.dataTransfer.setData("text/plain", slot.dataset.characterId);
+      event.dataTransfer.effectAllowed = "move";
+      slot.classList.add("dragging");
+    });
+
+    teamGrid.addEventListener("dragend", event => {
+      const slot = event.target.closest(".slot");
+      if (slot) slot.classList.remove("dragging");
+    });
+
+    teamGrid.addEventListener("dragover", event => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+      teamGrid.classList.add("team-drop-active");
+
+      const slot = event.target.closest(".slot");
+      teamGrid.querySelectorAll(".slot.drag-over").forEach(s => {
+        if (s !== slot) s.classList.remove("drag-over");
+      });
+      if (slot) slot.classList.add("drag-over");
+    });
+
+    teamGrid.addEventListener("dragleave", event => {
+      if (!teamGrid.contains(event.relatedTarget)) {
+        teamGrid.classList.remove("team-drop-active");
+        teamGrid.querySelectorAll(".slot.drag-over").forEach(s => s.classList.remove("drag-over"));
+      }
+    });
+
+    teamGrid.addEventListener("drop", event => {
+      event.preventDefault();
+      teamGrid.classList.remove("team-drop-active");
+      teamGrid.querySelectorAll(".slot.drag-over").forEach(s => s.classList.remove("drag-over"));
+
+      const id = event.dataTransfer.getData("text/plain");
+      if (!id || !characters.some(c => c.id === id)) return;
+
+      const slot = event.target.closest(".slot");
+      if (slot) {
+        const target = Number(slot.dataset.slot);
+        const existing = team.findIndex(m => m.id === id);
+        if (existing !== -1 && existing !== target) {
+          [team[existing], team[target]] = [team[target], team[existing]];
+        } else if (existing === -1) {
+          team[target] = { id, level: getRankLevel(getCharacter(id)), dupes: 0 };
+        }
+        render();
+        return;
+      }
+
+      // Dropped on the grid background (no specific slot under the cursor).
+      if (team.some(member => member.id === id)) return;
+      if (team.length < 5) {
+        team.push({ id, level: getRankLevel(getCharacter(id)), dupes: 0 });
+        render();
+      }
+    });
+
+</script>
+
+<script>
+(function(){
+  function updateBonuses(){
+    const clock = getClock(document.getElementById('clockSelect')?.value || '');
+    const out = document.getElementById('bonusSummary');
+    if (out) {
+      out.textContent = clock
+        ? `Bonus total: +${clock.hpPercent}% PV, +${clock.atkPercent}% ATQ`
+        : 'Bonus total: 0%';
+    }
+    window.teamBonusHpPercent = clock ? clock.hpPercent : 0;
+    window.teamBonusAtkPercent = clock ? clock.atkPercent : 0;
+  }
+
+  const clockSelect = document.getElementById('clockSelect');
+  const clockSummary = document.getElementById('clockSummary');
+
+  if (clockSelect) {
+    CLOCKS.forEach(clock => {
+      const opt = document.createElement('option');
+      opt.value = clock.id;
+      const who = describeClockTarget(clock);
+      const percentText = clock.hpPercent === clock.atkPercent
+        ? `+${clock.hpPercent}% PV y ATQ`
+        : `+${clock.hpPercent}% PV, +${clock.atkPercent}% ATQ`;
+      opt.textContent = `${clock.label} (${percentText} para ${who})`;
+      clockSelect.appendChild(opt);
+    });
+  }
+
+  // Imagen de cada reloj (relojes/<id>.png); los que no tienen imagen salen con ⌚
+  const watchImg = id => `relojes/${id}.png`;
+  const watchPicker = document.getElementById('watchPicker');
+  const watchCurrentImg = document.getElementById('watchCurrentImg');
+
+  function renderWatchPicker() {
+    const current = clockSelect ? clockSelect.value : '';
+    if (watchPicker) {
+      const pct = c => c.hpPercent === c.atkPercent ? `+${c.hpPercent}%` : `+${c.hpPercent}/${c.atkPercent}%`;
+      watchPicker.innerHTML =
+        `<button type="button" class="watch-option watch-none${current ? '' : ' selected'}" data-watch="">Sin reloj</button>` +
+        CLOCKS.map(c => `
+          <button type="button" class="watch-option${c.id === current ? ' selected' : ''}" data-watch="${escapeHtml(c.id)}" title="${escapeHtml(describeClock(c))}">
+            <img src="${escapeHtml(watchImg(c.id))}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⌚',style:'font-size:30px;line-height:44px'}))">
+            <span>${escapeHtml(c.label)}</span>
+            <span class="watch-pct">${pct(c)}</span>
+          </button>`).join('');
+    }
+    if (watchCurrentImg) {
+      if (current) {
+        watchCurrentImg.hidden = false;
+        watchCurrentImg.src = watchImg(current);
+        watchCurrentImg.onerror = () => { watchCurrentImg.hidden = true; };
+      } else {
+        watchCurrentImg.hidden = true;
+      }
+    }
+  }
+
+  if (watchPicker) watchPicker.addEventListener('click', e => {
+    const btn = e.target.closest('.watch-option');
+    if (!btn || !clockSelect) return;
+    clockSelect.value = btn.dataset.watch;
+    clockSelect.dispatchEvent(new Event('change'));
+  });
+
+  if (clockSelect) clockSelect.addEventListener('change', () => {
+    const clock = getClock(clockSelect.value);
+    if (clockSummary) {
+      clockSummary.textContent = clock ? describeClock(clock) : 'Ningún reloj seleccionado.';
+    }
+    updateBonuses();
+    renderWatchPicker();
+    if (typeof render === 'function') render();
+  });
+
+  renderWatchPicker();
+
+  window.renderCreatedDragZone = function(){
+    const zone = document.getElementById('createdCharactersDragZone');
+    if (!zone || typeof characters === 'undefined') return;
+
+    const tribeFilter = document.getElementById('tribeFilter');
+    const selectedTribe = (tribeFilter?.value || '').trim().toLowerCase();
+    const rankFilter = document.getElementById('rankFilter');
+    const selectedRank = (rankFilter?.value || '').trim().toUpperCase();
+
+    const visibleCharacters = characters.filter(c => {
+      const matchesTribe = !selectedTribe || String(c.tribe || '').trim().toLowerCase() === selectedTribe;
+      const matchesRank = !selectedRank || String(c.rank || '').trim().toUpperCase() === selectedRank;
+      return matchesTribe && matchesRank;
+    });
+
+    zone.innerHTML = visibleCharacters.length ? visibleCharacters.map(c => `
+      <div class="created-drag-card" draggable="true" data-character-id="${escapeHtml(c.id)}" data-tribe="${escapeHtml(String(c.tribe || '').toLowerCase())}">
+        <div class="card-tags">
+          <span class="rank-pill rank-${rankKey(c.rank)}">${escapeHtml(String(c.rank || '').toUpperCase())}</span>
+          <span class="tribe-tag">${escapeHtml(PP.tribeEs(c.tribe))}</span>
+        </div>
+        ${c.image
+          ? `<img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.name)}" loading="lazy">`
+          : `<div class="portrait">${getInitials(c.name)}</div>`}
+        <strong>${escapeHtml(c.name)}</strong>
+        <div class="hint">${getGenderSymbol(c.gender)} Nv. ${getRankLevel(c)}</div>
+        ${c.saga ? `<div class="hint">${escapeHtml(c.saga)}</div>` : ""}
+        <div class="hint" title="Con 10 dupes">PV: ${getStats(c, 10).hp.toLocaleString('en-US')}<br>ATQ: ${getStats(c, 10).atk.toLocaleString('en-US')}</div>
+      </div>`).join('') : '<p class="hint">Ningún yokai coincide con el filtro.</p>';
+  };
+
+  const tribeFilterSelect = document.getElementById('tribeFilter');
+  if (tribeFilterSelect) {
+    TRIBES.forEach(tribe => {
+      const opt = document.createElement('option');
+      opt.value = tribe;
+      opt.textContent = PP.tribeEs(tribe);
+      tribeFilterSelect.appendChild(opt);
+    });
+    tribeFilterSelect.addEventListener('change', () => window.renderCreatedDragZone());
+  }
+
+  const rankFilterSelect = document.getElementById('rankFilter');
+  if (rankFilterSelect) {
+    Object.keys(RANK_LEVELS).forEach(rank => {
+      const opt = document.createElement('option');
+      opt.value = rank;
+      opt.textContent = rank;
+      rankFilterSelect.appendChild(opt);
+    });
+    rankFilterSelect.addEventListener('change', () => window.renderCreatedDragZone());
+  }
+
+  // Delegated listeners for the character collection: set up ONCE instead of
+  // being re-attached to every card on every render/filter change.
+  const createdZone = document.getElementById('createdCharactersDragZone');
+  if (createdZone) {
+    createdZone.addEventListener('dragstart', e => {
+      const card = e.target.closest('.created-drag-card');
+      if (!card) return;
+      e.dataTransfer.setData('text/plain', card.dataset.characterId);
+      e.dataTransfer.effectAllowed = 'copy';
+      card.classList.add('dragging');
+    });
+    createdZone.addEventListener('dragend', e => {
+      const card = e.target.closest('.created-drag-card');
+      if (card) card.classList.remove('dragging');
+    });
+    createdZone.addEventListener('click', e => {
+      const card = e.target.closest('.created-drag-card');
+      if (!card) return;
+      const id = card.dataset.characterId;
+      if (team.length < 5 && !team.some(member => member.id === id)) {
+        team.push({ id, level: getRankLevel(getCharacter(id)), dupes: 0 });
+        render();
+      }
+    });
+  }
+
+  updateBonuses();
+  window.renderCreatedDragZone();
+})();
+</script>
+
+
+<script>
+(function(){
+  const TEAM_KEY = "teamBuilderTeamV3";
+
+  function saveTeam() {
+    try {
+      localStorage.setItem(TEAM_KEY, JSON.stringify(team));
+    } catch(e) {}
+  }
+
+  const originalRender = render;
+  window.render = function(){
+    saveTeam();
+    originalRender();
+    // renderCreatedDragZone() is NOT called here on purpose: its output only
+    // depends on the tribe/rank filters, not on team state, so re-running it
+    // on every drag/dupe-change/save would re-render the whole character
+    // collection for no reason. It's called on initial load and whenever a
+    // filter changes (see their own listeners below).
+  };
+
+  try {
+    const savedTeam = JSON.parse(localStorage.getItem(TEAM_KEY) || "null");
+    if (Array.isArray(savedTeam)) {
+      team = savedTeam
+        .filter(m => m && characters.some(c => c.id === m.id))
+        .slice(0, 5)
+        .map(m => ({ id: m.id, level: getRankLevel(getCharacter(m.id)), dupes: Math.max(0, Math.min(10, Number.isFinite(Number(m.dupes)) ? Number(m.dupes) : 0)) }));
+    }
+  } catch(e) {}
+
+  // "Añadir al equipo" desde la ficha de un yokai: team-builder.html?add=<id>
+  const addId = new URLSearchParams(location.search).get("add");
+  if (addId && getCharacter(addId) && !team.some(m => m.id === addId) && team.length < 5) {
+    team.push({ id: addId, level: getRankLevel(getCharacter(addId)), dupes: 0 });
+    saveTeam();
+  }
+  if (addId) history.replaceState(null, "", location.pathname);
+
+  originalRender();
+  renderCreatedDragZone();
+})();
+</script>
+
+<script>
+(function(){
+  const SAVED_TEAMS_KEY = "teamBuilderSavedTeamsV1";
+
+  function getSavedTeams() {
+    try {
+      const list = JSON.parse(localStorage.getItem(SAVED_TEAMS_KEY) || "[]");
+      return Array.isArray(list) ? list : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function setSavedTeams(list) {
+    try {
+      localStorage.setItem(SAVED_TEAMS_KEY, JSON.stringify(list));
+    } catch(e) {}
+  }
+
+  function sanitizeTeamForSave(t) {
+    return t
+      .filter(m => m && characters.some(c => c.id === m.id))
+      .slice(0, 5)
+      .map(m => ({ id: m.id, dupes: Math.max(0, Math.min(10, Number.isFinite(Number(m.dupes)) ? Number(m.dupes) : 0)) }));
+  }
+
+  function renderSavedTeams() {
+    const list = document.getElementById("savedTeamsList");
+    if (!list) return;
+
+    const savedTeams = getSavedTeams();
+
+    list.innerHTML = savedTeams.length
+      ? savedTeams.map(entry => `
+          <div class="saved-team-item" data-team-id="${escapeHtml(entry.id)}">
+            <span class="saved-team-name" title="${escapeHtml(entry.name)}">${escapeHtml(entry.name)}</span>
+            <button type="button" class="load-team-btn">Cargar</button>
+            <button type="button" class="delete-team-btn">Borrar</button>
+          </div>
+        `).join("")
+      : '<p class="hint">Aún no hay equipos guardados. Arma uno y guárdalo arriba.</p>';
+
+    list.querySelectorAll(".load-team-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.closest(".saved-team-item")?.dataset.teamId;
+        const entry = getSavedTeams().find(t => t.id === id);
+        if (!entry) return;
+
+        team = sanitizeTeamForSave(entry.team).map(m => ({
+          id: m.id,
+          level: getRankLevel(getCharacter(m.id)),
+          dupes: m.dupes
+        }));
+        render();
+      });
+    });
+
+    list.querySelectorAll(".delete-team-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.closest(".saved-team-item")?.dataset.teamId;
+        setSavedTeams(getSavedTeams().filter(t => t.id !== id));
+        renderSavedTeams();
+      });
+    });
+  }
+
+  const saveTeamBtn = document.getElementById("saveTeamBtn");
+  const saveTeamName = document.getElementById("saveTeamName");
+
+  if (saveTeamBtn) {
+    saveTeamBtn.addEventListener("click", () => {
+      const name = (saveTeamName?.value || "").trim();
+      if (!name) {
+        saveTeamName?.focus();
+        return;
+      }
+      if (!team.length) return;
+
+      const savedTeams = getSavedTeams();
+      const id = `team-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      savedTeams.push({ id, name, team: sanitizeTeamForSave(team) });
+      setSavedTeams(savedTeams);
+
+      if (saveTeamName) saveTeamName.value = "";
+      renderSavedTeams();
+    });
+  }
+
+  if (saveTeamName) {
+    saveTeamName.addEventListener("keydown", event => {
+      if (event.key === "Enter") saveTeamBtn?.click();
+    });
+  }
+
+  renderSavedTeams();
+})();
+</script>
+
+<script>
+// Barra fija del equipo: aparece cuando el equipo deja de verse al bajar
+(function(){
+  const bar = document.getElementById("miniTeam");
+  const slots = document.getElementById("miniTeamSlots");
+  const teamPanel = document.querySelector(".team-panel");
+  const teamGridEl = document.getElementById("teamGrid");
+  if (!bar || !slots || !teamGridEl) return;
+
+  new IntersectionObserver(([entry]) => {
+    const above = entry.boundingClientRect.bottom < 0; // el equipo ha quedado por arriba
+    bar.classList.toggle("visible", !entry.isIntersecting && above);
+  }).observe(teamGridEl);
+
+  document.getElementById("miniTeamTop").addEventListener("click", () => {
+    teamPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  // Poner un yokai en el hueco "target" (o moverlo/intercambiarlo si ya está en el equipo)
+  function placeInSlot(id, target) {
+    if (!id || !getCharacter(id)) return;
+    const existing = team.findIndex(m => m.id === id);
+    if (existing === target) return;
+    if (existing !== -1) {
+      if (team[target]) {
+        [team[existing], team[target]] = [team[target], team[existing]];
+      } else {
+        const [moved] = team.splice(existing, 1);
+        team.push(moved);
+      }
+    } else if (team[target]) {
+      team[target] = { id, level: getRankLevel(getCharacter(id)), dupes: 0 };
+    } else if (team.length < 5) {
+      team.push({ id, level: getRankLevel(getCharacter(id)), dupes: 0 });
+    }
+    render();
+  }
+
+  slots.addEventListener("dragstart", e => {
+    const s = e.target.closest(".mini-slot[draggable='true']");
+    if (!s) return;
+    e.dataTransfer.setData("text/plain", s.dataset.characterId);
+    e.dataTransfer.effectAllowed = "move";
+  });
+  slots.addEventListener("dragover", e => {
+    const s = e.target.closest(".mini-slot");
+    if (!s) return;
+    e.preventDefault();
+    slots.querySelectorAll(".drag-over").forEach(x => x !== s && x.classList.remove("drag-over"));
+    s.classList.add("drag-over");
+  });
+  slots.addEventListener("dragleave", e => {
+    if (!slots.contains(e.relatedTarget)) slots.querySelectorAll(".drag-over").forEach(x => x.classList.remove("drag-over"));
+  });
+  slots.addEventListener("drop", e => {
+    const s = e.target.closest(".mini-slot");
+    if (!s) return;
+    e.preventDefault();
+    placeInSlot(e.dataTransfer.getData("text/plain"), Number(s.dataset.slot));
+  });
+  slots.addEventListener("click", e => {
+    const btn = e.target.closest(".mini-remove");
+    if (!btn) return;
+    team.splice(Number(btn.dataset.remove), 1);
+    render();
+  });
+
+  renderMiniTeam();
+})();
+</script>
+
+</body>
+</html>

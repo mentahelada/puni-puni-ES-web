@@ -40,9 +40,6 @@ const characters = [
       affects: {
         tribes: ["Tough"]
       }
-    },
-    unity: {
-      percent: 28
     }
   },
   {
@@ -58,8 +55,8 @@ const characters = [
     atk10: 2314,
     image: "Uz++/Kirito.png",
     centerSkill: {
-      hpPercent: 7,
-      atkPercent: 7,
+      hpPercent: 6,
+      atkPercent: 8,
       affects: {
         tribes: ["Tough"]
       }
@@ -393,6 +390,10 @@ const characters = [
       affects: {
         genders: ["female"]
       }
+    },
+    femaleUnity: {
+      hpPercent: 28,
+      atkPercent: 19
     }
   },
   {
@@ -676,9 +677,6 @@ const characters = [
       affects: {
         sagas: ["Hololive"]
       }
-    },
-    unity: {
-      percent: 26
     }
   },
   {
@@ -1020,8 +1018,8 @@ const characters = [
     atk10: 1969,
     image: "Uz+/Damededtime.png",
     centerSkill: {
-      hpPercent: 7,
-      atkPercent: 7,
+      hpPercent: 5,
+      atkPercent: 5,
       affects: {
         tribes: ["Shady"]
       }
@@ -1662,7 +1660,7 @@ const characters = [
       }
     },
     sameTeamUnity: {
-      percent: 26
+      percent: 32
     }
   },
   {

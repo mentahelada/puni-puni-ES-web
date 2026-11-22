@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eventos · Puni Puni ES</title>
+  <meta name="description" content="Cómo funcionan los eventos de Yo-kai Watch Puni Puni: formatos, energía, Puntos Y, jefes, liga semanal y estrellas." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/estilo.css" />
+  <link rel="stylesheet" href="assets/nav.css" />
+  <style>
+    section.panel { scroll-margin-top: 80px; }
+    .steps { counter-reset: paso; list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .steps li { counter-increment: paso; position: relative; padding: 12px 14px 12px 54px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid var(--line); }
+    .steps li::before { content: counter(paso); position: absolute; left: 14px; top: 12px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; background: var(--accent); font-family: "M PLUS Rounded 1c", sans-serif; }
+    .formats { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .format { padding: 16px 18px; border-radius: 20px; background: linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02)); border: 1px solid var(--line); }
+    .format h3 { margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+    .format .tag { font-size: .72rem; font-weight: 800; color: var(--accent-2); letter-spacing: .04em; text-transform: uppercase; }
+    .format p { margin: 8px 0 0; }
+    .format ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    .leagues { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+    .league { padding: 14px; border-radius: 16px; text-align: center; background: rgba(0,0,0,.25); border: 2px solid var(--lc); }
+    .league b { display: block; color: var(--lc); font-family: "M PLUS Rounded 1c", sans-serif; font-size: 1.1rem; }
+    .league small { color: var(--muted); display: block; line-height: 1.4; margin-top: 4px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips span { padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid var(--line); font-size: .88rem; font-weight: 600; }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/minimal.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="yokais.html">Yokais</a>
+      <a href="relojes.html">Relojes</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="mecanicas.html">Mecánicas</a>
+      <a href="guias.html">Guías</a>
+      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="kicker">Guía</div>
+    <h1>Cómo funcionan <span>los eventos</span></h1>
+    <p>Los eventos son el corazón de Puni Puni: cada pocas semanas llega uno nuevo con su mapa, sus jefes, su tienda y sus yokais exclusivos.</p>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2>Índice</h2>
+      <div class="toc">
+        <a href="#ciclo">Cómo es un evento</a><a href="#formatos">Formatos</a><a href="#recursos">Energía y vida</a>
+        <a href="#puntos">Puntos Y y tienda</a><a href="#jefes">Jefes y escenario imposible</a><a href="#liga">Liga semanal</a>
+        <a href="#estrellas">Estrellas</a><a href="#consejos">Consejos</a>
+      </div>
+      <div class="callout warn">Esta guía resume cómo suelen funcionar los eventos según guías de la comunidad de varios años atrás. Level-5 cambia detalles con cada actualización (cifras de energía, recompensas, reglas de la liga…), así que tómalo como orientación y revisa el aviso del propio evento en el juego.</div>
+    </section>
+
+    <section class="panel" id="ciclo">
+      <h2>Cómo es un evento</h2>
+      <p>Aproximadamente cada dos semanas empieza un evento nuevo. Casi todos siguen el mismo esquema, cambie o no el formato de juego:</p>
+      <ol class="steps">
+        <li><b>Un mapa propio.</b> El evento trae su mapa con escenarios que se van desbloqueando al superar los anteriores.</li>
+        <li><b>Jefes al final de cada tramo.</b> Al avanzar aparece el jefe en dificultad normal y, después, una versión difícil. Derrotarlo varias veces es la forma de conseguir el yokai jefe del evento.</li>
+        <li><b>Puntos Y.</b> Casi todo lo que haces da Puntos Y, que se gastan en la tienda del evento.</li>
+        <li><b>Misiones.</b> Cada evento tiene su lista de misiones (ganar varias seguidas, robar objetos, usar ciertos yokais…) que dan recompensas extra.</li>
+        <li><b>Escenarios ocultos y yokais raros.</b> Suele haber escenarios secretos y yokais que solo aparecen con poca probabilidad durante el evento.</li>
+        <li><b>Un escenario "imposible".</b> Casi siempre hay un escenario muy difícil al final, pensado para los equipos más fuertes.</li>
+        <li><b>Yokais nuevos en el Crank-a-kai.</b> Con el evento llegan yokais nuevos a las máquinas, y muchos tienen skills que potencian ese evento en concreto.</li>
+      </ol>
+    </section>
+
+    <section class="panel" id="formatos">
+      <h2>Formatos de evento</h2>
+      <p>El "formato" es la forma de jugar el evento. Van rotando, y cada uno premia un tipo de equipo distinto.</p>
+      <div class="formats">
+        <article class="format">
+          <span class="tag">El más habitual</span>
+          <h3>🎯 Ohajiki</h3>
+          <p>Lanzas punis contra el jefe como si fueran canicas. El daño depende del ATQ y el PV de tu equipo, de su ataque especial, de las skills, de la ventaja de tribu y de lo bien que apuntes.</p>
+          <ul>
+            <li>Gastar más energía en un lanzamiento hace muchísimo más daño que gastar poca.</li>
+            <li>A veces hay zonas que multiplican el daño y bolas que lo suben o lo bajan.</li>
+            <li>Ayudar a amigos también cuesta energía, pero da recompensas.</li>
+          </ul>
+        </article>
+        <article class="format">
+          <span class="tag">Variante del ohajiki</span>
+          <h3>⛳ Punitto Shot</h3>
+          <p>La misma idea que el ohajiki, pero el lanzamiento se hace al estilo golf. Si encadenas aciertos en las zonas marcadas, el multiplicador de daño va subiendo.</p>
+        </article>
+        <article class="format">
+          <span class="tag">Puzzle con vida</span>
+          <h3>🌀 Portales místicos</h3>
+          <p>Superas escenarios de puzzle normales hasta abrir portales. Cada tipo de portal pone una restricción: más difícil recuperar vida, más difícil entrar en frenesí o sin potenciadores de ataque.</p>
+          <ul>
+            <li>Jugar gasta vida en lugar de energía.</li>
+            <li>Ayudar a amigos da cajas que pueden traer orbes para abrir portales.</li>
+          </ul>
+        </article>
+        <article class="format">
+          <span class="tag">Robar objetos</span>
+          <h3>🥊 Budokai y Pseudokai</h3>
+          <p>Al empezar eliges: menos Puntos Y sin riesgo, o más Puntos Y aunque puedan robarte objetos. En el <b>Budokai</b> juegas torneos seguidos, y cuantas más victorias encadenas más ganas. El <b>Pseudokai</b> mezcla ese sistema con un mapa normal.</p>
+          <ul>
+            <li>Para robar a otros jugadores necesitas tickets de robo.</li>
+            <li>Terminar rápido los escenarios importa, así que conviene empezar con el ataque especial cargado.</li>
+          </ul>
+        </article>
+        <article class="format">
+          <span class="tag">Minijuegos</span>
+          <h3>📺 Yokai-Tube Live</h3>
+          <p>Una "retransmisión" con varios minijuegos. Ganas visitas y experiencia de Yo-kai Tuber según lo bien que juegues, y eso se convierte en Puntos Y. Gasta una estamina que se recarga bastante rápido.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="recursos">
+      <h2>Energía y vida</h2>
+      <p>Cada formato consume un recurso que se recarga con el tiempo (normalmente unas horas para llenarlo entero):</p>
+      <div class="table-wrap"><table class="nice">
+        <tr><th>Formato</th><th>Gasta</th><th>Cómo recuperarlo</th></tr>
+        <tr><td>Ohajiki y Punitto Shot</td><td>Energía</td><td>Esperar, o bebidas de energía (de escenarios, de la tienda del evento o de pago)</td></tr>
+        <tr><td>Portales místicos</td><td>Vida (%)</td><td>Esperar, o medicinas (de cajas, misiones, la tienda del evento o de pago)</td></tr>
+        <tr><td>Yokai-Tube Live</td><td>Estamina</td><td>Se recarga sola mucho más rápido que las demás</td></tr>
+        <tr><td>Budokai / Pseudokai</td><td>Partidas normales</td><td>Los tickets de robo salen de escenarios, misiones o la tienda</td></tr>
+      </table></div>
+    </section>
+
+    <section class="panel" id="puntos">
+      <h2>Puntos Y y tienda del evento</h2>
+      <p>Los <b>Puntos Y</b> son la moneda de cada evento. Se consiguen jugando escenarios, derrotando jefes (los de dificultad alta dan más) y completando misiones. En la tienda del evento se cambian por:</p>
+      <div class="chips"><span>Bebidas de energía y medicinas</span><span>Tickets de robo</span><span>Orbes de experiencia</span><span>Secretos del alma</span><span>Yokais del evento</span><span>Otros objetos</span></div>
+      <p class="muted" style="margin-top:12px">Muchos yokais nuevos tienen skills que dan más Puntos Y o más daño en su evento, por eso salen junto a él en el Crank-a-kai.</p>
+    </section>
+
+    <section class="panel" id="jefes">
+      <h2>Jefes, sellos y escenario imposible</h2>
+      <p>El jefe <b>difícil</b> es el objetivo principal: se derrota una y otra vez hasta que se une a tu equipo, y además da más Puntos Y. En algunos eventos hay <b>sellos</b>: reuniendo a ciertos yokais se debilita el jefe del escenario imposible.</p>
+      <p>El <b>escenario imposible</b> está pensado para equipos al máximo. Ahí es donde más se nota armar bien el equipo: misma tribu para el efecto de tribu y el unity, una buena center skill y el reloj adecuado. Puedes probar combinaciones en el <a href="team-builder.html">Team Builder</a>.</p>
+    </section>
+
+    <section class="panel" id="liga">
+      <h2>Liga semanal (reto de puntuación)</h2>
+      <p>Aparte de los eventos, cada semana hay un reto de puntuación por ligas. Te agrupan con otros 49 jugadores al azar y, al acabar la semana, según tu puesto subes, te quedas o bajas de liga:</p>
+      <div class="leagues">
+        <div class="league" style="--lc:#cd8a4f"><b>Bronce</b><small>Liga de inicio. Sube la mayoría y nadie baja.</small></div>
+        <div class="league" style="--lc:#c9d3e0"><b>Plata</b><small>Sube casi la mitad; bajan los últimos.</small></div>
+        <div class="league" style="--lc:#ffcf3f"><b>Oro</b><small>Sube un tercio; baja otro tercio.</small></div>
+        <div class="league" style="--lc:#7fe0d6"><b>Platino</b><small>Suben muy pocos; bajan muchos.</small></div>
+        <div class="league" style="--lc:#8fd3ff"><b>Diamante</b><small>La más alta: solo se mantiene la parte media del grupo.</small></div>
+      </div>
+      <p style="margin-top:14px">Cuanto mejor quedas en tu grupo y más alta es tu liga, más puntos de reto ganas. Hay que participar cada semana para cobrar. Esos puntos se cambian en su propia tienda por yokais jefe de rango ZZZ, secretos del alma y orbes de experiencia (con un límite semanal en los mejores objetos).</p>
+    </section>
+
+    <section class="panel" id="estrellas">
+      <h2>Estrellas de los escenarios</h2>
+      <p>Muchos escenarios tienen objetivos extra que dan estrellas. Son retos del tipo:</p>
+      <div class="chips">
+        <span>Hacer un combo de X o más</span><span>Acabar con el ataque especial</span><span>Eliminar X punis</span>
+        <span>Superarlo en menos de X segundos</span><span>Terminar con al menos X% de vida</span><span>Entrar en frenesí X veces</span>
+        <span>Usar solo yokais de una tribu</span><span>Usar solo yokais de cierto rango</span><span>No continuar</span><span>Sacar X puntos o más</span>
+      </div>
+      <p class="muted" style="margin-top:12px">En el juego los objetivos aparecen en japonés; en las <a href="guias.html">guías externas</a> tienes una traducción completa.</p>
+    </section>
+
+    <section class="panel" id="consejos">
+      <h2>Consejos para cada evento</h2>
+      <ul>
+        <li><b>Lee el aviso del evento:</b> casi siempre indica qué tribu, saga o yokais tienen ventaja o bonus.</li>
+        <li><b>Gasta la energía en grande:</b> en ohajiki compensa más un lanzamiento con mucha energía que varios pequeños.</li>
+        <li><b>No dejes que se llene la energía:</b> si está al máximo, la recarga se desperdicia.</li>
+        <li><b>Haz las misiones pronto:</b> muchas dan bebidas, medicinas o tickets que te ayudan en el resto del evento.</li>
+        <li><b>Prepara el equipo antes del imposible:</b> calcula en el <a href="team-builder.html">Team Builder</a> qué combinación de tribu, centro y reloj te da más PV y ATQ.</li>
+      </ul>
+      <p class="muted">Fuentes: guías de <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/formatos" target="_blank" rel="noopener noreferrer">formatos</a>, <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/ligas" target="_blank" rel="noopener noreferrer">ligas</a> y <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/estrellas" target="_blank" rel="noopener noreferrer">estrellas</a> de yo-kai-watch.es. Calendario de eventos: <a href="https://mtwildwood.net/es/puni/events" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+  </footer>
+
+  <script src="assets/comun.js"></script>
+</body>
+</html>

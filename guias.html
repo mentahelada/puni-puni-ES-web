@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guías · Puni Puni ES</title>
+  <meta name="description" content="Enlaces a guías de la comunidad sobre Yo-kai Watch Puni Puni: ligas, eventos, zonas, sellos legendarios y más." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/estilo.css" />
+  <link rel="stylesheet" href="assets/nav.css" />
+  <style>
+    .card .src { font-size: .74rem; color: var(--accent-2); font-weight: 700; }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/minimal.css" />
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
+    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="yokais.html">Yokais</a>
+      <a href="relojes.html">Relojes</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="mecanicas.html">Mecánicas</a>
+      <a href="guias.html">Guías</a>
+      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="kicker">Comunidad</div>
+    <h1>Guías <span>externas</span></h1>
+    <p>Lo que no cubre esta web lo explican muy bien otras páginas de la comunidad. Aquí tienes los enlaces, ordenados por tema.</p>
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+  </header>
+
+  <main class="wrap" id="guias"></main>
+
+  <footer class="site-footer">
+    <p>Las guías enlazadas pertenecen a sus autores. Gracias a <a href="https://yo-kai-watch.es/secciones/juegos/punipuni" target="_blank" rel="noopener noreferrer">yo-kai-watch.es</a>, <a href="https://mtwildwood.net/es/puni/" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a> y <a href="https://game8.jp/punipuni/26088" target="_blank" rel="noopener noreferrer">Game8</a> por su trabajo.</p>
+    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+  </footer>
+
+  <script src="assets/comun.js"></script>
+  <script>
+    const ES = "https://yo-kai-watch.es/secciones/juegos/punipuni/";
+    const GROUPS = [
+      ["Partidas y eventos", [
+        ["🏆", "Sistema de ligas", "Cómo funciona el reto semanal por ligas y qué hace falta para subir.", ES + "ligas", "yo-kai-watch.es"],
+        ["📅", "Formatos de los eventos", "Los distintos tipos de evento que van rotando y en qué se diferencian.", ES + "formatos", "yo-kai-watch.es"],
+        ["⭐", "Traducción de estrellas", "Qué significa cada objetivo de estrella de los escenarios, en español.", ES + "estrellas", "yo-kai-watch.es"],
+        ["💰", "Conseguir dinero", "Trucos para farmear monedas sin gastar demasiado tiempo.", ES + "farmeo", "yo-kai-watch.es"],
+        ["📰", "Eventos y noticias", "Calendario de eventos pasados y actuales, con sus recompensas.", "https://mtwildwood.net/es/puni/events", "Mt. Wildwood"],
+      ]],
+      ["Modo historia", [
+        ["🗺️", "Desbloquear zonas", "Requisitos para abrir cada zona del mapa del modo historia.", ES + "zonas", "yo-kai-watch.es"],
+        ["🔍", "Escenarios ocultos", "Dónde están los escenarios secretos y cómo se llega a ellos.", ES + "ocultos", "yo-kai-watch.es"],
+        ["💎", "Yo-kai raros", "Qué yokais raros aparecen en la historia y cómo conseguirlos.", ES + "raros", "yo-kai-watch.es"],
+        ["📜", "Sellos legendarios", "Los yokais que hay que reunir para romper cada sello legendario.", ES + "legendarios", "yo-kai-watch.es"],
+        ["👥", "Más espacio para amigos", "Cómo ampliar el límite de amigos.", ES + "amigos", "yo-kai-watch.es"],
+      ]],
+      ["Datos del juego", [
+        ["📖", "Listado de todos los punis", "Base de datos completa con todos los rangos, no solo los UZ.", "https://yo-kai-watch.es/secciones/listados/yokai-db/index", "yo-kai-watch.es"],
+        ["✨", "Listado de habilidades", "Qué hace cada habilidad y cada ataque especial.", ES + "habilidades", "yo-kai-watch.es"],
+        ["⌚", "Relojes (datos del juego)", "Lista de relojes con su efecto exacto, sacada de los datos del juego.", "https://mtwildwood.net/es/puni/watches", "Mt. Wildwood"],
+        ["🎰", "Crank-a-kai", "Qué sale en cada máquina de cápsulas.", "https://mtwildwood.net/es/puni/crank", "Mt. Wildwood"],
+        ["🇯🇵", "Valoraciones de UZ (japonés)", "Puntuaciones y análisis de cada UZ en la mayor web japonesa de guías.", "https://game8.jp/punipuni/539283", "Game8"],
+      ]],
+      ["Extra", [
+        ["🧩", "Puni Puni Tetris", "Un minijuego de punis para pasar el rato.", ES + "minigame", "yo-kai-watch.es"],
+      ]],
+    ];
+    document.getElementById("guias").innerHTML = GROUPS.map(([title, items]) => `
+      <section class="panel">
+        <h2>${PP.esc(title)}</h2>
+        <div class="cards">
+          ${items.map(([icon, name, desc, url, src]) => `
+            <a class="card" href="${PP.esc(url)}" target="_blank" rel="noopener noreferrer">
+              <div class="icon">${icon}</div><strong>${PP.esc(name)}</strong><span>${PP.esc(desc)}</span>
+              <b class="go">Abrir guía ↗</b><small class="src">${PP.esc(src)}</small>
+            </a>`).join("")}
+        </div>
+      </section>`).join("");
+  </script>
+</body>
+</html>
