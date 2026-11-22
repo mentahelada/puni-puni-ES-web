@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Team Builder · Puni Puni ES</title>
   <link rel="stylesheet" href="assets/nav.css" />
@@ -948,15 +949,15 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
   <header class="hero">
@@ -966,7 +967,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
     <div class="hero-content">
       <div class="hero-kicker">妖怪ウォッチ ぷにぷに</div>
       <h1>Puni Puni <span>Team Builder</span></h1>
-      <p>Arma tu equipo y mira sus stats reales con dupes, relojes, center skills y unity.</p>
+      <p data-i18n="tb.hero">Arma tu equipo y mira sus stats reales con dupes, relojes, center skills y unity.</p>
       <div class="hero-domain">punipuni-teambuilder.com</div>
     </div>
     <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
@@ -975,69 +976,66 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
   <main>
     <div class="layout">
       <section class="panel team-panel">
-        <h2 class="panel-title">Tu equipo</h2>
+        <h2 class="panel-title" data-i18n="tb.yourTeam">Tu equipo</h2>
 
         <div id="summary" class="summary team-summary"></div>
 
         <div id="teamGrid" class="team-grid"></div>
 
         <div class="tribe-unity-panel">
-          <h3 class="tribe-unity-title">Bonus de tribu <span class="hint">(efecto de tribu + unity)</span></h3>
+          <h3 class="tribe-unity-title"><span data-i18n="tb.tribeBonus">Bonus de tribu</span> <span class="hint" data-i18n="tb.tribeBonusHint">(efecto de tribu + unity)</span></h3>
           <div id="tribeUnityList" class="tribe-unity-list"></div>
         </div>
 
         <div class="bonus-panel watch-panel">
-          <h3 class="tribe-unity-title">Reloj</h3>
+          <h3 class="tribe-unity-title" data-i18n="tb.watch">Reloj</h3>
           <div class="watch-current">
             <img id="watchCurrentImg" class="watch-current-img" alt="" hidden>
             <div>
               <select id="clockSelect" aria-label="Watch">
-                <option value="">Sin reloj</option>
+                <option value="" data-i18n="tb.noWatch">Sin reloj</option>
               </select>
-              <p id="clockSummary" class="hint">Ningún reloj seleccionado.</p>
+              <p id="clockSummary" class="hint" data-i18n="tb.noWatchSel">Ningún reloj seleccionado.</p>
             </div>
           </div>
           <div id="watchPicker" class="watch-picker"></div>
         </div>
 
         <div class="controls">
-          <div class="hint">
-            Arrastra un yokai de la colección a uno de los 5 huecos, o arrastra entre huecos para reordenar.
-            El nivel se fija solo según su rango.
-          </div>
-          <button id="resetBtn" type="button">Vaciar</button>
+          <div class="hint" data-i18n="tb.dragHint">Arrastra un yokai de la colección a uno de los 5 huecos, o arrastra entre huecos para reordenar. El nivel se fija solo según su rango.</div>
+          <button id="resetBtn" type="button" data-i18n="tb.reset">Vaciar</button>
         </div>
 
         <div class="saved-teams-panel">
-          <h3>Equipos guardados</h3>
+          <h3 data-i18n="tb.saved">Equipos guardados</h3>
           <div class="save-team-row">
-            <input id="saveTeamName" type="text" placeholder="Nombre del equipo..." maxlength="40" />
-            <button id="saveTeamBtn" type="button">Guardar equipo</button>
+            <input id="saveTeamName" type="text" placeholder="Nombre del equipo..." data-i18n-ph="tb.teamName" maxlength="40" />
+            <button id="saveTeamBtn" type="button" data-i18n="tb.save">Guardar equipo</button>
           </div>
           <div id="savedTeamsList" class="saved-teams-list"></div>
         </div>
       </section>
 
       <aside class="panel stats-panel">
-        <h2 class="panel-title">Yokais elegidos</h2>
+        <h2 class="panel-title" data-i18n="tb.selected">Yokais elegidos</h2>
 
         <div class="selected-list">
-          <h3 class="visually-hidden">Yokais elegidos</h3>
+          <h3 class="visually-hidden" data-i18n="tb.selected">Yokais elegidos</h3>
           <div id="selectedList"></div>
         </div>
       </aside>
 
 <section class="panel characters-panel">
-  <h2 class="panel-title">Colección</h2>
-  <p class="hint">Arrastra un yokai al equipo (o haz clic) para añadirlo.</p>
+  <h2 class="panel-title" data-i18n="tb.collection">Colección</h2>
+  <p class="hint" data-i18n="tb.collectionHint">Arrastra un yokai al equipo (o haz clic) para añadirlo.</p>
   <div class="tribe-filter-row">
-    <label for="tribeFilter">Tribu</label>
+    <label for="tribeFilter" data-i18n="tb.tribe">Tribu</label>
     <select id="tribeFilter">
-      <option value="">Todas las tribus</option>
+      <option value="" data-i18n="tb.allTribes">Todas las tribus</option>
     </select>
-    <label for="rankFilter">Rango</label>
+    <label for="rankFilter" data-i18n="tb.rank">Rango</label>
     <select id="rankFilter">
-      <option value="">Todos los rangos</option>
+      <option value="" data-i18n="tb.allRanks">Todos los rangos</option>
     </select>
   </div>
   <div id="createdCharactersDragZone" class="collection-grid"></div>
@@ -1050,8 +1048,8 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
 
 
 
-<div id="miniTeam" class="mini-team" aria-label="Tu equipo (barra rápida)">
-  <button type="button" class="mini-title" id="miniTeamTop" title="Ir a tu equipo">Equipo</button>
+<div id="miniTeam" class="mini-team" aria-label="Tu equipo (barra rápida)" data-i18n-aria="tb.miniAria">
+  <button type="button" class="mini-title" id="miniTeamTop" title="Ir a tu equipo" data-i18n-title="tb.goTeam" data-i18n="tb.miniTeam">Equipo</button>
   <div id="miniTeamSlots" class="mini-slots"></div>
   <div class="mini-side">
     <div class="mini-stats-box">
@@ -1063,8 +1061,8 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
 </div>
 
 <footer class="credits">
-    <p><span class="credits-label">Hecho por:</span> <a href="https://discord.com/users/1440708112867921940" target="_blank" rel="noopener noreferrer">mentahelada</a></p>
-    <p><span class="credits-label">Créditos:</span> <a href="https://discord.com/users/732345044425506827" target="_blank" rel="noopener noreferrer">Jeff74</a> · <a href="https://discord.com/users/458312562069733397" target="_blank" rel="noopener noreferrer">Cadri</a></p>
+    <p><span class="credits-label" data-i18n="tb.madeBy">Hecho por:</span> <a href="https://discord.com/users/1440708112867921940" target="_blank" rel="noopener noreferrer">mentahelada</a></p>
+    <p><span class="credits-label" data-i18n="tb.credits">Créditos:</span> <a href="https://discord.com/users/732345044425506827" target="_blank" rel="noopener noreferrer">Jeff74</a> · <a href="https://discord.com/users/458312562069733397" target="_blank" rel="noopener noreferrer">Cadri</a></p>
   </footer>
 
   <script src="character.js"></script>
@@ -1139,15 +1137,12 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
     function describeClockTarget(clock) {
       const who = describeCenterFilter(clock.affects);
       if (!clock.centerOnly) return who;
-      return who === "todo el equipo" ? "el yokai del centro" : `el yokai del centro (si es ${who})`;
+      return who === t("aff.team") ? t("tb.whoCenter") : t("tb.whoCenterIf", { who });
     }
 
     function describeClock(clock) {
       const who = describeClockTarget(clock);
-      if (clock.hpPercent === clock.atkPercent) {
-        return `${clock.label}: +${clock.hpPercent}% PV y ATQ para ${who}.`;
-      }
-      return `${clock.label}: +${clock.hpPercent}% PV, +${clock.atkPercent}% ATQ para ${who}.`;
+      return t("tb.clockFor", { label: clock.label, pct: PP.pct(clock.hpPercent, clock.atkPercent), who });
     }
 
 
@@ -1219,6 +1214,9 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
     }
 
     function describeCenterFilter(filter) {
+      return PP.describeAffects(filter);
+    }
+    function describeCenterFilterOld(filter) {
       if (!filter || typeof filter !== "object") return "todo el equipo";
       const parts = [];
       if (Array.isArray(filter.tribes) && filter.tribes.length) {
@@ -1245,10 +1243,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       const hpPercent = Number(skill.hpPercent) || 0;
       const atkPercent = Number(skill.atkPercent) || 0;
       const who = describeCenterFilter(skill.affects);
-      if (hpPercent === atkPercent) {
-        return `Center skill: +${hpPercent}% PV/ATQ a ${who}`;
-      }
-      return `Center skill: +${hpPercent}% PV, +${atkPercent}% ATQ a ${who}`;
+      return t("tb.centerSkill", { pct: PP.pct(hpPercent, atkPercent), who });
     }
 
     // Unity: a character with a "unity" field grants a flat % HP/ATK bonus to the
@@ -1278,7 +1273,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       if (unity.label) return unity.label;
       const percent = Number(unity.percent) || 0;
       const tribeLabel = character.tribe ? PP.tribeEsPlural(character.tribe) : "los de su tribu";
-      return `Unity: +${percent}% PV/ATQ a los ${tribeLabel} (necesita 2+ ${tribeLabel})`;
+      return t("tb.unity", { p: percent, tribe: tribeLabel });
     }
 
     // Builds one entry per tribe present in the current team that has at
@@ -1335,7 +1330,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
               <span class="tribe-unity-value">${formatTribeBonus(g)}</span>
             </div>`;
           }).join("")
-        : '<p class="hint">Pon 2 o más yokais de la misma tribu para conseguir bonus de tribu.</p>';
+        : `<p class="hint">${t('tb.noTribeBonusHint')}</p>`;
     }
 
     // Female Unity: like Unity, but restricted to gender instead of tribe.
@@ -1366,10 +1361,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       if (femaleUnity.label) return femaleUnity.label;
       const hpPercent = Number(femaleUnity.hpPercent) || 0;
       const atkPercent = Number(femaleUnity.atkPercent) || 0;
-      if (hpPercent === atkPercent) {
-        return `Unity femenino: +${hpPercent}% PV/ATQ a las chicas (necesita 2+ chicas)`;
-      }
-      return `Unity femenino: +${hpPercent}% PV, +${atkPercent}% ATQ a las chicas (necesita 2+ chicas)`;
+      return t("tb.femUnity", { pct: PP.pct(hpPercent, atkPercent) });
     }
 
     function getInitials(name) {
@@ -1416,41 +1408,41 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
               .join("");
 
             const isCenter = index === CENTER_SLOT_INDEX;
-            const centerBadge = isCenter ? '<div class="center-badge">★ Centro</div>' : "";
+            const centerBadge = isCenter ? `<div class="center-badge">${t('tb.center')}</div>` : "";
             const centerSkillText = isCenter && char.centerSkill
               ? `<div class="center-skill-text">${escapeHtml(describeCenterSkill(char.centerSkill))}</div>`
               : "";
 
             const unityActive = isUnityActive(char, tribeCounts);
             const unityText = char.unity
-              ? `<div class="unity-text${unityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeUnity(char))}${unityActive ? "" : " — no activo"}</div>`
+              ? `<div class="unity-text${unityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeUnity(char))}${unityActive ? "" : t("tb.notActive")}</div>`
               : "";
 
             const femaleUnityActive = isFemaleUnityActive(char, genderCounts);
             const femaleUnityText = char.femaleUnity
-              ? `<div class="unity-text${femaleUnityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeFemaleUnity(char))}${femaleUnityActive ? "" : " — no activo"}</div>`
+              ? `<div class="unity-text${femaleUnityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeFemaleUnity(char))}${femaleUnityActive ? "" : t("tb.notActive")}</div>`
               : "";
 
             return `
               <div class="slot${isCenter ? " slot-center" : ""}" data-slot="${index}" data-character-id="${escapeHtml(char.id)}" data-tribe="${escapeHtml(String(char.tribe || "").toLowerCase())}" draggable="true">
                 ${centerBadge}
                 <div class="portrait">${portrait}</div>
-                <div class="slot-number">Posición ${index + 1}</div>
+                <div class="slot-number">${t("tb.position", { n: index + 1 })}</div>
                 <div class="character-name" title="${escapeHtml(char.name)}">${escapeHtml(char.name)}</div>
-                <div class="rank-badge rank-${rankKey(char.rank)}">${escapeHtml(String(char.rank || "").toUpperCase())} ${getGenderSymbol(char.gender)} · Nv. ${level}</div>
-                <div class="level-fixed">Nivel fijado por el rango</div>
-                <label class="level-label" for="dupes-${index}">Dupes (0-10)</label>
+                <div class="rank-badge rank-${rankKey(char.rank)}">${escapeHtml(String(char.rank || "").toUpperCase())} ${getGenderSymbol(char.gender)} · ${t("lv")} ${level}</div>
+                <div class="level-fixed">${t("tb.levelLocked")}</div>
+                <label class="level-label" for="dupes-${index}">${t("tb.dupesLabel")}</label>
                 <select class="dupes-select" id="dupes-${index}" data-slot="${index}" draggable="false">${dupeOptions}</select>
                 <div class="mini-stats">
-                  <div class="mini-stat"><span>PV</span><strong>${stats.hp.toLocaleString("en-US")}</strong></div>
-                  <div class="mini-stat"><span>ATQ</span><strong>${stats.atk.toLocaleString("en-US")}</strong></div>
+                  <div class="mini-stat"><span>${t("hp")}</span><strong>${stats.hp.toLocaleString("en-US")}</strong></div>
+                  <div class="mini-stat"><span>${t("atk")}</span><strong>${stats.atk.toLocaleString("en-US")}</strong></div>
                 </div>
                 ${centerSkillText}
                 ${unityText}
                 ${femaleUnityText}
               </div>`;
           }).join("")
-        : '<div class="hint team-empty-hint">Arrastra aquí un yokai de la colección.</div>';
+        : `<div class="hint team-empty-hint">${t('tb.emptyTeam')}</div>`;
     }
 
     function calculateTeamStats() {
@@ -1555,9 +1547,9 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
 
     // "Tribe effect +10% (2 Charming) + Unity +56%"
     function describeTribeBonus(g) {
-      const parts = [`Efecto de tribu +${g.effect}% (${g.count} ${g.tribeLabel})`];
+      const parts = [t("tb.effect", { p: g.effect, n: g.count, tribe: g.tribeLabel })];
       if (g.unityTotal) parts.push(`Unity +${g.unityTotal}%`);
-      else if (g.unity && g.count < 2) parts.push(`Unity +${g.unity}% (necesita 2+)`);
+      else if (g.unity && g.count < 2) parts.push(t("tb.unityNeeds", { p: g.unity }));
       return parts.join(" + ");
     }
 
@@ -1567,12 +1559,12 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       document.getElementById("summary").innerHTML = `
         <div class="summary-card">
           <span class="summary-icon">❤</span>
-          <span class="summary-label">PV total del equipo</span>
+          <span class="summary-label">${t("tb.totalHp")}</span>
           <strong>${totals.hp.toLocaleString("en-US")}</strong>
         </div>
         <div class="summary-card">
           <span class="summary-icon">⚔</span>
-          <span class="summary-label">ATQ total del equipo</span>
+          <span class="summary-label">${t("tb.totalAtk")}</span>
           <strong>${totals.atk.toLocaleString("en-US")}</strong>
         </div>
       `;
@@ -1587,7 +1579,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
           <div class="selected-item">
             <div class="dot"></div>
             <strong>${index + 1}. ${escapeHtml(c.name)}</strong>
-            <span>${escapeHtml(String(c.rank || "").toUpperCase())} · Nv. ${getRankLevel(c)} · ${getDupes(member)} dupe${getDupes(member) === 1 ? "" : "s"}</span>
+            <span>${escapeHtml(String(c.rank || "").toUpperCase())} · ${t("lv")} ${getRankLevel(c)} · ${getDupes(member)} ${t("dupes")}</span>
           </div>
         `;
       }).join("");
@@ -1612,7 +1604,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
         const c = member ? getCharacter(member.id) : null;
         const center = i === CENTER_SLOT_INDEX ? " mini-center" : "";
         if (!c) {
-          return `<div class="mini-cell"><div class="mini-slot mini-empty${center}" data-slot="${i}" title="Hueco libre ${i + 1}">+</div><div class="mini-cell-stats">&nbsp;</div></div>`;
+          return `<div class="mini-cell"><div class="mini-slot mini-empty${center}" data-slot="${i}" title="${t("tb.emptySlot", { n: i + 1 })}">+</div><div class="mini-cell-stats">&nbsp;</div></div>`;
         }
         const face = c.image
           ? `<img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.name)}">`
@@ -1620,7 +1612,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
         const s = memberStats[i];
         return `<div class="mini-cell">
             <div class="mini-slot${center}" data-slot="${i}" data-character-id="${escapeHtml(c.id)}" data-tribe="${escapeHtml(String(c.tribe || "").toLowerCase())}" draggable="true" title="${escapeHtml(c.name)} · ${getDupes(member)} dupes">
-              ${face}<button type="button" class="mini-remove" data-remove="${i}" aria-label="Quitar a ${escapeHtml(c.name)}">×</button>
+              ${face}<button type="button" class="mini-remove" data-remove="${i}" aria-label="${escapeHtml(t("tb.remove", { name: c.name }))}">×</button>
             </div>
             <div class="mini-cell-stats"><span class="hp">${fmt(s.hp)}</span><span class="atk">${fmt(s.atk)}</span></div>
           </div>`;
@@ -1633,7 +1625,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       const groups = getTribeBonusBreakdown().filter(g => g.count >= 2);
       document.getElementById("miniTeamUnity").innerHTML = groups.length
         ? groups.map(g => `<span class="mini-unity${g.percent ? "" : " mini-off"}" data-tribe="${escapeHtml(g.tribeKey)}" title="${escapeHtml(describeTribeBonus(g))}">${escapeHtml(g.tribeLabel)} ×${g.count} ${formatTribeBonus(g)}</span>`).join("")
-        : `<span class="mini-unity mini-unity-none">Sin bonus de tribu</span>`;
+        : `<span class="mini-unity mini-unity-none">${t("tb.noTribeBonus")}</span>`;
     }
 
     function escapeHtml(value) {
@@ -1753,9 +1745,9 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       opt.value = clock.id;
       const who = describeClockTarget(clock);
       const percentText = clock.hpPercent === clock.atkPercent
-        ? `+${clock.hpPercent}% PV y ATQ`
-        : `+${clock.hpPercent}% PV, +${clock.atkPercent}% ATQ`;
-      opt.textContent = `${clock.label} (${percentText} para ${who})`;
+        ? PP.pct(clock.hpPercent, clock.hpPercent)
+        : PP.pct(clock.hpPercent, clock.atkPercent);
+      opt.textContent = t("tb.clockOpt", { label: clock.label, pct: percentText, who });
       clockSelect.appendChild(opt);
     });
   }
@@ -1770,7 +1762,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
     if (watchPicker) {
       const pct = c => c.hpPercent === c.atkPercent ? `+${c.hpPercent}%` : `+${c.hpPercent}/${c.atkPercent}%`;
       watchPicker.innerHTML =
-        `<button type="button" class="watch-option watch-none${current ? '' : ' selected'}" data-watch="">Sin reloj</button>` +
+        `<button type="button" class="watch-option watch-none${current ? '' : ' selected'}" data-watch="">${t("tb.noWatch")}</button>` +
         CLOCKS.map(c => `
           <button type="button" class="watch-option${c.id === current ? ' selected' : ''}" data-watch="${escapeHtml(c.id)}" title="${escapeHtml(describeClock(c))}">
             <img src="${escapeHtml(watchImg(c.id))}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'⌚',style:'font-size:30px;line-height:44px'}))">
@@ -1799,7 +1791,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
   if (clockSelect) clockSelect.addEventListener('change', () => {
     const clock = getClock(clockSelect.value);
     if (clockSummary) {
-      clockSummary.textContent = clock ? describeClock(clock) : 'Ningún reloj seleccionado.';
+      clockSummary.textContent = clock ? describeClock(clock) : t('tb.noWatchSel');
     }
     updateBonuses();
     renderWatchPicker();
@@ -1833,10 +1825,10 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
           ? `<img src="${escapeHtml(c.image)}" alt="${escapeHtml(c.name)}" loading="lazy">`
           : `<div class="portrait">${getInitials(c.name)}</div>`}
         <strong>${escapeHtml(c.name)}</strong>
-        <div class="hint">${getGenderSymbol(c.gender)} Nv. ${getRankLevel(c)}</div>
+        <div class="hint">${getGenderSymbol(c.gender)} ${t('lv')} ${getRankLevel(c)}</div>
         ${c.saga ? `<div class="hint">${escapeHtml(c.saga)}</div>` : ""}
-        <div class="hint" title="Con 10 dupes">PV: ${getStats(c, 10).hp.toLocaleString('en-US')}<br>ATQ: ${getStats(c, 10).atk.toLocaleString('en-US')}</div>
-      </div>`).join('') : '<p class="hint">Ningún yokai coincide con el filtro.</p>';
+        <div class="hint" title="${t('tb.with10')}">${t('hp')}: ${getStats(c, 10).hp.toLocaleString('en-US')}<br>${t('atk')}: ${getStats(c, 10).atk.toLocaleString('en-US')}</div>
+      </div>`).join('') : `<p class="hint">${t('tb.noMatch')}</p>`;
   };
 
   const tribeFilterSelect = document.getElementById('tribeFilter');
@@ -1973,11 +1965,11 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       ? savedTeams.map(entry => `
           <div class="saved-team-item" data-team-id="${escapeHtml(entry.id)}">
             <span class="saved-team-name" title="${escapeHtml(entry.name)}">${escapeHtml(entry.name)}</span>
-            <button type="button" class="load-team-btn">Cargar</button>
-            <button type="button" class="delete-team-btn">Borrar</button>
+            <button type="button" class="load-team-btn">${t("tb.load")}</button>
+            <button type="button" class="delete-team-btn">${t("tb.delete")}</button>
           </div>
         `).join("")
-      : '<p class="hint">Aún no hay equipos guardados. Arma uno y guárdalo arriba.</p>';
+      : `<p class="hint">${t('tb.noSaved')}</p>`;
 
     list.querySelectorAll(".load-team-btn").forEach(btn => {
       btn.addEventListener("click", () => {

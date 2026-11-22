@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yokais · Puni Puni ES</title>
   <meta name="description" content="Base de datos de yokais UZ, UZ+ y UZ++ de Yo-kai Watch Puni Puni con stats, center skill y unity." />
@@ -54,44 +55,44 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
 
   <header class="page-hero">
-    <div class="kicker">Base de datos</div>
-    <h1>Yokais <span>UZ</span></h1>
-    <p>Todos los UZ, UZ+ y UZ++ con sus stats, center skill y unity. Pulsa un yokai para ver su ficha.</p>
+    <div class="kicker" data-i18n="yk.kicker">Base de datos</div>
+    <h1><b data-i18n="yk.title" style="font-weight:inherit">Yokais</b> <span>UZ</span></h1>
+    <p data-i18n="yk.hero">Todos los UZ, UZ+ y UZ++ con sus stats, center skill y unity. Pulsa un yokai para ver su ficha.</p>
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
   </header>
 
   <main class="wrap">
     <section class="panel">
       <div class="filters">
-        <input id="q" type="search" placeholder="Buscar por nombre o saga…" aria-label="Buscar" />
-        <select id="fRank" aria-label="Rango"><option value="">Todos los rangos</option></select>
-        <select id="fTribe" aria-label="Tribu"><option value="">Todas las tribus</option></select>
-        <select id="fSaga" aria-label="Saga"><option value="">Todas las sagas</option></select>
+        <input id="q" type="search" placeholder="Buscar por nombre o saga…" aria-label="Buscar" data-i18n-ph="yk.search" data-i18n-aria="yk.aria.search" />
+        <select id="fRank" aria-label="Rango"><option value="" data-i18n="tb.allRanks">Todos los rangos</option></select>
+        <select id="fTribe" aria-label="Tribu"><option value="" data-i18n="tb.allTribes">Todas las tribus</option></select>
+        <select id="fSaga" aria-label="Saga"><option value="" data-i18n="yk.allSagas">Todas las sagas</option></select>
         <select id="fExtra" aria-label="Habilidad">
-          <option value="">Cualquier habilidad</option>
-          <option value="unity">Con unity de tribu</option>
-          <option value="female">Con unity femenino</option>
-          <option value="center">Con center skill</option>
+          <option value="" data-i18n="yk.anySkill">Cualquier habilidad</option>
+          <option value="unity" data-i18n="yk.withUnity">Con unity de tribu</option>
+          <option value="female" data-i18n="yk.withFemale">Con unity femenino</option>
+          <option value="center" data-i18n="yk.withCenter">Con center skill</option>
         </select>
         <select id="sort" aria-label="Ordenar">
-          <option value="">Orden de salida</option>
-          <option value="hp">Más PV</option>
-          <option value="atk">Más ATQ</option>
-          <option value="total">Más PV + ATQ</option>
-          <option value="name">Nombre (A-Z)</option>
+          <option value="" data-i18n="yk.sortRelease">Orden de salida</option>
+          <option value="hp" data-i18n="yk.sortHp">Más PV</option>
+          <option value="atk" data-i18n="yk.sortAtk">Más ATQ</option>
+          <option value="total" data-i18n="yk.sortTotal">Más PV + ATQ</option>
+          <option value="name" data-i18n="yk.sortName">Nombre (A-Z)</option>
         </select>
         <span id="count" class="count"></span>
       </div>
@@ -102,13 +103,14 @@
   <dialog id="ficha"><div class="sheet" id="sheet"></div></dialog>
 
   <footer class="site-footer">
-    <p>Stats: <em>The Puni Spreadsheet</em> (por Sallitine) y datos de la comunidad. Las stats son las del nivel máximo de su rango.</p>
-    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+    <p data-i18n="yk.foot">Stats: The Puni Spreadsheet (por Sallitine) y datos de la comunidad. Las stats son las del nivel máximo de su rango.</p>
+    <p data-i18n="footer.brand">Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
   </footer>
 
   <script src="character.js"></script>
   <script src="assets/comun.js"></script>
   <script>
+    addI18n({"yk.kicker": ["Base de datos", "Database", "データベース"], "yk.title": ["Yokais", "Yo-kai", "妖怪"], "yk.hero": ["Todos los UZ, UZ+ y UZ++ con sus stats, center skill y unity. Pulsa un yokai para ver su ficha.", "Every UZ, UZ+ and UZ++ with their stats, center skill and unity. Click a yo-kai to see its profile.", "UZ・UZ+・UZ++の全妖怪のステータス、センタースキル、結束。妖怪をクリックすると詳細が見られます。"], "yk.search": ["Buscar por nombre o saga…", "Search by name or series…", "名前・シリーズで検索…"], "yk.allSagas": ["Todas las sagas", "All series", "すべてのシリーズ"], "yk.anySkill": ["Cualquier habilidad", "Any skill", "すべてのスキル"], "yk.withUnity": ["Con unity de tribu", "With tribe unity", "種族結束あり"], "yk.withFemale": ["Con unity femenino", "With female unity", "女の子結束あり"], "yk.withCenter": ["Con center skill", "With center skill", "センタースキルあり"], "yk.sortRelease": ["Orden de salida", "Release order", "登場順"], "yk.sortHp": ["Más PV", "Most HP", "HPが高い順"], "yk.sortAtk": ["Más ATQ", "Most ATK", "こうげきが高い順"], "yk.sortTotal": ["Más PV + ATQ", "Most HP + ATK", "HP＋こうげき順"], "yk.sortName": ["Nombre (A-Z)", "Name (A-Z)", "名前順"], "yk.count": ["{n} yokais", "{n} yo-kai", "{n}体"], "yk.empty": ["No hay yokais con esos filtros.", "No yo-kai match these filters.", "条件に合う妖怪がいません。"], "yk.unityT": ["Unity de tribu +{p}%", "Tribe unity +{p}%", "種族結束+{p}%"], "yk.unityD": ["Sube un {p}% el {HP} y el {ATK} de los {tribe} del equipo. Solo funciona si hay 2 o más yokais de su tribu.", "Raises the {HP} and {ATK} of {tribe} in the team by {p}%. Only works with 2 or more yo-kai of its tribe.", "チーム内の{tribe}の{HP}と{ATK}を{p}%アップ。同じ種族が2体以上いると発動。"], "yk.sameT": ["Unity de equipo +{p}%", "Team unity +{p}%", "全員同種族結束+{p}%"], "yk.sameD": ["Solo se activa si todo el equipo es de la misma tribu.", "Only activates if the whole team is the same tribe.", "チーム全員が同じ種族のときだけ発動。"], "yk.femT": ["Unity femenino {pct}", "Female unity {pct}", "女の子結束 {pct}"], "yk.femD": ["Para las chicas del equipo, si hay 2 o más.", "For the girls in the team, if there are 2 or more.", "女の子妖怪が2体以上いると、女の子妖怪に発動。"], "yk.centerT": ["Center skill {pct}", "Center skill {pct}", "センタースキル {pct}"], "yk.centerD": ["Si va en el centro del equipo, afecta a: {who}.", "If placed in the center of the team, it affects: {who}.", "センターに置くと発動。対象：{who}。"], "yk.noSkills": ["Sin center skill ni unity registrados.", "No center skill or unity recorded.", "センタースキル・結束の記録なし。"], "yk.noDupes": ["Sin dupes", "No dupes", "0凸"], "yk.d5": ["5 dupes", "5 dupes", "5凸"], "yk.d10": ["10 dupes (+20%)", "10 dupes (+20%)", "10凸（+20%）"], "yk.add": ["⚔ Añadir al equipo", "⚔ Add to team", "⚔ チームに追加"], "yk.close": ["Cerrar", "Close", "閉じる"], "yk.f.unity": ["Unity", "Unity", "結束"], "yk.f.female": ["♀ Unity", "♀ Unity", "♀結束"], "yk.f.center": ["★ Center", "★ Center", "★センター"], "yk.foot": ["Stats: The Puni Spreadsheet (por Sallitine) y datos de la comunidad. Las stats son las del nivel máximo de su rango.", "Stats: The Puni Spreadsheet (by Sallitine) and community data. Stats are at the max level of each rank.", "ステータス：The Puni Spreadsheet（Sallitine作）とコミュニティのデータ。各ランクの最大レベル時の値です。"], "yk.aria.search": ["Buscar", "Search", "検索"]});
     const $ = id => document.getElementById(id);
     const all = characters.map((c, i) => ({ ...c, order: i, tk: PP.key(c.tribe) }));
 
@@ -119,11 +121,11 @@
 
     function unityText(c) {
       const out = [];
-      if (c.unity) out.push(`<div class="skill"><b>Unity de tribu +${c.unity.percent}%</b><br><span class="muted">Sube un ${c.unity.percent}% el PV y el ATQ de los ${PP.tribeEsPlural(c.tribe)} del equipo. Solo funciona si hay 2 o más yokais de su tribu.</span></div>`);
-      if (c.sameTeamUnity) out.push(`<div class="skill"><b>Unity de equipo +${c.sameTeamUnity.percent}%</b><br><span class="muted">Solo se activa si todo el equipo es de la misma tribu.</span></div>`);
-      if (c.femaleUnity) out.push(`<div class="skill"><b>Unity femenino ${PP.pct(c.femaleUnity.hpPercent, c.femaleUnity.atkPercent)}</b><br><span class="muted">Para las chicas del equipo, si hay 2 o más.</span></div>`);
-      if (c.centerSkill) out.push(`<div class="skill"><b>Center skill ${PP.pct(c.centerSkill.hpPercent, c.centerSkill.atkPercent)}</b><br><span class="muted">Si va en el centro del equipo, afecta a: ${PP.esc(PP.describeAffects(c.centerSkill.affects))}.</span></div>`);
-      return out.join("") || `<p class="muted">Sin center skill ni unity registrados.</p>`;
+      if (c.unity) out.push(`<div class="skill"><b>${t("yk.unityT", { p: c.unity.percent })}</b><br><span class="muted">${t("yk.unityD", { p: c.unity.percent, tribe: PP.tribeEsPlural(c.tribe) })}</span></div>`);
+      if (c.sameTeamUnity) out.push(`<div class="skill"><b>${t("yk.sameT", { p: c.sameTeamUnity.percent })}</b><br><span class="muted">${t("yk.sameD")}</span></div>`);
+      if (c.femaleUnity) out.push(`<div class="skill"><b>${t("yk.femT", { pct: PP.pct(c.femaleUnity.hpPercent, c.femaleUnity.atkPercent) })}</b><br><span class="muted">${t("yk.femD")}</span></div>`);
+      if (c.centerSkill) out.push(`<div class="skill"><b>${t("yk.centerT", { pct: PP.pct(c.centerSkill.hpPercent, c.centerSkill.atkPercent) })}</b><br><span class="muted">${t("yk.centerD", { who: PP.esc(PP.describeAffects(c.centerSkill.affects)) })}</span></div>`);
+      return out.join("") || `<p class="muted">${t("yk.noSkills")}</p>`;
     }
 
     function openSheet(id, push = true) {
@@ -132,13 +134,13 @@
       const s0 = PP.statsAt(c, 0), s10 = PP.statsAt(c, 10);
       $("sheet").dataset.tribe = c.tk;
       $("sheet").innerHTML = `
-        <button class="close" type="button" aria-label="Cerrar">×</button>
+        <button class="close" type="button" aria-label="${t("yk.close")}">×</button>
         <div class="sheet-top">
           <img src="${PP.esc(c.image)}" alt="${PP.esc(c.name)}">
           <div>
             <h2>${PP.esc(c.name)}</h2>
             <div class="meta">
-              <span class="pill rank-${PP.rankKey(c.rank)}">${PP.esc(c.rank)} · Nv. ${PP.RANK_LEVEL[c.rank] || "?"}</span>
+              <span class="pill rank-${PP.rankKey(c.rank)}">${PP.esc(c.rank)} · ${t("lv")} ${PP.RANK_LEVEL[c.rank] || "?"}</span>
               <span class="pill tribe-pill" data-tribe="${PP.esc(c.tk)}">${PP.esc(PP.tribeEs(c.tribe))}</span>
               <span>${PP.genderSymbol(c.gender)}</span>
               ${c.saga ? `<span>· ${PP.esc(c.saga)}</span>` : ""}
@@ -146,13 +148,13 @@
           </div>
         </div>
         <div class="table-wrap"><table class="nice">
-          <tr><th></th><th>Sin dupes</th><th>5 dupes</th><th>10 dupes (+20%)</th></tr>
-          <tr><td>❤ PV</td><td>${PP.fmt(s0.hp)}</td><td>${PP.fmt(PP.statsAt(c, 5).hp)}</td><td><b>${PP.fmt(s10.hp)}</b></td></tr>
-          <tr><td>⚔ ATQ</td><td>${PP.fmt(s0.atk)}</td><td>${PP.fmt(PP.statsAt(c, 5).atk)}</td><td><b>${PP.fmt(s10.atk)}</b></td></tr>
+          <tr><th></th><th>${t("yk.noDupes")}</th><th>${t("yk.d5")}</th><th>${t("yk.d10")}</th></tr>
+          <tr><td>❤ ${t("hp")}</td><td>${PP.fmt(s0.hp)}</td><td>${PP.fmt(PP.statsAt(c, 5).hp)}</td><td><b>${PP.fmt(s10.hp)}</b></td></tr>
+          <tr><td>⚔ ${t("atk")}</td><td>${PP.fmt(s0.atk)}</td><td>${PP.fmt(PP.statsAt(c, 5).atk)}</td><td><b>${PP.fmt(s10.atk)}</b></td></tr>
         </table></div>
         ${unityText(c)}
         <div class="actions">
-          <a class="btn" href="team-builder.html?add=${encodeURIComponent(c.id)}">⚔ Añadir al equipo</a>
+          <a class="btn" href="team-builder.html?add=${encodeURIComponent(c.id)}">${t("yk.add")}</a>
         </div>`;
       $("sheet").querySelector(".close").onclick = () => $("ficha").close();
       if (!$("ficha").open) $("ficha").showModal();
@@ -163,25 +165,25 @@
 
     function render() {
       const q = $("q").value.trim().toLowerCase();
-      const r = $("fRank").value, t = $("fTribe").value, s = $("fSaga").value, x = $("fExtra").value, so = $("sort").value;
+      const r = $("fRank").value, tri = $("fTribe").value, s = $("fSaga").value, x = $("fExtra").value, so = $("sort").value;
       let list = all.filter(c =>
         (!q || c.name.toLowerCase().includes(q) || String(c.saga || "").toLowerCase().includes(q)) &&
-        (!r || c.rank === r) && (!t || c.tk === t) && (!s || c.saga === s) &&
+        (!r || c.rank === r) && (!tri || c.tk === tri) && (!s || c.saga === s) &&
         (!x || (x === "unity" ? (c.unity || c.sameTeamUnity) : x === "female" ? c.femaleUnity : c.centerSkill)));
       const st = c => PP.statsAt(c, 0);
       if (so === "hp") list.sort((a, b) => b.hp0 - a.hp0);
       else if (so === "atk") list.sort((a, b) => b.atk0 - a.atk0);
       else if (so === "total") list.sort((a, b) => (b.hp0 + b.atk0) - (a.hp0 + a.atk0));
       else if (so === "name") list.sort((a, b) => a.name.localeCompare(b.name));
-      $("count").textContent = `${list.length} yokai${list.length === 1 ? "" : "s"}`;
+      $("count").textContent = t("yk.count", { n: list.length });
       $("grid").innerHTML = list.length ? list.map(c => `
         <button class="yk" type="button" data-id="${PP.esc(c.id)}" data-tribe="${PP.esc(c.tk)}">
           <div class="tags"><span class="pill rank-${PP.rankKey(c.rank)}">${PP.esc(c.rank)}</span><span class="pill tribe-pill">${PP.esc(PP.tribeEs(c.tribe))}</span></div>
           <img src="${PP.esc(c.image)}" alt="" loading="lazy">
           <b>${PP.esc(c.name)}</b>
           <small>❤ ${PP.fmt(c.hp0)} · ⚔ ${PP.fmt(c.atk0)}</small>
-          <div class="flags">${c.unity || c.sameTeamUnity ? `<span class="flag">Unity</span>` : ""}${c.femaleUnity ? `<span class="flag">♀ Unity</span>` : ""}${c.centerSkill ? `<span class="flag">★ Center</span>` : ""}</div>
-        </button>`).join("") : `<div class="empty">No hay yokais con esos filtros.</div>`;
+          <div class="flags">${c.unity || c.sameTeamUnity ? `<span class="flag">${t("yk.f.unity")}</span>` : ""}${c.femaleUnity ? `<span class="flag">${t("yk.f.female")}</span>` : ""}${c.centerSkill ? `<span class="flag">${t("yk.f.center")}</span>` : ""}</div>
+        </button>`).join("") : `<div class="empty">${t("yk.empty")}</div>`;
     }
     ["q", "fRank", "fTribe", "fSaga", "fExtra", "sort"].forEach(id => $(id).addEventListener("input", render));
     $("grid").addEventListener("click", e => { const b = e.target.closest(".yk"); if (b) openSheet(b.dataset.id); });

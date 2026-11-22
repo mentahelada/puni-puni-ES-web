@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eventos · Puni Puni ES</title>
   <meta name="description" content="Cómo funcionan los eventos de Yo-kai Watch Puni Puni: formatos, energía, Puntos Y, jefes, liga semanal y estrellas." />
@@ -34,26 +35,38 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
 
   <header class="page-hero">
+    <div data-l="es">
     <div class="kicker">Guía</div>
     <h1>Cómo funcionan <span>los eventos</span></h1>
     <p>Los eventos son el corazón de Puni Puni: cada pocas semanas llega uno nuevo con su mapa, sus jefes, su tienda y sus yokais exclusivos.</p>
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+    </div>
+    <div data-l="en">
+      <div class="kicker">Guide</div>
+      <h1>How events <span>work</span></h1>
+      <p>Events are the heart of Puni Puni: every few weeks a new one arrives with its own map, bosses, shop and exclusive yo-kai.</p>
+    </div>
+    <div data-l="ja">
+      <div class="kicker">解説</div>
+      <h1>イベントの<span>仕組み</span></h1>
+      <p>イベントはぷにぷにの中心。数週間ごとに、専用マップ・ボス・ショップ・限定妖怪とともに新しいイベントが始まります。</p>
+    </div>
   </header>
 
   <main class="wrap">
+    <div data-l="es">
     <section class="panel">
       <h2>Índice</h2>
       <div class="toc">
@@ -183,10 +196,214 @@
       </ul>
       <p class="muted">Fuentes: guías de <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/formatos" target="_blank" rel="noopener noreferrer">formatos</a>, <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/ligas" target="_blank" rel="noopener noreferrer">ligas</a> y <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/estrellas" target="_blank" rel="noopener noreferrer">estrellas</a> de yo-kai-watch.es. Calendario de eventos: <a href="https://mtwildwood.net/es/puni/events" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>.</p>
     </section>
+    </div>
+    <div data-l="en">
+    <section class="panel">
+      <h2>Contents</h2>
+      <div class="toc">
+        <a href="#en-cycle">What an event is like</a><a href="#en-formats">Formats</a><a href="#en-res">Energy and HP</a>
+        <a href="#en-points">Y Points and shop</a><a href="#en-boss">Bosses and impossible stage</a><a href="#en-league">Weekly league</a>
+        <a href="#en-stars">Stars</a><a href="#en-tips">Tips</a>
+      </div>
+      <div class="callout warn">This guide summarizes how events usually work, based on community guides from a few years ago. Level-5 changes details with every update (energy numbers, rewards, league rules…), so take it as a reference and check the in-game event notice.</div>
+    </section>
+
+    <section class="panel" id="en-cycle">
+      <h2>What an event is like</h2>
+      <p>A new event starts roughly every two weeks. Almost all of them follow the same pattern, whatever the format:</p>
+      <ol class="steps">
+        <li><b>Its own map.</b> The event brings a map whose stages unlock as you clear the previous ones.</li>
+        <li><b>Bosses at the end of each section.</b> First the normal-difficulty boss appears, then a hard version. Beating it repeatedly is how you recruit the event boss.</li>
+        <li><b>Y Points.</b> Almost everything you do gives Y Points, which you spend in the event shop.</li>
+        <li><b>Missions.</b> Each event has its mission list (win streaks, stealing items, using certain yo-kai…) with extra rewards.</li>
+        <li><b>Hidden stages and rare yo-kai.</b> There are usually secret stages and yo-kai that only appear with low odds during the event.</li>
+        <li><b>An "impossible" stage.</b> There's almost always a very hard final stage meant for the strongest teams.</li>
+        <li><b>New yo-kai in the Crank-a-kai.</b> New yo-kai arrive in the capsule machines with each event, and many have skills that boost that specific event.</li>
+      </ol>
+    </section>
+
+    <section class="panel" id="en-formats">
+      <h2>Event formats</h2>
+      <p>The "format" is how the event is played. They rotate, and each one rewards a different kind of team.</p>
+      <div class="formats">
+        <article class="format"><span class="tag">The most common</span><h3>🎯 Ohajiki</h3>
+          <p>You flick punis at the boss like marbles. Damage depends on your team's ATK and HP, its special attack, skills, tribe advantage and how well you aim.</p>
+          <ul><li>Spending more energy on one shot does far more damage than spending a little.</li><li>Sometimes there are zones that multiply damage and balls that raise or lower it.</li><li>Helping friends also costs energy, but gives rewards.</li></ul></article>
+        <article class="format"><span class="tag">Ohajiki variant</span><h3>⛳ Punitto Shot</h3>
+          <p>Same idea as ohajiki, but the shot works like golf. Chaining hits in the marked zones keeps raising the damage multiplier.</p></article>
+        <article class="format"><span class="tag">Puzzle with HP</span><h3>🌀 Gates of Whimsy</h3>
+          <p>You clear normal puzzle stages until gates open. Each gate type adds a restriction: harder to recover HP, harder to enter fever, or no attack boosters.</p>
+          <ul><li>Playing costs HP instead of energy.</li><li>Helping friends gives boxes that may contain orbs to open gates.</li></ul></article>
+        <article class="format"><span class="tag">Item stealing</span><h3>🥊 Budokai and Pseudokai</h3>
+          <p>At the start you choose: fewer Y Points with no risk, or more Y Points but your items can be stolen. In <b>Budokai</b> you play tournaments in a row, and longer win streaks earn more. <b>Pseudokai</b> mixes that system with a normal map.</p>
+          <ul><li>Stealing from other players requires steal tickets.</li><li>Clearing stages fast matters, so start with the special attack charged.</li></ul></article>
+        <article class="format"><span class="tag">Mini-games</span><h3>📺 Yo-kai Tube Live</h3>
+          <p>A "live stream" made of several mini-games. You earn views and Yo-kai Tuber experience depending on how well you play, which turn into Y Points. It uses stamina that refills fairly quickly.</p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="en-res">
+      <h2>Energy and HP</h2>
+      <p>Each format uses a resource that refills over time (usually a few hours to fill completely):</p>
+      <div class="table-wrap"><table class="nice">
+        <tr><th>Format</th><th>Uses</th><th>How to recover it</th></tr>
+        <tr><td>Ohajiki and Punitto Shot</td><td>Energy</td><td>Wait, or energy drinks (from stages, the event shop or paid)</td></tr>
+        <tr><td>Gates of Whimsy</td><td>HP (%)</td><td>Wait, or medicine (from boxes, missions, the event shop or paid)</td></tr>
+        <tr><td>Yo-kai Tube Live</td><td>Stamina</td><td>Refills on its own much faster than the others</td></tr>
+        <tr><td>Budokai / Pseudokai</td><td>Normal plays</td><td>Steal tickets come from stages, missions or the shop</td></tr>
+      </table></div>
+    </section>
+
+    <section class="panel" id="en-points">
+      <h2>Y Points and the event shop</h2>
+      <p><b>Y Points</b> are each event's currency. You get them by playing stages, beating bosses (hard ones give more) and completing missions. In the event shop you trade them for:</p>
+      <div class="chips"><span>Energy drinks and medicine</span><span>Steal tickets</span><span>EXP orbs</span><span>Soul secrets</span><span>Event yo-kai</span><span>Other items</span></div>
+      <p class="muted" style="margin-top:12px">Many new yo-kai have skills that give more Y Points or more damage in their event, which is why they come out in the Crank-a-kai alongside it.</p>
+    </section>
+
+    <section class="panel" id="en-boss">
+      <h2>Bosses, seals and the impossible stage</h2>
+      <p>The <b>hard</b> boss is the main goal: you beat it over and over until it joins your team, and it gives more Y Points. Some events have <b>seals</b>: gathering certain yo-kai weakens the impossible stage boss.</p>
+      <p>The <b>impossible stage</b> is meant for maxed-out teams. That's where good team building matters most: same tribe for tribe effect and unity, a good center skill and the right watch. You can test combinations in the <a href="team-builder.html">Team Builder</a>.</p>
+    </section>
+
+    <section class="panel" id="en-league">
+      <h2>Weekly league (score challenge)</h2>
+      <p>Besides events, there's a weekly score challenge with leagues. You're grouped with 49 random players and, at the end of the week, your rank decides whether you move up, stay or move down:</p>
+      <div class="leagues">
+        <div class="league" style="--lc:#cd8a4f"><b>Bronze</b><small>Starting league. Most move up and nobody goes down.</small></div>
+        <div class="league" style="--lc:#c9d3e0"><b>Silver</b><small>Almost half move up; the last ones go down.</small></div>
+        <div class="league" style="--lc:#ffcf3f"><b>Gold</b><small>A third move up; another third go down.</small></div>
+        <div class="league" style="--lc:#7fe0d6"><b>Platinum</b><small>Very few move up; many go down.</small></div>
+        <div class="league" style="--lc:#8fd3ff"><b>Diamond</b><small>The top league: only the middle of the group stays.</small></div>
+      </div>
+      <p style="margin-top:14px">The better you place in your group and the higher your league, the more challenge points you earn. You have to take part every week to get them. Those points are traded in their own shop for ZZZ-rank boss yo-kai, soul secrets and EXP orbs (with a weekly limit on the best items).</p>
+    </section>
+
+    <section class="panel" id="en-stars">
+      <h2>Stage stars</h2>
+      <p>Many stages have extra objectives that give stars. They're challenges like:</p>
+      <div class="chips"><span>Make a combo of X or more</span><span>Finish with the special attack</span><span>Clear X punis</span><span>Clear it in under X seconds</span><span>Finish with at least X% HP</span><span>Enter fever X times</span><span>Use only one tribe</span><span>Use only a certain rank</span><span>Don't continue</span><span>Score X points or more</span></div>
+      <p class="muted" style="margin-top:12px">In the game the objectives are in Japanese; the <a href="guias.html">external guides</a> include a full translation (in Spanish).</p>
+    </section>
+
+    <section class="panel" id="en-tips">
+      <h2>Tips for every event</h2>
+      <ul>
+        <li><b>Read the event notice:</b> it almost always says which tribe, series or yo-kai get an advantage or bonus.</li>
+        <li><b>Spend energy big:</b> in ohajiki one high-energy shot is worth more than several small ones.</li>
+        <li><b>Don't let energy cap:</b> if it's full, the recharge is wasted.</li>
+        <li><b>Do missions early:</b> many give drinks, medicine or tickets that help for the rest of the event.</li>
+        <li><b>Prepare your team before the impossible stage:</b> check in the <a href="team-builder.html">Team Builder</a> which tribe, center and watch combo gives the most HP and ATK.</li>
+      </ul>
+      <p class="muted">Sources: yo-kai-watch.es guides on <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/formatos" target="_blank" rel="noopener noreferrer">formats</a>, <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/ligas" target="_blank" rel="noopener noreferrer">leagues</a> and <a href="https://yo-kai-watch.es/secciones/juegos/punipuni/estrellas" target="_blank" rel="noopener noreferrer">stars</a>. Event calendar: <a href="https://mtwildwood.net/es/puni/events" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>.</p>
+    </section>
+    </div>
+    <div data-l="ja">
+    <section class="panel">
+      <h2>目次</h2>
+      <div class="toc">
+        <a href="#ja-cycle">イベントの流れ</a><a href="#ja-formats">イベント形式</a><a href="#ja-res">エネルギーと体力</a>
+        <a href="#ja-points">Yポイントとショップ</a><a href="#ja-boss">ボスと極ステージ</a><a href="#ja-league">週間リーグ</a>
+        <a href="#ja-stars">星</a><a href="#ja-tips">コツ</a>
+      </div>
+      <div class="callout warn">このページは数年前のコミュニティ攻略をもとに、イベントの一般的な仕組みをまとめたものです。エネルギー量・報酬・リーグのルールなどはアップデートで変わるので、目安として読み、ゲーム内のお知らせも確認してください。</div>
+    </section>
+
+    <section class="panel" id="ja-cycle">
+      <h2>イベントの流れ</h2>
+      <p>新しいイベントはおよそ2週間ごとに始まります。形式が変わっても、ほとんどは同じ構成です。</p>
+      <ol class="steps">
+        <li><b>専用マップ。</b>ステージをクリアすると次のステージが解放されていきます。</li>
+        <li><b>区切りごとのボス。</b>まず通常難易度のボス、その後に高難易度版が登場。何度も倒すとイベントのボス妖怪が仲間になります。</li>
+        <li><b>Yポイント。</b>ほぼすべての行動でYポイントがもらえ、イベントショップで使えます。</li>
+        <li><b>ミッション。</b>連勝、アイテム奪取、特定の妖怪の使用などのミッションで追加報酬。</li>
+        <li><b>隠しステージとレア妖怪。</b>隠しステージや、イベント中に低確率で出現する妖怪がいることが多いです。</li>
+        <li><b>「極」ステージ。</b>最強クラスのチーム向けの非常に難しいステージがほぼ必ずあります。</li>
+        <li><b>ガシャの新妖怪。</b>イベントに合わせてガシャに新しい妖怪が登場し、その多くがイベントを有利にするスキルを持っています。</li>
+      </ol>
+    </section>
+
+    <section class="panel" id="ja-formats">
+      <h2>イベント形式</h2>
+      <p>「形式」はイベントの遊び方のこと。順番に入れ替わり、形式ごとに向いているチームが違います。</p>
+      <div class="formats">
+        <article class="format"><span class="tag">いちばん多い</span><h3>🎯 おはじき</h3>
+          <p>ぷにをおはじきのようにボスへ弾きます。ダメージはチームのこうげきとHP、ひっさつわざ、スキル、種族相性、狙いの正確さで決まります。</p>
+          <ul><li>1回に多くのエネルギーを使うほど、ダメージは大きく伸びます。</li><li>ダメージ倍率が上がるゾーンや、ダメージを増減させる玉が出ることも。</li><li>フレンドの応援にもエネルギーを使いますが、報酬がもらえます。</li></ul></article>
+        <article class="format"><span class="tag">おはじきの派生</span><h3>⛳ ぷにっとショット</h3>
+          <p>おはじきと同じ仕組みですが、ゴルフのように打ちます。指定ゾーンに連続で当てると倍率が上がっていきます。</p></article>
+        <article class="format"><span class="tag">体力を使うパズル</span><h3>🌀 妖魔界ゲート</h3>
+          <p>通常のパズルステージを進めるとゲートが開きます。ゲートごとに「回復しにくい」「フィーバーに入りにくい」「こうげき系ブースター禁止」などの制限があります。</p>
+          <ul><li>エネルギーではなく体力を消費します。</li><li>フレンドを手伝うと、ゲートを開くオーブ入りの箱がもらえることがあります。</li></ul></article>
+        <article class="format"><span class="tag">アイテム奪取</span><h3>🥊 武道会・疑似武道会</h3>
+          <p>開始時に「Yポイント少なめで安全」か「Yポイント多めだがアイテムを奪われるかも」を選びます。<b>武道会</b>はトーナメント形式で、連勝するほど多くもらえます。<b>疑似武道会</b>はその仕組みを通常マップと組み合わせたものです。</p>
+          <ul><li>他のプレイヤーから奪うには横取りチケットが必要です。</li><li>速くクリアするほど有利なので、ひっさつわざをためた状態で始めましょう。</li></ul></article>
+        <article class="format"><span class="tag">ミニゲーム</span><h3>📺 妖怪チューブ ライブ</h3>
+          <p>複数のミニゲームでできた「生配信」。上手に遊ぶほど再生数と妖怪チューバー経験値が増え、Yポイントになります。スタミナは比較的早く回復します。</p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="ja-res">
+      <h2>エネルギーと体力</h2>
+      <p>形式ごとに消費するものが違い、時間で回復します（満タンまで数時間程度）。</p>
+      <div class="table-wrap"><table class="nice">
+        <tr><th>形式</th><th>消費</th><th>回復方法</th></tr>
+        <tr><td>おはじき・ぷにっとショット</td><td>エネルギー</td><td>時間経過、元気ドリンク（ステージ報酬・ショップ・課金）</td></tr>
+        <tr><td>妖魔界ゲート</td><td>体力（%）</td><td>時間経過、薬（箱・ミッション・ショップ・課金）</td></tr>
+        <tr><td>妖怪チューブ ライブ</td><td>スタミナ</td><td>他より早く自然回復</td></tr>
+        <tr><td>武道会・疑似武道会</td><td>通常プレイ</td><td>横取りチケットはステージ・ミッション・ショップで入手</td></tr>
+      </table></div>
+    </section>
+
+    <section class="panel" id="ja-points">
+      <h2>Yポイントとイベントショップ</h2>
+      <p><b>Yポイント</b>はイベントごとの通貨です。ステージのプレイ、ボス討伐（高難易度ほど多い）、ミッション達成で手に入り、イベントショップで次のものと交換できます。</p>
+      <div class="chips"><span>元気ドリンク・薬</span><span>横取りチケット</span><span>経験値玉</span><span>ひっさつの秘伝書</span><span>イベント妖怪</span><span>その他のアイテム</span></div>
+      <p class="muted" style="margin-top:12px">新しい妖怪の多くは、そのイベントでYポイントやダメージが増えるスキルを持っているため、イベントと同時にガシャに登場します。</p>
+    </section>
+
+    <section class="panel" id="ja-boss">
+      <h2>ボス・封印・極ステージ</h2>
+      <p><b>高難易度</b>のボスがメインの目標です。仲間になるまで何度も倒し、Yポイントも多くもらえます。イベントによっては<b>封印</b>があり、特定の妖怪を集めると極ステージのボスが弱くなります。</p>
+      <p><b>極ステージ</b>は育成しきったチーム向け。種族効果と結束のための種族統一、センタースキル、ウォッチなど、編成の良さが最も効いてきます。組み合わせは<a href="team-builder.html">編成ツール</a>で試せます。</p>
+    </section>
+
+    <section class="panel" id="ja-league">
+      <h2>週間リーグ（スコアアタック）</h2>
+      <p>イベントとは別に、毎週リーグ制のスコアアタックがあります。ランダムな49人と同じグループになり、週末の順位で昇格・残留・降格が決まります。</p>
+      <div class="leagues">
+        <div class="league" style="--lc:#cd8a4f"><b>ブロンズ</b><small>最初のリーグ。多くが昇格し、降格はなし。</small></div>
+        <div class="league" style="--lc:#c9d3e0"><b>シルバー</b><small>半分近くが昇格、下位は降格。</small></div>
+        <div class="league" style="--lc:#ffcf3f"><b>ゴールド</b><small>3分の1が昇格、3分の1が降格。</small></div>
+        <div class="league" style="--lc:#7fe0d6"><b>プラチナ</b><small>昇格はごく少数、降格は多め。</small></div>
+        <div class="league" style="--lc:#8fd3ff"><b>ダイヤモンド</b><small>最上位。グループの中位だけが残留。</small></div>
+      </div>
+      <p style="margin-top:14px">グループ内の順位が高く、リーグが上なほど多くのポイントがもらえます。毎週参加しないともらえません。ポイントは専用ショップでZZZランクのボス妖怪、ひっさつの秘伝書、経験値玉などと交換できます（上位アイテムは週ごとの上限あり）。</p>
+    </section>
+
+    <section class="panel" id="ja-stars">
+      <h2>ステージの星</h2>
+      <p>多くのステージには、星がもらえる追加条件があります。たとえば：</p>
+      <div class="chips"><span>X以上のコンボ</span><span>ひっさつわざでとどめ</span><span>ぷにをX個消す</span><span>X秒以内にクリア</span><span>HPをX%以上残してクリア</span><span>フィーバーにX回入る</span><span>1種族だけで挑む</span><span>特定ランクだけで挑む</span><span>コンティニューなし</span><span>Xpt以上のスコア</span></div>
+    </section>
+
+    <section class="panel" id="ja-tips">
+      <h2>イベント攻略のコツ</h2>
+      <ul>
+        <li><b>お知らせを読む：</b>有利な種族・シリーズ・妖怪がほぼ必ず書かれています。</li>
+        <li><b>エネルギーはまとめて使う：</b>おはじきでは小分けより大量消費の一撃が効率的。</li>
+        <li><b>エネルギーをあふれさせない：</b>満タンのままだと回復分がムダになります。</li>
+        <li><b>ミッションは早めに：</b>ドリンク・薬・チケットなど、その後に役立つ報酬が多いです。</li>
+        <li><b>極ステージ前に編成を準備：</b><a href="team-builder.html">編成ツール</a>で種族・センター・ウォッチの最適な組み合わせを確認しましょう。</li>
+      </ul>
+      <p class="muted">参考：yo-kai-watch.es の<a href="https://yo-kai-watch.es/secciones/juegos/punipuni/formatos" target="_blank" rel="noopener noreferrer">形式</a>・<a href="https://yo-kai-watch.es/secciones/juegos/punipuni/ligas" target="_blank" rel="noopener noreferrer">リーグ</a>・<a href="https://yo-kai-watch.es/secciones/juegos/punipuni/estrellas" target="_blank" rel="noopener noreferrer">星</a>の解説（スペイン語）。イベント一覧：<a href="https://mtwildwood.net/es/puni/events" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>。</p>
+    </section>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+    <p data-i18n="footer.brand">Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
   </footer>
 
   <script src="assets/comun.js"></script>
