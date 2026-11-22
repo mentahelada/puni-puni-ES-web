@@ -3432,7 +3432,7 @@ const characters = [
   {
     id: "ren-(guardian-king)",
     name: "Ren (Guardian King)",
-    tribe: "Charming",
+    tribe: "Heartful",
     gender: "male",
     saga: "Puni God Darkness",
     rank: "UZ",
