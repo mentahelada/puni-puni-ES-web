@@ -1474,6 +1474,9 @@ const characters = [
     atk0: 1717,
     atk10: 2060,
     image: "Uz+/Massiface.png",
+    unity: {
+      percent: 26
+    },
     centerSkill: {
       hpPercent: 4,
       atkPercent: 6,
@@ -3436,7 +3439,10 @@ const characters = [
     hp10: 1753,
     atk0: 1439,
     atk10: 1727,
-    image: "Uz/Futureren.png"
+    image: "Uz/Futureren.png",
+    unity: {
+      percent: 24
+    }
   },
   {
     id: "punigami-kegare",
@@ -3566,7 +3572,11 @@ const characters = [
     hp10: 1669,
     atk0: 1509,
     atk10: 1811,
-    image: "Uz/Bridaljaen.png"
+    image: "Uz/Bridaljaen.png",
+    femaleUnity: {
+      hpPercent: 20,
+      atkPercent: 15
+    }
   },
   {
     id: "kokoro-dame-dedtime",
@@ -3631,7 +3641,10 @@ const characters = [
     hp10: 1720,
     atk0: 1467,
     atk10: 1760,
-    image: "Uz/Hellarachnus.png"
+    image: "Uz/Hellarachnus.png",
+    unity: {
+      percent: 24
+    }
   },
   {
     id: "hell-toadal",
@@ -4653,7 +4666,10 @@ const characters = [
     hp10: 1759,
     atk0: 1434,
     atk10: 1721,
-    image: "Uz2/Ladysakuchan.png"
+    image: "Uz2/Ladysakuchan.png",
+    unity: {
+      percent: 24
+    }
   },
   {
     id: "lady-smogmella",
@@ -4887,7 +4903,10 @@ const characters = [
     hp10: 1758,
     atk0: 1435,
     atk10: 1722,
-    image: "Uz2/Laplusdarkness(halloween).png"
+    image: "Uz2/Laplusdarkness(halloween).png",
+    unity: {
+      percent: 24
+    }
   },
   {
     id: "nakiri-ayame-halloween",
@@ -5550,7 +5569,10 @@ const characters = [
     hp10: 1735,
     atk0: 1454,
     atk10: 1745,
-    image: "Uz2/Leafa(alo).png"
+    image: "Uz2/Leafa(alo).png",
+    unity: {
+      percent: 24
+    }
   },
   {
     id: "yuuki-alo",
