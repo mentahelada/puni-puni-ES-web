@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Guías · Puni Puni ES</title>
   <meta name="description" content="Enlaces a guías de la comunidad sobre Yo-kai Watch Puni Puni: ligas, eventos, zonas, sellos legendarios y más." />
@@ -19,69 +20,80 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
 
+
   <header class="page-hero">
-    <div class="kicker">Comunidad</div>
-    <h1>Guías <span>externas</span></h1>
-    <p>Lo que no cubre esta web lo explican muy bien otras páginas de la comunidad. Aquí tienes los enlaces, ordenados por tema.</p>
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+    <div class="kicker" data-i18n="gd.kicker">Comunidad</div>
+    <h1><b data-i18n="gd.t1" style="font-weight:inherit">Guías</b> <span data-i18n="gd.t2">externas</span></h1>
+    <p data-i18n="gd.hero">Lo que no cubre esta web lo explican muy bien otras páginas de la comunidad. Aquí tienes los enlaces, ordenados por tema.</p>
   </header>
 
   <main class="wrap" id="guias"></main>
 
   <footer class="site-footer">
-    <p>Las guías enlazadas pertenecen a sus autores. Gracias a <a href="https://yo-kai-watch.es/secciones/juegos/punipuni" target="_blank" rel="noopener noreferrer">yo-kai-watch.es</a>, <a href="https://mtwildwood.net/es/puni/" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a> y <a href="https://game8.jp/punipuni/26088" target="_blank" rel="noopener noreferrer">Game8</a> por su trabajo.</p>
-    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+    <p><span data-i18n="gd.thanks">Las guías enlazadas pertenecen a sus autores. Gracias por su trabajo a:</span> <a href="https://yo-kai-watch.es/secciones/juegos/punipuni" target="_blank" rel="noopener noreferrer">yo-kai-watch.es</a> · <a href="https://mtwildwood.net/es/puni/" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a> · <a href="https://game8.jp/punipuni/26088" target="_blank" rel="noopener noreferrer">Game8</a></p>
+    <p data-i18n="footer.brand">Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
   </footer>
 
   <script src="assets/comun.js"></script>
   <script>
+    addI18n({
+      "gd.kicker": ["Comunidad", "Community", "コミュニティ"],
+      "gd.t1": ["Guías", "External", "外部"],
+      "gd.t2": ["externas", "guides", "攻略リンク"],
+      "gd.hero": ["Lo que no cubre esta web lo explican muy bien otras páginas de la comunidad. Aquí tienes los enlaces, ordenados por tema.", "What this site doesn't cover is explained very well by other community sites. Here are the links, sorted by topic.", "このサイトで扱っていない内容は、他のコミュニティサイトが詳しく解説しています。テーマ別のリンク集です。"],
+      "gd.thanks": ["Las guías enlazadas pertenecen a sus autores. Gracias por su trabajo a:", "Linked guides belong to their authors. Thanks for their work to:", "リンク先の攻略は各作者のものです。感謝を込めて："],
+      "gd.open": ["Abrir guía ↗", "Open guide ↗", "開く ↗"],
+    });
     const ES = "https://yo-kai-watch.es/secciones/juegos/punipuni/";
+    const L = ["es", "en", "ja"].indexOf(window.LANG);
+    const pick = arr => arr[L] ?? arr[0];
+    // [icono, [nombre es/en/ja], [descripción es/en/ja], url, fuente]
     const GROUPS = [
-      ["Partidas y eventos", [
-        ["🏆", "Sistema de ligas", "Cómo funciona el reto semanal por ligas y qué hace falta para subir.", ES + "ligas", "yo-kai-watch.es"],
-        ["📅", "Formatos de los eventos", "Los distintos tipos de evento que van rotando y en qué se diferencian.", ES + "formatos", "yo-kai-watch.es"],
-        ["⭐", "Traducción de estrellas", "Qué significa cada objetivo de estrella de los escenarios, en español.", ES + "estrellas", "yo-kai-watch.es"],
-        ["💰", "Conseguir dinero", "Trucos para farmear monedas sin gastar demasiado tiempo.", ES + "farmeo", "yo-kai-watch.es"],
-        ["📰", "Eventos y noticias", "Calendario de eventos pasados y actuales, con sus recompensas.", "https://mtwildwood.net/es/puni/events", "Mt. Wildwood"],
+      [["Partidas y eventos", "Gameplay and events", "バトル・イベント"], [
+        ["🏆", ["Sistema de ligas", "League system", "リーグ制度"], ["Cómo funciona el reto semanal por ligas y qué hace falta para subir.", "How the weekly league challenge works and what it takes to move up.", "週間リーグの仕組みと昇格条件。"], ES + "ligas", "yo-kai-watch.es (ES)"],
+        ["📅", ["Formatos de los eventos", "Event formats", "イベント形式"], ["Los distintos tipos de evento que van rotando y en qué se diferencian.", "The different rotating event types and how they differ.", "ローテーションするイベントの種類と違い。"], ES + "formatos", "yo-kai-watch.es (ES)"],
+        ["⭐", ["Traducción de estrellas", "Star objectives translated", "星の条件の翻訳"], ["Qué significa cada objetivo de estrella de los escenarios.", "What each stage star objective means.", "各ステージの星条件の意味（スペイン語）。"], ES + "estrellas", "yo-kai-watch.es (ES)"],
+        ["💰", ["Conseguir dinero", "Farming money", "お金稼ぎ"], ["Trucos para farmear monedas sin gastar demasiado tiempo.", "Tips to farm coins without spending too much time.", "効率よくお金を稼ぐコツ。"], ES + "farmeo", "yo-kai-watch.es (ES)"],
+        ["📰", ["Eventos y noticias", "Events and news", "イベント・ニュース"], ["Calendario de eventos pasados y actuales, con sus recompensas.", "Calendar of past and current events with their rewards.", "過去と現在のイベントと報酬の一覧。"], "https://mtwildwood.net/es/puni/events", "Mt. Wildwood"],
       ]],
-      ["Modo historia", [
-        ["🗺️", "Desbloquear zonas", "Requisitos para abrir cada zona del mapa del modo historia.", ES + "zonas", "yo-kai-watch.es"],
-        ["🔍", "Escenarios ocultos", "Dónde están los escenarios secretos y cómo se llega a ellos.", ES + "ocultos", "yo-kai-watch.es"],
-        ["💎", "Yo-kai raros", "Qué yokais raros aparecen en la historia y cómo conseguirlos.", ES + "raros", "yo-kai-watch.es"],
-        ["📜", "Sellos legendarios", "Los yokais que hay que reunir para romper cada sello legendario.", ES + "legendarios", "yo-kai-watch.es"],
-        ["👥", "Más espacio para amigos", "Cómo ampliar el límite de amigos.", ES + "amigos", "yo-kai-watch.es"],
+      [["Modo historia", "Story mode", "ストーリー"], [
+        ["🗺️", ["Desbloquear zonas", "Unlocking zones", "エリア解放"], ["Requisitos para abrir cada zona del mapa del modo historia.", "Requirements to open each story map zone.", "ストーリーの各エリアを開く条件。"], ES + "zonas", "yo-kai-watch.es (ES)"],
+        ["🔍", ["Escenarios ocultos", "Hidden stages", "隠しステージ"], ["Dónde están los escenarios secretos y cómo se llega a ellos.", "Where the secret stages are and how to reach them.", "隠しステージの場所と行き方。"], ES + "ocultos", "yo-kai-watch.es (ES)"],
+        ["💎", ["Yo-kai raros", "Rare yo-kai", "レア妖怪"], ["Qué yokais raros aparecen en la historia y cómo conseguirlos.", "Which rare yo-kai appear in the story and how to get them.", "ストーリーに出るレア妖怪と入手方法。"], ES + "raros", "yo-kai-watch.es (ES)"],
+        ["📜", ["Sellos legendarios", "Legendary seals", "伝説の封印"], ["Los yokais que hay que reunir para romper cada sello legendario.", "The yo-kai you need to break each legendary seal.", "各伝説の封印を解くのに必要な妖怪。"], ES + "legendarios", "yo-kai-watch.es (ES)"],
+        ["👥", ["Más espacio para amigos", "More friend slots", "友達枠を増やす"], ["Cómo ampliar el límite de amigos.", "How to raise your friend limit.", "友達の上限を増やす方法。"], ES + "amigos", "yo-kai-watch.es (ES)"],
       ]],
-      ["Datos del juego", [
-        ["📖", "Listado de todos los punis", "Base de datos completa con todos los rangos, no solo los UZ.", "https://yo-kai-watch.es/secciones/listados/yokai-db/index", "yo-kai-watch.es"],
-        ["✨", "Listado de habilidades", "Qué hace cada habilidad y cada ataque especial.", ES + "habilidades", "yo-kai-watch.es"],
-        ["⌚", "Relojes (datos del juego)", "Lista de relojes con su efecto exacto, sacada de los datos del juego.", "https://mtwildwood.net/es/puni/watches", "Mt. Wildwood"],
-        ["🎰", "Crank-a-kai", "Qué sale en cada máquina de cápsulas.", "https://mtwildwood.net/es/puni/crank", "Mt. Wildwood"],
-        ["🇯🇵", "Valoraciones de UZ (japonés)", "Puntuaciones y análisis de cada UZ en la mayor web japonesa de guías.", "https://game8.jp/punipuni/539283", "Game8"],
+      [["Datos del juego", "Game data", "ゲームデータ"], [
+        ["📖", ["Listado de todos los punis", "Full puni list", "全ぷに一覧"], ["Base de datos completa con todos los rangos, no solo los UZ.", "Complete database with every rank, not just UZ.", "UZ以外も含む全ランクのデータベース。"], "https://yo-kai-watch.es/secciones/listados/yokai-db/index", "yo-kai-watch.es (ES)"],
+        ["✨", ["Listado de habilidades", "Skill list", "スキル一覧"], ["Qué hace cada habilidad y cada ataque especial.", "What each skill and special attack does.", "各スキルとひっさつわざの効果。"], ES + "habilidades", "yo-kai-watch.es (ES)"],
+        ["⌚", ["Relojes (datos del juego)", "Watches (game data)", "ウォッチ（ゲームデータ）"], ["Lista de relojes con su efecto exacto, sacada de los datos del juego.", "Watch list with exact effects taken from game data.", "ゲームデータから取得した正確な効果付きのウォッチ一覧。"], "https://mtwildwood.net/es/puni/watches", "Mt. Wildwood"],
+        ["🎰", ["Crank-a-kai", "Crank-a-kai", "ガシャ"], ["Qué sale en cada máquina de cápsulas.", "What each capsule machine contains.", "各ガシャの排出内容。"], "https://mtwildwood.net/es/puni/crank", "Mt. Wildwood"],
+        ["🇯🇵", ["Valoraciones de UZ (japonés)", "UZ ratings (Japanese)", "UZランク評価"], ["Puntuaciones y análisis de cada UZ en la mayor web japonesa de guías.", "Scores and analysis of each UZ on the biggest Japanese guide site.", "ゲームエイトによる各UZの評価と解説。"], "https://game8.jp/punipuni/539283", "Game8 (JA)"],
       ]],
-      ["Extra", [
-        ["🧩", "Puni Puni Tetris", "Un minijuego de punis para pasar el rato.", ES + "minigame", "yo-kai-watch.es"],
+      [["Extra", "Extra", "おまけ"], [
+        ["🧩", ["Puni Puni Tetris", "Puni Puni Tetris", "ぷにぷにテトリス"], ["Un minijuego de punis para pasar el rato.", "A puni mini-game to pass the time.", "暇つぶしにぴったりのぷにミニゲーム。"], ES + "minigame", "yo-kai-watch.es"],
       ]],
     ];
     document.getElementById("guias").innerHTML = GROUPS.map(([title, items]) => `
       <section class="panel">
-        <h2>${PP.esc(title)}</h2>
+        <h2>${PP.esc(pick(title))}</h2>
         <div class="cards">
           ${items.map(([icon, name, desc, url, src]) => `
             <a class="card" href="${PP.esc(url)}" target="_blank" rel="noopener noreferrer">
-              <div class="icon">${icon}</div><strong>${PP.esc(name)}</strong><span>${PP.esc(desc)}</span>
-              <b class="go">Abrir guía ↗</b><small class="src">${PP.esc(src)}</small>
+              <div class="icon">${icon}</div><strong>${PP.esc(pick(name))}</strong><span>${PP.esc(pick(desc))}</span>
+              <b class="go">${t("gd.open")}</b><small class="src">${PP.esc(src)}</small>
             </a>`).join("")}
         </div>
       </section>`).join("");

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Puni Puni ES · Guía y Team Builder</title>
   <meta name="description" content="Guía en español de Yo-kai Watch Puni Puni: base de datos de yokais UZ, relojes, mecánicas y team builder." />
@@ -28,15 +29,15 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
 
@@ -44,7 +45,7 @@
     <div id="heroPunis" class="hero-punis" aria-hidden="true"></div>
     <div class="kicker">妖怪ウォッチ ぷにぷに</div>
     <h1>Yo-kai Watch<br><span>Puni Puni</span></h1>
-    <p>Base de datos de yokais UZ, relojes, mecánicas explicadas y un team builder para calcular las stats reales de tu equipo.</p>
+    <p data-i18n="idx.hero">Base de datos de yokais UZ, relojes, mecánicas explicadas y un team builder para calcular las stats reales de tu equipo.</p>
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
   </header>
 
@@ -52,12 +53,12 @@
     <section class="panel">
       <div class="intro">
         <div>
-          <h2>¿Qué es Puni Puni?</h2>
-          <p class="lead">Yo-kai Watch Puni Puni es el juego de puzles para móvil de Level-5. Unes punis del mismo yokai para eliminarlos, cargar el ataque especial de tu equipo y derrotar a los jefes de cada evento.</p>
-          <p class="muted">Cada yokai pertenece a una tribu, tiene un rango que fija su nivel máximo y unas habilidades propias. Elegir bien a los cinco yokais del equipo, el que va en el centro y el reloj marca la diferencia en los eventos difíciles. Esta web reúne esa información en español y te deja probar equipos antes de jugarlos.</p>
+          <h2 data-i18n="idx.whatTitle">¿Qué es Puni Puni?</h2>
+          <p class="lead" data-i18n="idx.what1">Yo-kai Watch Puni Puni es el juego de puzles para móvil de Level-5. Unes punis del mismo yokai para eliminarlos, cargar el ataque especial de tu equipo y derrotar a los jefes de cada evento.</p>
+          <p class="muted" data-i18n="idx.what2">Cada yokai pertenece a una tribu, tiene un rango que fija su nivel máximo y unas habilidades propias. Elegir bien a los cinco yokais del equipo, el que va en el centro y el reloj marca la diferencia en los eventos difíciles. Esta web reúne esa información en español y te deja probar equipos antes de jugarlos.</p>
           <div class="cta-row">
-            <a class="btn" href="team-builder.html">⚔ Abrir el Team Builder</a>
-            <a class="btn secondary" href="mecanicas.html">Cómo funcionan las stats</a>
+            <a class="btn" href="team-builder.html" data-i18n="idx.openTb">⚔ Abrir el Team Builder</a>
+            <a class="btn secondary" href="mecanicas.html" data-i18n="idx.howStats">Cómo funcionan las stats</a>
           </div>
         </div>
         <div id="introPunis" class="intro-punis" aria-hidden="true"></div>
@@ -65,39 +66,40 @@
     </section>
 
     <section class="panel">
-      <h2>En cifras</h2>
+      <h2 data-i18n="idx.numbers">En cifras</h2>
       <div class="stats-row" id="cifras"></div>
     </section>
 
     <section class="panel">
-      <h2>Secciones</h2>
+      <h2 data-i18n="idx.sections">Secciones</h2>
       <div class="cards">
-        <a class="card" href="yokais.html"><div class="icon">📖</div><strong>Base de datos de yokais</strong><span>Todos los UZ, UZ+ y UZ++ con buscador, filtros por tribu, rango y saga, y la ficha de cada uno.</span><b class="go">Ver yokais →</b></a>
-        <a class="card" href="relojes.html"><div class="icon"><img src="relojes/crown-watch.png" alt=""></div><strong>Relojes</strong><span>Qué reloj sube las stats de quién, con su imagen y su porcentaje.</span><b class="go">Ver relojes →</b></a>
-        <a class="card" href="eventos.html"><div class="icon">🎪</div><strong>Eventos</strong><span>Cómo funciona un evento: formatos, energía, Puntos Y, jefes, liga semanal y estrellas.</span><b class="go">Ver eventos →</b></a>
-        <a class="card" href="mecanicas.html"><div class="icon">🧮</div><strong>Mecánicas</strong><span>Tribus, efecto de tribu, unity, dupes, rangos, center skill y la fórmula de las stats.</span><b class="go">Leer la guía →</b></a>
-        <a class="card" href="guias.html"><div class="icon">🗺️</div><strong>Guías externas</strong><span>Enlaces a guías de la comunidad: ligas, eventos, zonas, sellos legendarios y más.</span><b class="go">Ver guías →</b></a>
-        <a class="card" href="team-builder.html"><div class="icon">⚔️</div><strong>Team Builder</strong><span>Arma tu equipo de 5, ajusta dupes y reloj y mira el PV y ATQ final al momento.</span><b class="go">Crear equipo →</b></a>
+        <a class="card" href="yokais.html"><div class="icon">📖</div><strong data-i18n="idx.c1t">Base de datos de yokais</strong><span data-i18n="idx.c1d">Todos los UZ, UZ+ y UZ++ con buscador, filtros por tribu, rango y saga, y la ficha de cada uno.</span><b class="go" data-i18n="idx.c1g">Ver yokais →</b></a>
+        <a class="card" href="relojes.html"><div class="icon"><img src="relojes/crown-watch.png" alt=""></div><strong data-i18n="nav.watches">Relojes</strong><span data-i18n="idx.c2d">Qué reloj sube las stats de quién, con su imagen y su porcentaje.</span><b class="go" data-i18n="idx.c2g">Ver relojes →</b></a>
+        <a class="card" href="eventos.html"><div class="icon">🎪</div><strong data-i18n="nav.events">Eventos</strong><span data-i18n="idx.c3d">Cómo funciona un evento: formatos, energía, Puntos Y, jefes, liga semanal y estrellas.</span><b class="go" data-i18n="idx.c3g">Ver eventos →</b></a>
+        <a class="card" href="mecanicas.html"><div class="icon">🧮</div><strong data-i18n="nav.mechanics">Mecánicas</strong><span data-i18n="idx.c4d">Tribus, efecto de tribu, unity, dupes, rangos, center skill y la fórmula de las stats.</span><b class="go" data-i18n="idx.c4g">Leer la guía →</b></a>
+        <a class="card" href="guias.html"><div class="icon">🗺️</div><strong data-i18n="idx.c5t">Guías externas</strong><span data-i18n="idx.c5d">Enlaces a guías de la comunidad: ligas, eventos, zonas, sellos legendarios y más.</span><b class="go" data-i18n="idx.c5g">Ver guías →</b></a>
+        <a class="card" href="team-builder.html"><div class="icon">⚔️</div><strong data-i18n="nav.builder">Team Builder</strong><span data-i18n="idx.c6d">Arma tu equipo de 5, ajusta dupes y reloj y mira el PV y ATQ final al momento.</span><b class="go" data-i18n="idx.c6g">Crear equipo →</b></a>
       </div>
     </section>
 
     <section class="panel">
-      <h2>Últimos UZ añadidos</h2>
-      <p class="muted">Los yokais más recientes de cada rango en la base de datos.</p>
+      <h2 data-i18n="idx.newest">Últimos UZ añadidos</h2>
+      <p class="muted" data-i18n="idx.newestHint">Los yokais más recientes de cada rango en la base de datos.</p>
       <div class="newest" id="newest"></div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Web hecha por <a href="https://discord.com/users/1440708112867921940" target="_blank" rel="noopener noreferrer">mentahelada</a> · Créditos: <a href="https://discord.com/users/732345044425506827" target="_blank" rel="noopener noreferrer">Jeff74</a> · <a href="https://discord.com/users/458312562069733397" target="_blank" rel="noopener noreferrer">Cadri</a></p>
-    <p>Datos de stats: <em>The Puni Spreadsheet</em> (por Sallitine). Imágenes de relojes: <a href="https://mtwildwood.net/es/puni/watches" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>. Guías: <a href="https://yo-kai-watch.es/secciones/juegos/punipuni" target="_blank" rel="noopener noreferrer">yo-kai-watch.es</a>.</p>
-    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+    <p><span data-i18n="idx.madeBy">Web hecha por</span> <a href="https://discord.com/users/1440708112867921940" target="_blank" rel="noopener noreferrer">mentahelada</a> · <span data-i18n="tb.credits">Créditos:</span> <a href="https://discord.com/users/732345044425506827" target="_blank" rel="noopener noreferrer">Jeff74</a> · <a href="https://discord.com/users/458312562069733397" target="_blank" rel="noopener noreferrer">Cadri</a></p>
+    <p><span data-i18n="idx.dataBy">Datos de stats:</span> <em>The Puni Spreadsheet</em> (Sallitine). <span data-i18n="idx.watchImgs">Imágenes de relojes:</span> <a href="https://mtwildwood.net/es/puni/watches" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>. <span data-i18n="nav.guides">Guías</span>: <a href="https://yo-kai-watch.es/secciones/juegos/punipuni" target="_blank" rel="noopener noreferrer">yo-kai-watch.es</a>.</p>
+    <p data-i18n="footer.brand">Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
   </footer>
 
   <script src="character.js"></script>
   <script src="watches.js"></script>
   <script src="assets/comun.js"></script>
   <script>
+    addI18n({"idx.hero": ["Base de datos de yokais UZ, relojes, mecánicas explicadas y un team builder para calcular las stats reales de tu equipo.", "UZ yo-kai database, watches, explained mechanics and a team builder to calculate your team's real stats.", "UZ妖怪のデータベース、ウォッチ、仕組みの解説、そしてチームの本当のステータスを計算できる編成ツール。"], "idx.whatTitle": ["¿Qué es Puni Puni?", "What is Puni Puni?", "ぷにぷにとは？"], "idx.what1": ["Yo-kai Watch Puni Puni es el juego de puzles para móvil de Level-5. Unes punis del mismo yokai para eliminarlos, cargar el ataque especial de tu equipo y derrotar a los jefes de cada evento.", "Yo-kai Watch Puni Puni is Level-5's mobile puzzle game. You link punis of the same yo-kai to clear them, charge your team's special attack and defeat each event's bosses.", "妖怪ウォッチ ぷにぷには、レベルファイブのスマホ向けパズルゲーム。同じ妖怪のぷにをつなげて消し、ひっさつわざをためて、イベントのボスを倒そう。"], "idx.what2": ["Cada yokai pertenece a una tribu, tiene un rango que fija su nivel máximo y unas habilidades propias. Elegir bien a los cinco yokais del equipo, el que va en el centro y el reloj marca la diferencia en los eventos difíciles. Esta web reúne esa información y te deja probar equipos antes de jugarlos.", "Every yo-kai belongs to a tribe, has a rank that sets its max level and its own skills. Picking the right five yo-kai, the one in the center and the watch makes the difference in hard events. This site gathers that info and lets you test teams before playing them.", "妖怪にはそれぞれ種族、最大レベルを決めるランク、固有のスキルがあります。5体の編成、センター、ウォッチの選び方が難しいイベントでの勝敗を分けます。このサイトでは情報をまとめ、実際に使う前に編成を試せます。"], "idx.openTb": ["⚔ Abrir el Team Builder", "⚔ Open the Team Builder", "⚔ 編成ツールを開く"], "idx.howStats": ["Cómo funcionan las stats", "How stats work", "ステータスの仕組み"], "idx.numbers": ["En cifras", "In numbers", "データ"], "idx.sections": ["Secciones", "Sections", "コンテンツ"], "idx.c1t": ["Base de datos de yokais", "Yo-kai database", "妖怪データベース"], "idx.c1d": ["Todos los UZ, UZ+ y UZ++ con buscador, filtros por tribu, rango y saga, y la ficha de cada uno.", "Every UZ, UZ+ and UZ++ with search, filters by tribe, rank and series, and a profile for each one.", "UZ・UZ+・UZ++の全妖怪。検索、種族・ランク・シリーズでの絞り込み、個別ページ付き。"], "idx.c1g": ["Ver yokais →", "Browse yo-kai →", "妖怪を見る →"], "idx.c2d": ["Qué reloj sube las stats de quién, con su imagen y su porcentaje.", "Which watch boosts whose stats, with its image and percentage.", "どのウォッチが誰のステータスを上げるか、画像と倍率付きで。"], "idx.c2g": ["Ver relojes →", "See watches →", "ウォッチを見る →"], "idx.c3d": ["Cómo funciona un evento: formatos, energía, Puntos Y, jefes, liga semanal y estrellas.", "How an event works: formats, energy, Y Points, bosses, weekly league and stars.", "イベントの仕組み：形式、エネルギー、Yポイント、ボス、週間リーグ、星。"], "idx.c3g": ["Ver eventos →", "See events →", "イベントを見る →"], "idx.c4d": ["Tribus, efecto de tribu, unity, dupes, rangos, center skill y la fórmula de las stats.", "Tribes, tribe effect, unity, dupes, ranks, center skill and the stat formula.", "種族、種族効果、結束、凸、ランク、センタースキル、ステータスの計算式。"], "idx.c4g": ["Leer la guía →", "Read the guide →", "解説を読む →"], "idx.c5t": ["Guías externas", "External guides", "外部攻略リンク"], "idx.c5d": ["Enlaces a guías de la comunidad: ligas, eventos, zonas, sellos legendarios y más.", "Links to community guides: leagues, events, zones, legendary seals and more.", "コミュニティの攻略へのリンク：リーグ、イベント、ゾーン、伝説の封印など。"], "idx.c5g": ["Ver guías →", "See guides →", "リンクを見る →"], "idx.c6d": ["Arma tu equipo de 5, ajusta dupes y reloj y mira el PV y ATQ final al momento.", "Build your team of 5, set dupes and watch, and see the final HP and ATK instantly.", "5体のチームを組み、凸とウォッチを設定して、最終HPとこうげきをすぐに確認。"], "idx.c6g": ["Crear equipo →", "Build a team →", "チームを作る →"], "idx.newest": ["Últimos UZ añadidos", "Latest UZ added", "最新のUZ"], "idx.newestHint": ["Los yokais más recientes de cada rango en la base de datos.", "The most recent yo-kai of each rank in the database.", "データベースに追加された各ランクの最新妖怪。"], "idx.madeBy": ["Web hecha por", "Site made by", "制作"], "idx.dataBy": ["Datos de stats:", "Stat data:", "ステータスデータ："], "idx.watchImgs": ["Imágenes de relojes:", "Watch images:", "ウォッチ画像："], "idx.n.total": ["yokais en la base de datos", "yo-kai in the database", "体の妖怪"], "idx.n.watches": ["relojes", "watches", "種類のウォッチ"], "idx.n.tribes": ["tribus", "tribes", "種族"]});
     PP.floatingPunis("heroPunis", 14, [[3,12],[12,44],[5,72],[20,16],[22,66],[14,84],[90,72],[92,30],[78,58],[86,44],[26,40],[80,84],[72,12],[30,86]]);
 
     // Collage de la intro: 8 UZ++ al azar
@@ -108,8 +110,8 @@
     const by = r => characters.filter(c => c.rank === r).length;
     const tribes = new Set(characters.map(c => PP.key(c.tribe))).size;
     document.getElementById("cifras").innerHTML = [
-      [characters.length, "yokais en la base de datos"], [by("UZ++"), "UZ++"], [by("UZ+"), "UZ+"], [by("UZ"), "UZ"],
-      [CLOCKS.length, "relojes"], [tribes, "tribus"]
+      [characters.length, t("idx.n.total")], [by("UZ++"), "UZ++"], [by("UZ+"), "UZ+"], [by("UZ"), "UZ"],
+      [CLOCKS.length, t("idx.n.watches")], [tribes, t("idx.n.tribes")]
     ].map(([n, t]) => `<div class="stat-box"><b>${PP.fmt(n)}</b><span>${t}</span></div>`).join("");
 
     // Últimos añadidos: los 4 últimos de cada rango (el archivo sigue el orden de salida)

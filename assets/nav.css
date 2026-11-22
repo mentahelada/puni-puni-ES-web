@@ -39,6 +39,18 @@
   .site-nav .nav-links a { padding: 10px 14px; }
 }
 
+/* Idiomas: solo se ve el bloque del idioma actual */
+html[data-lang="es"] [data-l]:not([data-l="es"]),
+html[data-lang="en"] [data-l]:not([data-l="en"]),
+html[data-lang="ja"] [data-l]:not([data-l="ja"]) { display: none !important; }
+.site-nav .lang-switch {
+  width: auto !important; flex: 0 0 auto;
+  margin-left: 8px; padding: 7px 10px; border-radius: 8px; font: inherit; font-size: .82rem; font-weight: 600;
+  background: #000; color: #f2f2f4; border: 1px solid #2e2e36; cursor: pointer;
+}
+@media (max-width: 760px) { .site-nav .lang-switch { margin-left: auto; } .site-nav .nav-toggle { margin-left: 8px; } }
+html[lang="ja"] body { font-family: "Inter", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif !important; }
+
 .site-footer {
   margin-top: 40px; padding: 26px 20px 34px; text-align: center;
   color: #a99fd0; font-size: .82rem; line-height: 1.7;

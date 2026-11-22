@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Relojes · Puni Puni ES</title>
   <meta name="description" content="Todos los relojes de Yo-kai Watch Puni Puni con su imagen y a qué yokais suben las stats." />
@@ -34,54 +35,56 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
 
   <header class="page-hero">
-    <div class="kicker">Equipamiento</div>
-    <h1>Relojes</h1>
-    <p>El reloj que equipas sube el PV y el ATQ de los yokais que cumplen su condición: una tribu, una saga o solo las chicas.</p>
+    <div class="kicker" data-i18n="wt.kicker">Equipamiento</div>
+    <h1 data-i18n="nav.watches">Relojes</h1>
+    <p data-i18n="wt.hero">El reloj que equipas sube el PV y el ATQ de los yokais que cumplen su condición: una tribu, una saga o solo las chicas.</p>
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
   </header>
 
   <main class="wrap">
     <section class="panel">
       <div class="filters">
-        <input id="q" type="search" placeholder="Buscar reloj…" aria-label="Buscar reloj" />
+        <input id="q" type="search" placeholder="Buscar reloj…" data-i18n-ph="wt.search" aria-label="Buscar reloj" />
         <select id="fType" aria-label="Tipo">
-          <option value="">Todos los relojes</option>
-          <option value="tribes">Por tribu</option>
-          <option value="sagas">Por saga</option>
-          <option value="genders">Por género</option>
+          <option value="" data-i18n="wt.all">Todos los relojes</option>
+          <option value="tribes" data-i18n="wt.byTribe">Por tribu</option>
+          <option value="sagas" data-i18n="wt.bySaga">Por saga</option>
+          <option value="genders" data-i18n="wt.byGender">Por género</option>
         </select>
-        <select id="fTribe" aria-label="Tribu"><option value="">Cualquier tribu</option></select>
+        <select id="fTribe" aria-label="Tribu"><option value="" data-i18n="wt.anyTribe">Cualquier tribu</option></select>
         <select id="sort" aria-label="Ordenar">
-          <option value="">Orden de salida</option>
-          <option value="best">Más bonus total</option>
+          <option value="" data-i18n="yk.sortRelease">Orden de salida</option>
+          <option value="best" data-i18n="wt.best">Más bonus total</option>
         </select>
         <span id="count" class="count"></span>
       </div>
       <div id="list" class="watches"></div>
-      <p class="muted" style="margin-top:16px">Puedes probar cualquier reloj con tu equipo en el <a href="team-builder.html">Team Builder</a>. Imágenes de los relojes: <a href="https://mtwildwood.net/es/puni/watches" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>.</p>
+      <p class="muted" style="margin-top:16px"><a href="team-builder.html" data-i18n="wt.tryIt">Puedes probar cualquier reloj con tu equipo en el Team Builder.</a> <span data-i18n="wt.imgs">Imágenes de los relojes:</span> <a href="https://mtwildwood.net/es/puni/watches" target="_blank" rel="noopener noreferrer">Mt. Wildwood</a>.</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+    <p data-i18n="footer.brand">Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
   </footer>
 
   <script src="watches.js"></script>
   <script src="assets/comun.js"></script>
   <script>
+    addI18n({"wt.kicker": ["Equipamiento", "Equipment", "装備"], "wt.hero": ["El reloj que equipas sube el PV y el ATQ de los yokais que cumplen su condición: una tribu, una saga o solo las chicas.", "The equipped watch raises the HP and ATK of the yo-kai that meet its condition: a tribe, a series or only girls.", "装備したウォッチは、条件（種族・シリーズ・女の子のみなど）を満たす妖怪のHPとこうげきを上げます。"], "wt.search": ["Buscar reloj…", "Search watch…", "ウォッチを検索…"], "wt.all": ["Todos los relojes", "All watches", "すべてのウォッチ"], "wt.byTribe": ["Por tribu", "By tribe", "種族"], "wt.bySaga": ["Por saga", "By series", "シリーズ"], "wt.byGender": ["Por género", "By gender", "性別"], "wt.anyTribe": ["Cualquier tribu", "Any tribe", "すべての種族"], "wt.best": ["Más bonus total", "Highest total bonus", "合計ボーナス順"], "wt.count": ["{n} relojes", "{n} watches", "{n}種類"], "wt.for": ["Para: {who}", "For: {who}", "対象：{who}"], "wt.centerOnly": ["Solo al yokai del centro", "Center yo-kai only", "センターの妖怪のみ"], "wt.none": ["No hay relojes con esos filtros.", "No watches match these filters.", "条件に合うウォッチがありません。"], "wt.tryIt": ["Puedes probar cualquier reloj con tu equipo en el Team Builder.", "You can try any watch with your team in the Team Builder.", "編成ツールでどのウォッチもチームと一緒に試せます。"], "wt.imgs": ["Imágenes de los relojes:", "Watch images:", "ウォッチ画像："]});
+    addI18n({"yk.sortRelease": ["Orden de salida", "Release order", "登場順"]});
     const $ = id => document.getElementById(id);
     PP.TRIBE_ORDER.forEach(t => $("fTribe").add(new Option(PP.TRIBE_ES[t], t)));
     const list = CLOCKS.map((c, i) => ({ ...c, order: i }));
@@ -96,17 +99,17 @@
         return true;
       });
       if ($("sort").value === "best") out.sort((a, b) => (b.hpPercent + b.atkPercent) - (a.hpPercent + a.atkPercent));
-      $("count").textContent = `${out.length} reloj${out.length === 1 ? "" : "es"}`;
+      $("count").textContent = t("wt.count", { n: out.length });
       $("list").innerHTML = out.map(c => `
         <article class="watch">
           <img src="relojes/${PP.esc(c.id)}.png" alt="${PP.esc(c.label)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;noimg&quot;>⌚</div>'">
           <div>
             <b>${PP.esc(c.label)}</b>
             <div class="bonus"><span class="hp">❤ +${c.hpPercent}%</span><span class="atk">⚔ +${c.atkPercent}%</span></div>
-            <div class="who">Para: ${PP.esc(PP.describeAffects(c.affects))}</div>
-            ${c.centerOnly ? `<div class="center">Solo al yokai del centro</div>` : ""}
+            <div class="who">${t("wt.for", { who: PP.esc(PP.describeAffects(c.affects)) })}</div>
+            ${c.centerOnly ? `<div class="center">${t("wt.centerOnly")}</div>` : ""}
           </div>
-        </article>`).join("") || `<p class="muted">No hay relojes con esos filtros.</p>`;
+        </article>`).join("") || `<p class="muted">${t("wt.none")}</p>`;
     }
     ["q", "fType", "fTribe", "sort"].forEach(id => $(id).addEventListener("input", render));
     render();

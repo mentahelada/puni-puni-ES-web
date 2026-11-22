@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <script src="assets/i18n.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mecánicas · Puni Puni ES</title>
   <meta name="description" content="Cómo se calculan las stats en Yo-kai Watch Puni Puni: rangos, dupes, efecto de tribu, unity, center skill y relojes." />
@@ -23,129 +24,304 @@
 <body>
   <nav class="site-nav">
     <a class="brand" href="index.html"><i class="brand-dot"></i>Puni Puni <span>ES</span></a>
-    <button class="nav-toggle" type="button" aria-label="Menú">☰</button>
+    <button class="nav-toggle" type="button" aria-label="Menú" data-i18n-aria="nav.menu">☰</button>
     <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="yokais.html">Yokais</a>
-      <a href="relojes.html">Relojes</a>
-      <a href="eventos.html">Eventos</a>
-      <a href="mecanicas.html">Mecánicas</a>
-      <a href="guias.html">Guías</a>
-      <a class="nav-cta" href="team-builder.html">Team Builder</a>
+      <a href="index.html" data-i18n="nav.home">Inicio</a>
+      <a href="yokais.html" data-i18n="nav.yokai">Yokais</a>
+      <a href="relojes.html" data-i18n="nav.watches">Relojes</a>
+      <a href="eventos.html" data-i18n="nav.events">Eventos</a>
+      <a href="mecanicas.html" data-i18n="nav.mechanics">Mecánicas</a>
+      <a href="guias.html" data-i18n="nav.guides">Guías</a>
+      <a class="nav-cta" href="team-builder.html" data-i18n="nav.builder">Team Builder</a>
     </div>
   </nav>
 
   <header class="page-hero">
-    <div class="kicker">Guía</div>
-    <h1>Cómo funcionan <span>las stats</span></h1>
-    <p>Todo lo que suma PV y ATQ a tu equipo, explicado paso a paso, y la fórmula que usa el Team Builder.</p>
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,80 480,0 720,32 C960,64 1200,16 1440,40 L1440,80 L0,80 Z"/></svg>
+    <div data-l="es">
+      <div class="kicker">Guía</div>
+      <h1>Cómo funcionan <span>las stats</span></h1>
+      <p>Todo lo que suma PV y ATQ a tu equipo, explicado paso a paso, y la fórmula que usa el Team Builder.</p>
+    </div>
+    <div data-l="en">
+      <div class="kicker">Guide</div>
+      <h1>How stats <span>work</span></h1>
+      <p>Everything that adds HP and ATK to your team, explained step by step, plus the formula the Team Builder uses.</p>
+    </div>
+    <div data-l="ja">
+      <div class="kicker">解説</div>
+      <h1>ステータスの<span>仕組み</span></h1>
+      <p>チームのHPとこうげきを上げる要素を順番に解説。編成ツールで使っている計算式も紹介します。</p>
+    </div>
   </header>
 
   <main class="wrap">
-    <section class="panel">
-      <h2>Índice</h2>
-      <div class="toc">
-        <a href="#rangos">Rangos y nivel</a><a href="#dupes">Dupes</a><a href="#tribus">Tribus</a>
-        <a href="#efecto">Efecto de tribu</a><a href="#unity">Unity</a><a href="#center">Center skill</a>
-        <a href="#relojes">Relojes</a><a href="#formula">La fórmula</a><a href="#consejos">Consejos</a>
-      </div>
-    </section>
+    <!-- ===================== ESPAÑOL ===================== -->
+    <div data-l="es">
+      <section class="panel">
+        <h2>Índice</h2>
+        <div class="toc">
+          <a href="#rangos">Rangos y nivel</a><a href="#dupes">Dupes</a><a href="#tribus">Tribus</a>
+          <a href="#efecto">Efecto de tribu</a><a href="#unity">Unity</a><a href="#center">Center skill</a>
+          <a href="#relojes">Relojes</a><a href="#formula">La fórmula</a><a href="#consejos">Consejos</a>
+        </div>
+      </section>
+      <section class="panel" id="rangos">
+        <h2>Rangos y nivel</h2>
+        <p>El rango de un yokai decide hasta qué nivel puede subir. En esta web solo están los rangos más altos, y las stats que ves son siempre las de su nivel máximo:</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>Rango</th><th>Nivel máximo</th></tr>
+          <tr><td><span class="pill rank-uz">UZ</span></td><td>90</td></tr>
+          <tr><td><span class="pill rank-uzp">UZ+</span></td><td>100</td></tr>
+          <tr><td><span class="pill rank-uzpp">UZ++</span></td><td>110</td></tr>
+        </table></div>
+        <p class="muted">Por eso un UZ++ suele rondar los 2.000 de PV y ATQ base, mientras que un UZ se queda cerca de 1.450.</p>
+      </section>
+      <section class="panel" id="dupes">
+        <h2>Dupes (copias repetidas)</h2>
+        <p>Cada copia repetida de un yokai que ya tienes sube sus stats base un <b>2%</b>. El máximo son <b>10 dupes</b>, que dan un <b>+20%</b>.</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>Dupes</th><th>0</th><th>1</th><th>3</th><th>5</th><th>10</th></tr>
+          <tr><td>Bonus</td><td>+0%</td><td>+2%</td><td>+6%</td><td>+10%</td><td>+20%</td></tr>
+        </table></div>
+        <div class="callout">Las fichas y hojas de la comunidad a veces dan las stats de un evento con varias copias ya sumadas. En esta web todas las stats son <b>sin dupes</b>; los dupes los eliges tú en el Team Builder.</div>
+      </section>
+      <section class="panel" id="tribus">
+        <h2>Tribus</h2>
+        <p>Cada yokai pertenece a una de estas 9 tribus. La tribu decide qué bonus le afectan: el efecto de tribu, el unity, muchas center skills y la mayoría de relojes.</p>
+        <div class="tribes tribeList"></div>
+      </section>
+      <section class="panel" id="efecto">
+        <h2>Efecto de tribu</h2>
+        <p>Cuantos más yokais de la misma tribu lleves, más suben las stats de esa tribu. Es un bonus del propio juego y no depende de ninguna habilidad:</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>Yokais de la misma tribu</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>PV y ATQ de esa tribu</td><td>+0%</td><td>+10%</td><td>+20%</td><td>+25%</td><td>+30%</td></tr>
+        </table></div>
+        <p class="muted">Las tribus van por separado: con 3 Encantadores y 2 Robustos, los Encantadores reciben +20% y los Robustos +10%.</p>
+      </section>
+      <section class="panel" id="unity">
+        <h2>Unity</h2>
+        <p>Algunos yokais tienen una habilidad de <b>unity</b> que se suma encima del efecto de tribu. Hay tres tipos:</p>
+        <h3>Unity de tribu</h3>
+        <p>Sube el PV y el ATQ de <b>los yokais de su tribu</b> (no de todo el equipo). Solo se activa si hay <b>2 o más</b> de esa tribu. Si varios yokais de la misma tribu tienen unity, sus porcentajes se suman. Los valores habituales son +24% en UZ, +26% en UZ+ y +28% en UZ++.</p>
+        <h3>Unity de equipo</h3>
+        <p>Unos pocos yokais (Red Flash Boushinyan, Azure Storm Slurpent, Green Tree Elderbloom y Yohko Komashura) tienen un unity que solo funciona si <b>los cinco del equipo son de la misma tribu</b>.</p>
+        <h3>Unity femenino</h3>
+        <p>Sube las stats de las <b>chicas</b> del equipo cuando hay 2 o más. Puede dar distinto porcentaje al PV y al ATQ.</p>
+        <div class="callout">Ejemplo: Chirpster y Chizuru Mizuhara son Encantadores y los dos tienen unity +28%. Juntos, los Encantadores reciben +10% (efecto de tribu) + 56% (unity) = <b>+66%</b>.</div>
+      </section>
+      <section class="panel" id="center">
+        <h2>Center skill</h2>
+        <p>El yokai que pongas en el <b>hueco central</b> del equipo (la posición 3) activa su center skill. Normalmente sube un porcentaje a los de una tribu, a las chicas o a los de una saga concreta. Los yokais de los otros huecos no la activan, así que conviene que en el centro vaya uno cuya center skill afecte a la mayoría del equipo.</p>
+      </section>
+      <section class="panel" id="relojes">
+        <h2>Relojes</h2>
+        <p>El reloj equipado sube el PV y el ATQ de los yokais que cumplen su condición: una o dos tribus, una saga o un género. Algunos solo afectan al yokai del centro. Tienes la lista completa en <a href="relojes.html">Relojes</a>.</p>
+      </section>
+      <section class="panel" id="formula">
+        <h2>La fórmula</h2>
+        <p>Así calcula el Team Builder el PV y el ATQ final de cada yokai del equipo:</p>
+        <p><code class="f">stats con dupes = base × (1 + 0,02 × dupes)</code></p>
+        <p><code class="f">stat final = stats con dupes × (1 + (efecto de tribu + unity + unity femenino + reloj + center skill) ÷ 100)</code></p>
+        <p class="muted">Todos los porcentajes se suman entre sí antes de aplicarlos. Cada uno solo cuenta si afecta a ese yokai: el unity de tribu, por ejemplo, no sube a los de otras tribus.</p>
+        <div class="callout">Ejemplo: Chirpster tiene 2.047 de PV base. Con 2 dupes pasa a 2.047 × 1,04 = 2.129. Con Chizuru en el equipo recibe +66% (10 de efecto de tribu + 56 de unity), así que su PV final es 2.129 × 1,66 = <b>3.534</b>.</div>
+      </section>
+      <section class="panel" id="consejos">
+        <h2>Consejos para armar equipo</h2>
+        <ul>
+          <li><b>Agrupa por tribu.</b> El efecto de tribu y el unity solo suman entre yokais de la misma tribu, así que cuantos más compartan tribu, más rinde el equipo.</li>
+          <li><b>Mete varios con unity.</b> Dos yokais con unity de la misma tribu ya dan más del 50% a esa tribu.</li>
+          <li><b>Elige bien el centro.</b> Pon en el hueco 3 a quien tenga la center skill que más yokais del equipo aprovechen.</li>
+          <li><b>Encaja el reloj.</b> Un reloj de tu tribu principal o de la saga del evento suele ser la mejor opción.</li>
+          <li><b>Pruébalo antes.</b> En el <a href="team-builder.html">Team Builder</a> ves al momento cuánto cambia el total con cada ajuste.</li>
+        </ul>
+      </section>
+    </div>
 
-    <section class="panel" id="rangos">
-      <h2>Rangos y nivel</h2>
-      <p>El rango de un yokai decide hasta qué nivel puede subir. En esta web solo están los rangos más altos, y las stats que ves son siempre las de su nivel máximo:</p>
-      <div class="table-wrap"><table class="nice">
-        <tr><th>Rango</th><th>Nivel máximo</th></tr>
-        <tr><td><span class="pill rank-uz">UZ</span></td><td>90</td></tr>
-        <tr><td><span class="pill rank-uzp">UZ+</span></td><td>100</td></tr>
-        <tr><td><span class="pill rank-uzpp">UZ++</span></td><td>110</td></tr>
-      </table></div>
-      <p class="muted">Por eso un UZ++ suele rondar los 2.000 de PV y ATQ base, mientras que un UZ se queda cerca de 1.450.</p>
-    </section>
+    <!-- ===================== ENGLISH ===================== -->
+    <div data-l="en">
+      <section class="panel">
+        <h2>Contents</h2>
+        <div class="toc">
+          <a href="#ranks">Ranks and level</a><a href="#dupes-en">Dupes</a><a href="#tribes">Tribes</a>
+          <a href="#effect">Tribe effect</a><a href="#unity-en">Unity</a><a href="#center-en">Center skill</a>
+          <a href="#watches">Watches</a><a href="#formula-en">The formula</a><a href="#tips">Tips</a>
+        </div>
+      </section>
+      <section class="panel" id="ranks">
+        <h2>Ranks and level</h2>
+        <p>A yo-kai's rank decides how high its level can go. This site only lists the top ranks, and the stats shown are always at their max level:</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>Rank</th><th>Max level</th></tr>
+          <tr><td><span class="pill rank-uz">UZ</span></td><td>90</td></tr>
+          <tr><td><span class="pill rank-uzp">UZ+</span></td><td>100</td></tr>
+          <tr><td><span class="pill rank-uzpp">UZ++</span></td><td>110</td></tr>
+        </table></div>
+        <p class="muted">That's why a UZ++ usually has around 2,000 base HP and ATK, while a UZ stays near 1,450.</p>
+      </section>
+      <section class="panel" id="dupes-en">
+        <h2>Dupes (duplicate copies)</h2>
+        <p>Every duplicate copy of a yo-kai you already own raises its base stats by <b>2%</b>. The max is <b>10 dupes</b>, for <b>+20%</b>.</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>Dupes</th><th>0</th><th>1</th><th>3</th><th>5</th><th>10</th></tr>
+          <tr><td>Bonus</td><td>+0%</td><td>+2%</td><td>+6%</td><td>+10%</td><td>+20%</td></tr>
+        </table></div>
+        <div class="callout">Community sheets sometimes list a yo-kai's stats from an event with several copies already added. On this site every stat is <b>without dupes</b>; you choose the dupes in the Team Builder.</div>
+      </section>
+      <section class="panel" id="tribes">
+        <h2>Tribes</h2>
+        <p>Every yo-kai belongs to one of these 9 tribes. The tribe decides which bonuses apply to it: tribe effect, unity, many center skills and most watches.</p>
+        <div class="tribes tribeList"></div>
+      </section>
+      <section class="panel" id="effect">
+        <h2>Tribe effect</h2>
+        <p>The more yo-kai of the same tribe you bring, the higher that tribe's stats go. It's a built-in game bonus that doesn't depend on any skill:</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>Yo-kai of the same tribe</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>HP and ATK of that tribe</td><td>+0%</td><td>+10%</td><td>+20%</td><td>+25%</td><td>+30%</td></tr>
+        </table></div>
+        <p class="muted">Tribes count separately: with 3 Charming and 2 Tough, the Charming yo-kai get +20% and the Tough ones +10%.</p>
+      </section>
+      <section class="panel" id="unity-en">
+        <h2>Unity</h2>
+        <p>Some yo-kai have a <b>unity</b> skill that stacks on top of the tribe effect. There are three kinds:</p>
+        <h3>Tribe unity</h3>
+        <p>Raises the HP and ATK of <b>yo-kai of its own tribe</b> (not the whole team). It only activates with <b>2 or more</b> of that tribe. If several yo-kai of the same tribe have unity, their percentages add up. Typical values are +24% on UZ, +26% on UZ+ and +28% on UZ++.</p>
+        <h3>Team unity</h3>
+        <p>A few yo-kai (Red Flash Boushinyan, Azure Storm Slurpent, Green Tree Elderbloom and Yohko Komashura) have a unity that only works if <b>all five team members share the same tribe</b>.</p>
+        <h3>Female unity</h3>
+        <p>Raises the stats of the <b>girls</b> in the team when there are 2 or more. It can give different percentages to HP and ATK.</p>
+        <div class="callout">Example: Chirpster and Chizuru Mizuhara are Charming and both have +28% unity. Together, Charming yo-kai get +10% (tribe effect) + 56% (unity) = <b>+66%</b>.</div>
+      </section>
+      <section class="panel" id="center-en">
+        <h2>Center skill</h2>
+        <p>The yo-kai placed in the team's <b>center slot</b> (position 3) activates its center skill. It usually boosts one tribe, the girls or a specific series. Yo-kai in other slots don't trigger it, so put in the center the one whose center skill helps most of your team.</p>
+      </section>
+      <section class="panel" id="watches">
+        <h2>Watches</h2>
+        <p>The equipped watch raises the HP and ATK of yo-kai that meet its condition: one or two tribes, a series or a gender. Some only affect the center yo-kai. See the full list in <a href="relojes.html">Watches</a>.</p>
+      </section>
+      <section class="panel" id="formula-en">
+        <h2>The formula</h2>
+        <p>This is how the Team Builder calculates each team member's final HP and ATK:</p>
+        <p><code class="f">stats with dupes = base × (1 + 0.02 × dupes)</code></p>
+        <p><code class="f">final stat = stats with dupes × (1 + (tribe effect + unity + female unity + watch + center skill) ÷ 100)</code></p>
+        <p class="muted">All percentages are added together before being applied. Each one only counts if it affects that yo-kai: tribe unity, for example, doesn't boost other tribes.</p>
+        <div class="callout">Example: Chirpster has 2,047 base HP. With 2 dupes it becomes 2,047 × 1.04 = 2,129. With Chizuru in the team it gets +66% (10 tribe effect + 56 unity), so its final HP is 2,129 × 1.66 = <b>3,534</b>.</div>
+      </section>
+      <section class="panel" id="tips">
+        <h2>Team-building tips</h2>
+        <ul>
+          <li><b>Group by tribe.</b> Tribe effect and unity only stack among yo-kai of the same tribe, so the more share a tribe, the stronger the team.</li>
+          <li><b>Bring several with unity.</b> Two yo-kai with same-tribe unity already give that tribe over 50%.</li>
+          <li><b>Pick the center well.</b> Put in slot 3 the one whose center skill benefits the most team members.</li>
+          <li><b>Match the watch.</b> A watch for your main tribe or the event's series is usually the best choice.</li>
+          <li><b>Test it first.</b> In the <a href="team-builder.html">Team Builder</a> you instantly see how much each change affects the total.</li>
+        </ul>
+      </section>
+    </div>
 
-    <section class="panel" id="dupes">
-      <h2>Dupes (copias repetidas)</h2>
-      <p>Cada copia repetida de un yokai que ya tienes sube sus stats base un <b>2%</b>. El máximo son <b>10 dupes</b>, que dan un <b>+20%</b>.</p>
-      <div class="table-wrap"><table class="nice">
-        <tr><th>Dupes</th><th>0</th><th>1</th><th>3</th><th>5</th><th>10</th></tr>
-        <tr><td>Bonus</td><td>+0%</td><td>+2%</td><td>+6%</td><td>+10%</td><td>+20%</td></tr>
-      </table></div>
-      <div class="callout">Las fichas y hojas de la comunidad a veces dan las stats de un evento con varias copias ya sumadas. En esta web todas las stats son <b>sin dupes</b>; los dupes los eliges tú en el Team Builder.</div>
-    </section>
-
-    <section class="panel" id="tribus">
-      <h2>Tribus</h2>
-      <p>Cada yokai pertenece a una de estas 9 tribus. La tribu decide qué bonus le afectan: el efecto de tribu, el unity, muchas center skills y la mayoría de relojes.</p>
-      <div class="tribes" id="tribeList"></div>
-    </section>
-
-    <section class="panel" id="efecto">
-      <h2>Efecto de tribu</h2>
-      <p>Cuantos más yokais de la misma tribu lleves, más suben las stats de esa tribu. Es un bonus del propio juego y no depende de ninguna habilidad:</p>
-      <div class="table-wrap"><table class="nice">
-        <tr><th>Yokais de la misma tribu</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
-        <tr><td>PV y ATQ de esa tribu</td><td>+0%</td><td>+10%</td><td>+20%</td><td>+25%</td><td>+30%</td></tr>
-      </table></div>
-      <p class="muted">Las tribus van por separado: con 3 Encantadores y 2 Robustos, los Encantadores reciben +20% y los Robustos +10%.</p>
-    </section>
-
-    <section class="panel" id="unity">
-      <h2>Unity</h2>
-      <p>Algunos yokais tienen una habilidad de <b>unity</b> que se suma encima del efecto de tribu. Hay tres tipos:</p>
-      <h3>Unity de tribu</h3>
-      <p>Sube el PV y el ATQ de <b>los yokais de su tribu</b> (no de todo el equipo). Solo se activa si hay <b>2 o más</b> de esa tribu. Si varios yokais de la misma tribu tienen unity, sus porcentajes se suman. Los valores habituales son +24% en UZ, +26% en UZ+ y +28% en UZ++.</p>
-      <h3>Unity de equipo</h3>
-      <p>Unos pocos yokais (Red Flash Boushinyan, Azure Storm Slurpent, Green Tree Elderbloom y Yohko Komashura) tienen un unity que solo funciona si <b>los cinco del equipo son de la misma tribu</b>.</p>
-      <h3>Unity femenino</h3>
-      <p>Sube las stats de las <b>chicas</b> del equipo cuando hay 2 o más. Puede dar distinto porcentaje al PV y al ATQ.</p>
-      <div class="callout">Ejemplo: Chirpster y Chizuru Mizuhara son Encantadores y los dos tienen unity +28%. Juntos, los Encantadores reciben +10% (efecto de tribu) + 56% (unity) = <b>+66%</b>.</div>
-    </section>
-
-    <section class="panel" id="center">
-      <h2>Center skill</h2>
-      <p>El yokai que pongas en el <b>hueco central</b> del equipo (la posición 3) activa su center skill. Normalmente sube un porcentaje a los de una tribu, a las chicas o a los de una saga concreta. Los yokais de los otros huecos no la activan, así que conviene que en el centro vaya uno cuya center skill afecte a la mayoría del equipo.</p>
-    </section>
-
-    <section class="panel" id="relojes">
-      <h2>Relojes</h2>
-      <p>El reloj equipado sube el PV y el ATQ de los yokais que cumplen su condición: una o dos tribus, una saga o un género. Algunos solo afectan al yokai del centro. Tienes la lista completa en <a href="relojes.html">Relojes</a>.</p>
-    </section>
-
-    <section class="panel" id="formula">
-      <h2>La fórmula</h2>
-      <p>Así calcula el Team Builder el PV y el ATQ final de cada yokai del equipo:</p>
-      <p><code class="f">stats con dupes = base × (1 + 0,02 × dupes)</code></p>
-      <p><code class="f">stat final = stats con dupes × (1 + (efecto de tribu + unity + unity femenino + reloj + center skill) ÷ 100)</code></p>
-      <p class="muted">Todos los porcentajes se suman entre sí antes de aplicarlos. Cada uno solo cuenta si afecta a ese yokai: el unity de tribu, por ejemplo, no sube a los de otras tribus.</p>
-      <div class="callout">Ejemplo: Chirpster tiene 2.047 de PV base. Con 2 dupes pasa a 2.047 × 1,04 = 2.129. Con Chizuru en el equipo recibe +66% (10 de efecto de tribu + 56 de unity), así que su PV final es 2.129 × 1,66 = <b>3.534</b>.</div>
-    </section>
-
-    <section class="panel" id="consejos">
-      <h2>Consejos para armar equipo</h2>
-      <ul>
-        <li><b>Agrupa por tribu.</b> El efecto de tribu y el unity solo suman entre yokais de la misma tribu, así que cuantos más compartan tribu, más rinde el equipo.</li>
-        <li><b>Mete varios con unity.</b> Dos yokais con unity de la misma tribu ya dan más del 50% a esa tribu.</li>
-        <li><b>Elige bien el centro.</b> Pon en el hueco 3 a quien tenga la center skill que más yokais del equipo aprovechen.</li>
-        <li><b>Encaja el reloj.</b> Un reloj de tu tribu principal o de la saga del evento suele ser la mejor opción.</li>
-        <li><b>Pruébalo antes.</b> En el <a href="team-builder.html">Team Builder</a> ves al momento cuánto cambia el total con cada ajuste.</li>
-      </ul>
-    </section>
+    <!-- ===================== 日本語 ===================== -->
+    <div data-l="ja">
+      <section class="panel">
+        <h2>目次</h2>
+        <div class="toc">
+          <a href="#ja-rank">ランクとレベル</a><a href="#ja-dupes">凸</a><a href="#ja-tribes">種族</a>
+          <a href="#ja-effect">種族効果</a><a href="#ja-unity">結束</a><a href="#ja-center">センタースキル</a>
+          <a href="#ja-watch">ウォッチ</a><a href="#ja-formula">計算式</a><a href="#ja-tips">編成のコツ</a>
+        </div>
+      </section>
+      <section class="panel" id="ja-rank">
+        <h2>ランクとレベル</h2>
+        <p>妖怪のランクによって最大レベルが決まります。このサイトでは最上位ランクのみを掲載し、ステータスはすべて最大レベル時の値です。</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>ランク</th><th>最大レベル</th></tr>
+          <tr><td><span class="pill rank-uz">UZ</span></td><td>90</td></tr>
+          <tr><td><span class="pill rank-uzp">UZ+</span></td><td>100</td></tr>
+          <tr><td><span class="pill rank-uzpp">UZ++</span></td><td>110</td></tr>
+        </table></div>
+        <p class="muted">そのためUZ++は基礎HP・こうげきが2,000前後、UZは1,450前後になります。</p>
+      </section>
+      <section class="panel" id="ja-dupes">
+        <h2>凸（重複入手）</h2>
+        <p>すでに持っている妖怪をもう1体手に入れるごとに、基礎ステータスが<b>2%</b>アップします。最大は<b>10凸</b>で<b>+20%</b>です。</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>凸数</th><th>0</th><th>1</th><th>3</th><th>5</th><th>10</th></tr>
+          <tr><td>ボーナス</td><td>+0%</td><td>+2%</td><td>+6%</td><td>+10%</td><td>+20%</td></tr>
+        </table></div>
+        <div class="callout">コミュニティの資料ではイベントで凸済みのステータスが載っていることがあります。このサイトのステータスはすべて<b>0凸</b>の値で、凸数は編成ツールで設定します。</div>
+      </section>
+      <section class="panel" id="ja-tribes">
+        <h2>種族</h2>
+        <p>妖怪は次の9種族のどれかに属します。種族によって、種族効果・結束・多くのセンタースキル・ほとんどのウォッチの対象が決まります。</p>
+        <div class="tribes tribeList"></div>
+      </section>
+      <section class="panel" id="ja-effect">
+        <h2>種族効果</h2>
+        <p>同じ種族の妖怪を多く編成するほど、その種族のステータスが上がります。スキルに関係なくゲームの仕様として発動します。</p>
+        <div class="table-wrap"><table class="nice">
+          <tr><th>同じ種族の数</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+          <tr><td>その種族のHP・こうげき</td><td>+0%</td><td>+10%</td><td>+20%</td><td>+25%</td><td>+30%</td></tr>
+        </table></div>
+        <p class="muted">種族ごとに別々に計算されます。プリチー3体とゴーケツ2体なら、プリチーは+20%、ゴーケツは+10%です。</p>
+      </section>
+      <section class="panel" id="ja-unity">
+        <h2>結束</h2>
+        <p>一部の妖怪は、種族効果に上乗せされる<b>結束</b>スキルを持っています。種類は3つです。</p>
+        <h3>種族の結束</h3>
+        <p><b>同じ種族の妖怪</b>のHPとこうげきを上げます（チーム全員ではありません）。その種族が<b>2体以上</b>いると発動。同じ種族に結束持ちが複数いれば合計されます。目安はUZで+24%、UZ+で+26%、UZ++で+28%です。</p>
+        <h3>全員同種族の結束</h3>
+        <p>一部の妖怪（赤閃ブシニャン、蒼嵐やまタン、神緑花さか爺、陽黄しゅらコマ）は、<b>5体全員が同じ種族</b>のときだけ発動する結束を持っています。</p>
+        <h3>女の子の結束</h3>
+        <p>女の子妖怪が2体以上いると、<b>女の子妖怪</b>のステータスを上げます。HPとこうげきで倍率が違うこともあります。</p>
+        <div class="callout">例：つづらチュン太夫と水原千鶴はどちらもプリチーで結束+28%。2体そろうとプリチーは+10%（種族効果）+56%（結束）＝<b>+66%</b>。</div>
+      </section>
+      <section class="panel" id="ja-center">
+        <h2>センタースキル</h2>
+        <p>チームの<b>センター</b>（3番目の枠）に置いた妖怪のセンタースキルが発動します。多くは特定の種族、女の子妖怪、または特定のシリーズを強化します。他の枠では発動しないので、チームの多くに効くセンタースキルを持つ妖怪をセンターに置きましょう。</p>
+      </section>
+      <section class="panel" id="ja-watch">
+        <h2>ウォッチ</h2>
+        <p>装備したウォッチは、条件（1〜2種族、シリーズ、性別）を満たす妖怪のHPとこうげきを上げます。センターの妖怪だけに効くものもあります。一覧は<a href="relojes.html">ウォッチ</a>へ。</p>
+      </section>
+      <section class="panel" id="ja-formula">
+        <h2>計算式</h2>
+        <p>編成ツールでは各妖怪の最終HP・こうげきを次のように計算しています。</p>
+        <p><code class="f">凸込みステータス ＝ 基礎値 ×（1 ＋ 0.02 × 凸数）</code></p>
+        <p><code class="f">最終ステータス ＝ 凸込みステータス ×（1 ＋（種族効果 ＋ 結束 ＋ 女の子の結束 ＋ ウォッチ ＋ センタースキル）÷ 100）</code></p>
+        <p class="muted">倍率はすべて足し合わせてから掛けます。それぞれ対象の妖怪にだけ効きます（たとえば種族の結束は他の種族には効きません）。</p>
+        <div class="callout">例：つづらチュン太夫の基礎HPは2,047。2凸で2,047×1.04＝2,129。水原千鶴がいると+66%（種族効果10＋結束56）なので、最終HPは2,129×1.66＝<b>3,534</b>。</div>
+      </section>
+      <section class="panel" id="ja-tips">
+        <h2>編成のコツ</h2>
+        <ul>
+          <li><b>種族をそろえる。</b>種族効果と結束は同じ種族同士でしか重ならないので、そろえるほど強くなります。</li>
+          <li><b>結束持ちを複数入れる。</b>同じ種族の結束持ちが2体いれば、それだけで+50%以上。</li>
+          <li><b>センターを選ぶ。</b>3番目の枠には、チームの多くに効くセンタースキルの妖怪を。</li>
+          <li><b>ウォッチを合わせる。</b>メインの種族やイベントのシリーズに合うウォッチがおすすめ。</li>
+          <li><b>事前に試す。</b><a href="team-builder.html">編成ツール</a>で変更ごとの合計値の差がすぐわかります。</li>
+        </ul>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <p>Porcentajes del efecto de tribu según las guías de la comunidad; el juego puede cambiarlos con actualizaciones.</p>
-    <p>Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
+    <p data-l="es">Porcentajes del efecto de tribu según las guías de la comunidad; el juego puede cambiarlos con actualizaciones.</p>
+    <p data-l="en">Tribe effect percentages are based on community guides; the game may change them in updates.</p>
+    <p data-l="ja">種族効果の倍率はコミュニティの攻略情報に基づきます。アップデートで変わる可能性があります。</p>
+    <p data-i18n="footer.brand">Yo-kai Watch y Puni Puni son marcas de LEVEL-5. Web de fans sin ánimo de lucro.</p>
   </footer>
 
   <script src="character.js"></script>
   <script src="assets/comun.js"></script>
   <script>
-    document.getElementById("tribeList").innerHTML = PP.TRIBE_ORDER.map(t => {
-      const n = characters.filter(c => PP.key(c.tribe) === t).length;
-      const en = t[0].toUpperCase() + t.slice(1);
-      return `<div class="tribe" data-tribe="${t}"><b>${PP.TRIBE_ES[t]}</b><small>${en} · ${n} yokais en la web</small></div>`;
+    addI18n({ "mec.inWeb": ["{n} yokais en la web", "{n} yo-kai on this site", "サイト掲載{n}体"] });
+    const html = PP.TRIBE_ORDER.map(tr => {
+      const n = characters.filter(c => PP.key(c.tribe) === tr).length;
+      const en = tr[0].toUpperCase() + tr.slice(1);
+      return `<div class="tribe" data-tribe="${tr}"><b>${PP.TRIBE_ES[tr]}</b><small>${LANG === "en" ? "" : en + " · "}${t("mec.inWeb", { n })}</small></div>`;
     }).join("");
+    document.querySelectorAll(".tribeList").forEach(el => { el.innerHTML = html; });
   </script>
 </body>
 </html>
