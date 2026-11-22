@@ -1329,8 +1329,16 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
               <span class="tribe-unity-name">${escapeHtml(g.tribeLabel)} ×${g.count}</span>
               <span class="tribe-unity-value">${formatTribeBonus(g)}</span>
             </div>`;
-          }).join("")
-        : `<p class="hint">${t('tb.noTribeBonusHint')}</p>`;
+          }).join("") + sagaChipsHtml("tribe-unity-chip tribe-unity-active saga-chip")
+        : (sagaChipsHtml("tribe-unity-chip tribe-unity-active saga-chip") || `<p class="hint">${t('tb.noTribeBonusHint')}</p>`);
+    }
+
+    // Etiquetas de unity de saga activos (Konosuba ×2 +24%/+32%)
+    function sagaChipsHtml(cls) {
+      return Object.values(getSagaBonusBreakdown()).map(g => {
+        const pct = g.hp === g.atk ? `+${g.hp}%` : `+${g.hp}%/+${g.atk}%`;
+        return `<div class="${cls}" title="${escapeHtml(t("tb.sagaUnityTip", { saga: g.saga, pct: PP.pct(g.hp, g.atk) }))}"><span class="tribe-unity-name">${escapeHtml(g.saga)} ×${g.count}</span> <span class="tribe-unity-value">${pct}</span></div>`;
+      }).join("");
     }
 
     // Female Unity: like Unity, but restricted to gender instead of tribe.
@@ -1419,6 +1427,11 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
               : "";
 
             const femaleUnityActive = isFemaleUnityActive(char, genderCounts);
+            const sagaKey = String(char.sagaUnity?.saga || "").trim().toLowerCase();
+            const sagaActive = !!(char.sagaUnity && getSagaBonusBreakdown()[sagaKey]);
+            const sagaUnityText = char.sagaUnity
+              ? `<div class="unity-text${sagaActive ? " unity-active" : " unity-inactive"}">${escapeHtml(t("tb.sagaUnity", { saga: char.sagaUnity.saga, pct: PP.pct(char.sagaUnity.hpPercent, char.sagaUnity.atkPercent) }))}${sagaActive ? "" : t("tb.notActive")}</div>`
+              : "";
             const femaleUnityText = char.femaleUnity
               ? `<div class="unity-text${femaleUnityActive ? " unity-active" : " unity-inactive"}">${escapeHtml(describeFemaleUnity(char))}${femaleUnityActive ? "" : t("tb.notActive")}</div>`
               : "";
@@ -1440,6 +1453,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
                 ${centerSkillText}
                 ${unityText}
                 ${femaleUnityText}
+                ${sagaUnityText}
               </div>`;
           }).join("")
         : `<div class="hint team-empty-hint">${t('tb.emptyTeam')}</div>`;
@@ -1471,6 +1485,7 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
 
       const unityByTribe = {};
       getTribeBonusBreakdown().forEach(g => { unityByTribe[g.tribeKey] = g.percent; });
+      const sagaBonus = getSagaBonusBreakdown();
 
       // Female Unity bonus: summed separately for HP/ATK (they can differ),
       // and only ever applied to female team members below — never the whole team.
@@ -1509,8 +1524,31 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
           atkPercent += Number(centerSkill.atkPercent) || 0;
         }
 
+        // Unity de saga (p. ej. Konosuba): a los de esa saga, si hay 2+ de ella
+        const sg = sagaBonus[String(character.saga || "").trim().toLowerCase()];
+        if (sg) {
+          hpPercent += sg.hp;
+          atkPercent += sg.atk;
+        }
+
         return { member, character, hpPercent, atkPercent };
       });
+    }
+
+    // Unity de saga activos: { "konosuba": { saga, count, hp, atk } } (solo con 2+ yokais de la saga en el equipo)
+    function getSagaBonusBreakdown() {
+      const counts = {}, out = {};
+      team.forEach(m => { const c = getCharacter(m.id); const k = String(c?.saga || "").trim().toLowerCase(); if (k) counts[k] = (counts[k] || 0) + 1; });
+      team.forEach(m => {
+        const su = getCharacter(m.id)?.sagaUnity;
+        if (!su) return;
+        const k = String(su.saga).trim().toLowerCase();
+        if ((counts[k] || 0) < 2) return;
+        const g = out[k] || (out[k] = { saga: su.saga, count: counts[k], hp: 0, atk: 0 });
+        g.hp += Number(su.hpPercent) || 0;
+        g.atk += Number(su.atkPercent) || 0;
+      });
+      return out;
     }
 
     // Tribe effect (種族効果): +% HP/ATK for the yokai of a tribe depending on how many are in the team
@@ -1624,8 +1662,8 @@ select, .save-team-row input, .level-input { background: rgba(14, 8, 40, .75); b
       // % de bonus que recibe cada tribu (unity con 2+ + center skill + reloj + female unity)
       const groups = getTribeBonusBreakdown().filter(g => g.count >= 2);
       document.getElementById("miniTeamUnity").innerHTML = groups.length
-        ? groups.map(g => `<span class="mini-unity${g.percent ? "" : " mini-off"}" data-tribe="${escapeHtml(g.tribeKey)}" title="${escapeHtml(describeTribeBonus(g))}">${escapeHtml(g.tribeLabel)} ×${g.count} ${formatTribeBonus(g)}</span>`).join("")
-        : `<span class="mini-unity mini-unity-none">${t("tb.noTribeBonus")}</span>`;
+        ? groups.map(g => `<span class="mini-unity${g.percent ? "" : " mini-off"}" data-tribe="${escapeHtml(g.tribeKey)}" title="${escapeHtml(describeTribeBonus(g))}">${escapeHtml(g.tribeLabel)} ×${g.count} ${formatTribeBonus(g)}</span>`).join("") + sagaChipsHtml("mini-unity saga-chip")
+        : (sagaChipsHtml("mini-unity saga-chip") || `<span class="mini-unity mini-unity-none">${t("tb.noTribeBonus")}</span>`);
     }
 
     function escapeHtml(value) {

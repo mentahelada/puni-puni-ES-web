@@ -89,6 +89,8 @@
     "tb.unity": ["Unity: +{p}% {HP}/{ATK} a los {tribe} (necesita 2+ {tribe})", "Unity: +{p}% {HP}/{ATK} to {tribe} (needs 2+ {tribe})", "結束：{tribe}の{HP}/{ATK}+{p}%（{tribe}2体以上で発動）"],
     "tb.femUnity": ["Unity femenino: {pct} a las chicas (necesita 2+ chicas)", "Female unity: {pct} to girls (needs 2+ girls)", "女の子結束：女の子妖怪の{pct}（女の子2体以上で発動）"],
     "tb.effect": ["Efecto de tribu +{p}% ({n} {tribe})", "Tribe effect +{p}% ({n} {tribe})", "種族効果+{p}%（{tribe}{n}体）"],
+    "tb.sagaUnity": ["Unity de saga {saga}: {pct} a los de {saga} (necesita 2+)", "{saga} unity: {pct} to {saga} yo-kai (needs 2+)", "{saga}結束：{saga}の妖怪の{pct}（2体以上で発動）"],
+    "tb.sagaUnityTip": ["Unity de saga: {pct} a los yokais de {saga}", "Series unity: {pct} to {saga} yo-kai", "シリーズ結束：{saga}の妖怪の{pct}"],
     "tb.unityNeeds": ["Unity +{p}% (necesita 2+)", "Unity +{p}% (needs 2+)", "結束+{p}%（2体以上で発動）"],
   };
 
