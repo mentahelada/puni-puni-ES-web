@@ -330,6 +330,11 @@ const characters = [
       affects: {
         tribes: ["Mysterious"]
       }
+    },
+    sagaUnity: {
+      saga: "Hololive",
+      hpPercent: 30,
+      atkPercent: 26
     }
   },
   {
@@ -757,6 +762,11 @@ const characters = [
       affects: {
         sagas: ["Galaxy Watch"]
       }
+    },
+    sagaUnity: {
+      saga: "Galaxy Watch",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -857,6 +867,11 @@ const characters = [
       affects: {
         sagas: ["Konosuba"]
       }
+    },
+    sagaUnity: {
+      saga: "Konosuba",
+      hpPercent: 24,
+      atkPercent: 32
     }
   },
   {
@@ -1438,6 +1453,11 @@ const characters = [
       condition: {
         saga: "Idol Royale"
       }
+    },
+    sagaUnity: {
+      saga: "Idol Royale",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -1574,6 +1594,11 @@ const characters = [
       condition: {
         saga: "100 Tales"
       }
+    },
+    sagaUnity: {
+      saga: "100 Tales",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -1688,6 +1713,11 @@ const characters = [
       condition: {
         saga: "Idol Royale"
       }
+    },
+    sagaUnity: {
+      saga: "Idol Royale",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -1755,6 +1785,11 @@ const characters = [
       condition: {
         saga: "Hololive"
       }
+    },
+    sagaUnity: {
+      saga: "Hololive",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -2245,6 +2280,11 @@ const characters = [
       affects: {
         tribes: ["Heartful"]
       }
+    },
+    sagaUnity: {
+      saga: "Re:Zero",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -2265,6 +2305,11 @@ const characters = [
       affects: {
         tribes: ["Tough"]
       }
+    },
+    sagaUnity: {
+      saga: "Re:Zero",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -2285,6 +2330,11 @@ const characters = [
       affects: {
         tribes: ["Mysterious"]
       }
+    },
+    sagaUnity: {
+      saga: "Re:Zero",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -2305,6 +2355,11 @@ const characters = [
       affects: {
         tribes: ["Heartful"]
       }
+    },
+    sagaUnity: {
+      saga: "100 Tales",
+      hpPercent: 26,
+      atkPercent: 30
     }
   },
   {
@@ -3759,7 +3814,12 @@ const characters = [
     hp10: 1742,
     atk0: 1448,
     atk10: 1738,
-    image: "Uz/Hoshimachisuisei.png"
+    image: "Uz/Hoshimachisuisei.png",
+    sagaUnity: {
+      saga: "Hololive",
+      hpPercent: 30,
+      atkPercent: 26
+    }
   },
   {
     id: "nekomata-okayu",
@@ -3830,7 +3890,12 @@ const characters = [
     hp10: 1670,
     atk0: 1508,
     atk10: 1810,
-    image: "Uz/Cloneblackdragon.png"
+    image: "Uz/Cloneblackdragon.png",
+    sagaUnity: {
+      saga: "Dragonslayer",
+      hpPercent: 28,
+      atkPercent: 28
+    }
   },
   {
     id: "light-wings-omatsu",
@@ -4508,7 +4573,12 @@ const characters = [
     hp10: 1732,
     atk0: 1457,
     atk10: 1748,
-    image: "Uz2/Flowernanda.png"
+    image: "Uz2/Flowernanda.png",
+    sagaUnity: {
+      saga: "100 Tales",
+      hpPercent: 28,
+      atkPercent: 28
+    }
   },
   {
     id: "future-boushinyan",
@@ -4745,7 +4815,12 @@ const characters = [
     hp10: 1721,
     atk0: 1466,
     atk10: 1759,
-    image: "Uz2/Ruten.png"
+    image: "Uz2/Ruten.png",
+    sagaUnity: {
+      saga: "100 Tales",
+      hpPercent: 28,
+      atkPercent: 28
+    }
   },
   {
     id: "melek",
@@ -4849,7 +4924,12 @@ const characters = [
     hp10: 1757,
     atk0: 1436,
     atk10: 1723,
-    image: "Uz2/Mangetsu(child).png"
+    image: "Uz2/Mangetsu(child).png",
+    sagaUnity: {
+      saga: "Galaxy Watch",
+      hpPercent: 28,
+      atkPercent: 28
+    }
   },
   {
     id: "sports-day-mera-shishino",
