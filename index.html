@@ -782,10 +782,10 @@
     }
 
     function getStats(character, dupes = 0) {
+      // Initial stats +2% per dupe, up to +20% at 10 dupes.
       const d = Math.max(0, Math.min(10, Number(dupes) || 0));
-      const hp = character.hp0 + (character.hp10 - character.hp0) * (d / 10);
-      const atk = character.atk0 + (character.atk10 - character.atk0) * (d / 10);
-      return { hp: Math.round(hp), atk: Math.round(atk) };
+      const mult = 1 + 0.02 * d;
+      return { hp: Math.round(character.hp0 * mult), atk: Math.round(character.atk0 * mult) };
     }
 
     // Center slot: position 3 = array index 2.
@@ -1313,7 +1313,7 @@
         <strong>${escapeHtml(c.name)}</strong>
         <div class="hint">${escapeHtml(c.tribe || '')} ${getGenderSymbol(c.gender)} · ${escapeHtml(String(c.rank || '').toUpperCase())} · Lv. ${getRankLevel(c)}</div>
         ${c.saga ? `<div class="hint">${escapeHtml(c.saga)}</div>` : ""}
-        <div class="hint">ATK: ${Number(c.atk10).toLocaleString('en-US')}<br>HP: ${Number(c.hp10).toLocaleString('en-US')}</div>
+        <div class="hint">ATK: ${getStats(c, 10).atk.toLocaleString('en-US')}<br>HP: ${getStats(c, 10).hp.toLocaleString('en-US')}</div>
       </div>`).join('') : '<p class="hint">No characters match this filter.</p>';
   };
 
