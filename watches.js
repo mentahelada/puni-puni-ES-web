@@ -255,8 +255,17 @@ const CLOCKS = [
     affects: { genders: ["female"] }
   },
   {
+    // 妖怪ウォッチブロック (el reloj pixelado): ゴーケツ = Tough
     id: "courage-watch",
     label: "Courage Watch",
+    hpPercent: 25,
+    atkPercent: 25,
+    affects: { tribes: ["Tough"] }
+  },
+  {
+    // 転生勇者ウォッチ: エンマ e イサマシ = Enma y Brave
+    id: "reincarnated-hero-watch",
+    label: "Reincarnated Hero Watch",
     hpPercent: 25,
     atkPercent: 25,
     affects: { tribes: ["Brave", "Enma"] }
