@@ -36,7 +36,6 @@ h1, h2, h3, button, .pill, .rank-pill, .rank-badge, .center-badge, .panel-title,
   backdrop-filter: blur(10px);
 }
 .site-nav .brand { font-weight: 700 !important; }
-.site-nav .brand-dot { width: 10px !important; height: 10px !important; background: var(--accent) !important; box-shadow: none !important; }
 .site-nav .brand span { color: var(--muted) !important; font-weight: 500; }
 .site-nav .nav-links a { color: var(--muted) !important; font-weight: 500 !important; border-radius: 8px !important; }
 .site-nav .nav-links a:hover { color: var(--text) !important; background: transparent !important; }
